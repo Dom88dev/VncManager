@@ -1,18 +1,25 @@
 package view;
 	
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("VncManager.fxml"));
-			Scene scene = new Scene(root,400,400);
+			//화면 전환 및 다이얼그 팝업을 위해 각 컨트롤러에서 primaryStage 객체를 받아야함
+			//primaryStage객체를 loader를 이용해  컨트롤러로 전달해 주기 위해 생성자로 컨테이너를 연결해주지 않고 로더 객체를 생성
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("VncManager.fxml"));
+			//StackPane root = (StackPane)FXMLLoader.load(getClass().getResource("VncManager.fxml"));
+			StackPane root = loader.load();
+			
+			VncManagerController controller = loader.getController();
+			controller.setPrimaryStage(primaryStage);
+			Scene scene = new Scene(root,1000,700);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
