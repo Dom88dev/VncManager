@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -12,139 +11,625 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
    <center>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <bottom>
-            <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </bottom>
-         <center>
-            <ScrollPane prefHeight="546.0" prefWidth="819.0" BorderPane.alignment="CENTER">
+      <TabPane side="LEFT" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab closable="false" text="조회">
                <content>
-                  <TableView prefHeight="517.0" prefWidth="771.0">
-                    <columns>
-                        <TableColumn prefWidth="75.0" text="상품번호" />
-                      <TableColumn prefWidth="75.0" text="상품종류" />
-                      <TableColumn prefWidth="75.0" text="제목" />
-                        <TableColumn prefWidth="75.0" text="장르" />
-                        <TableColumn prefWidth="75.0" text="연령등급" />
-                        <TableColumn prefWidth="75.0" text="출시일" />
-                        <TableColumn prefWidth="75.0" text="대여여부" />
-                        <TableColumn prefWidth="75.0" text="대여횟수" />
-                        <TableColumn prefWidth="75.0">
-                           <graphic>
-                              <CheckBox mnemonicParsing="false" />
-                           </graphic></TableColumn>
-                    </columns>
-                  </TableView>
-               </content>
-            </ScrollPane>
-         </center>
-         <right>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <top>
-                  <Button mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#9600ff" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <BorderPane.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </BorderPane.margin>
-                  </Button>
-               </top>
-               <left>
-                  <TextArea prefHeight="469.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </left>
-            </BorderPane>
-         </right>
-         <left>
-            <TabPane prefHeight="545.0" prefWidth="34.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab text="조회" />
-                <Tab text="추가" />
-                  <Tab text="수정/삭제">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-         </left>
-      </BorderPane>
-   </center>
-   <top>
-      <BorderPane prefHeight="128.0" prefWidth="915.0" BorderPane.alignment="CENTER">
-         <center>
-            <BorderPane prefHeight="173.0" prefWidth="871.0" BorderPane.alignment="CENTER">
-               <right>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <bottom>
-                        <ComboBox prefWidth="150.0" promptText="전체" BorderPane.alignment="CENTER" />
+                        <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                      </bottom>
                      <center>
-                        <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-                           <graphic>
-                              <ImageView fitHeight="42.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@images/homeLSq.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </center>
-                  </BorderPane>
-               </right>
-               <bottom>
-                  <BorderPane prefHeight="35.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
-                     <left>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <right>
-                              <ChoiceBox prefWidth="150.0" BorderPane.alignment="CENTER" />
-                           </right>
-                        </BorderPane>
-                     </left>
-                     <center>
-                        <TextArea prefHeight="36.0" prefWidth="208.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets left="20.0" right="50.0" />
-                           </BorderPane.margin>
-                        </TextArea>
+                        <ScrollPane prefHeight="546.0" prefWidth="819.0" BorderPane.alignment="CENTER">
+                           <content>
+                              <TableView prefHeight="517.0" prefWidth="771.0">
+                                <columns>
+                                    <TableColumn prefWidth="95.0" text="상품번호" />
+                                  <TableColumn prefWidth="95.0" text="상품종류" />
+                                  <TableColumn prefWidth="95.0" text="제목" />
+                                    <TableColumn prefWidth="95.0" text="장르" />
+                                    <TableColumn prefWidth="95.0" text="연령등급" />
+                                    <TableColumn prefWidth="95.0" text="출시일" />
+                                    <TableColumn prefWidth="95.0" text="대여여부" />
+                                    <TableColumn prefWidth="95.0" text="대여횟수" />
+                                </columns>
+                              </TableView>
+                           </content>
+                        </ScrollPane>
                      </center>
                      <right>
-                        <Button mnemonicParsing="false" text="검색" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets right="200.0" />
-                           </BorderPane.margin>
-                        </Button>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#f27200" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </BorderPane.margin>
+                              </Button>
+                           </top>
+                           <left>
+                              <TextArea prefHeight="443.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect></TextArea>
+                           </left>
+                        </BorderPane>
                      </right>
+                     <top>
+                        <GridPane prefHeight="66.0" prefWidth="970.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ComboBox prefWidth="150.0" style="-fx-background-color: white;">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </ComboBox>
+                              <TextField GridPane.columnIndex="1" GridPane.columnSpan="2">
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect></TextField>
+                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Button" GridPane.columnIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <DropShadow color="#ffa100" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </Button>
+                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <InnerShadow color="#ff9300" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </ChoiceBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </top>
                   </BorderPane>
-               </bottom>
-               <top>
-                  <Label prefHeight="42.0" prefWidth="283.0" text="상품관리" textAlignment="CENTER" textFill="#9600ff" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                     <BorderPane.margin>
-                        <Insets bottom="-10.0" top="10.0" />
-                     </BorderPane.margin>
-                  </Label>
-               </top>
-            </BorderPane>
-         </center>
-         <left>
-            <ImageView fitHeight="100.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               </content>
+            </Tab>
+            <Tab closable="false" text="추가">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="970.0">
+                     <children>
+                        <BorderPane prefHeight="597.0" prefWidth="969.0" style="-fx-background-color: white;">
+                           <center>
+                              <HBox prefHeight="526.0" prefWidth="888.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <GridPane prefHeight="600.0" prefWidth="464.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.4000701904297" minWidth="10.0" prefWidth="150.13339233398438" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.19998474121093" minWidth="10.0" prefWidth="245.0666076660156" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="제   목">
+                                             <GridPane.margin>
+                                                <Insets left="115.0" top="150.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="장   르" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets left="115.0" top="90.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="연령등급" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="95.0" top="25.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="출시일" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets bottom="30.0" left="115.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="공급처" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets bottom="90.0" left="115.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="거래처번호" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets bottom="150.0" left="75.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField GridPane.columnIndex="1">
+                                             <GridPane.margin>
+                                                <Insets top="150.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets top="90.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets top="30.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets bottom="30.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets bottom="90.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets bottom="150.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </GridPane>
+                                    <GridPane prefHeight="601.0" prefWidth="360.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.33331298828125" minWidth="10.0" prefWidth="87.06673583984374" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.86669921875" minWidth="10.0" prefWidth="267.3332641601562" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="감   독">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" top="100.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="배   우" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets bottom="60.0" left="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="작   가" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="230.0" left="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField GridPane.columnIndex="1">
+                                             <GridPane.margin>
+                                                <Insets top="110.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets bottom="50.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="230.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <HBox prefHeight="150.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="추가">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="취소">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <right>
+                              <BorderPane prefHeight="598.0" prefWidth="157.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <ChoiceBox prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: WhiTE;" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="450.0" />
+                                       </BorderPane.margin>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </ChoiceBox>
+                                 </center>
+                              </BorderPane>
+                           </right>
+                           <top>
+                              <Label text="*상품추가*" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets top="10.0" />
+                                 </BorderPane.margin>
+                              </Label>
+                           </top>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab closable="false" text="수정/삭제">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BorderPane prefHeight="597.0" prefWidth="969.0" style="-fx-background-color: white;">
+                           <center>
+                              <HBox prefHeight="526.0" prefWidth="888.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <GridPane prefHeight="600.0" prefWidth="464.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="243.4000701904297" minWidth="10.0" prefWidth="150.13339233398438" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.19998474121093" minWidth="10.0" prefWidth="245.0666076660156" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="제   목">
+                                             <GridPane.margin>
+                                                <Insets left="115.0" top="150.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="장   르" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets left="115.0" top="90.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="연령등급" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets left="95.0" top="25.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="출시일" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets bottom="30.0" left="115.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="공급처" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets bottom="90.0" left="115.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="거래처번호" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets bottom="150.0" left="75.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField GridPane.columnIndex="1">
+                                             <GridPane.margin>
+                                                <Insets top="150.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets top="90.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets top="30.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <GridPane.margin>
+                                                <Insets bottom="30.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <GridPane.margin>
+                                                <Insets bottom="90.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <GridPane.margin>
+                                                <Insets bottom="150.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </GridPane>
+                                    <GridPane prefHeight="601.0" prefWidth="360.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.33331298828125" minWidth="10.0" prefWidth="87.06673583984374" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.86669921875" minWidth="10.0" prefWidth="267.3332641601562" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="감   독">
+                                             <GridPane.margin>
+                                                <Insets left="10.0" top="100.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="배   우" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets bottom="60.0" left="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="작   가" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="230.0" left="10.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField GridPane.columnIndex="1">
+                                             <GridPane.margin>
+                                                <Insets top="110.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets bottom="50.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <GridPane.margin>
+                                                <Insets bottom="230.0" />
+                                             </GridPane.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </TextField>
+                                          <HBox prefHeight="150.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                             <children>
+                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="수정">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="취소">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" text="삭제">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </HBox>
+                           </center>
+                           <right>
+                              <BorderPane prefHeight="598.0" prefWidth="157.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets bottom="450.0" />
+                                       </BorderPane.margin>
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </ChoiceBox>
+                                 </center>
+                              </BorderPane>
+                           </right>
+                           <top>
+                              <Label text="*수정/삭제*" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </Label>
+                           </top>
+                        </BorderPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/vncLogoWh.png" />
                </image>
             </ImageView>
-         </left>
-      </BorderPane>
+            <Label alignment="CENTER" prefHeight="42.0" prefWidth="686.0" text="상품관리" textAlignment="CENTER" textFill="#f27200">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/homeLSq.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
    </top>
 </BorderPane>

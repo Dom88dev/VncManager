@@ -24,6 +24,26 @@ public class ProductDatas {
 	private String actor;
 	private String writer;
 	
+	public ProductDatas(int P_id, String kind, String title, String genre, int age_grade, Date release,
+			String edition, boolean isRental, int rentalCnt, int supply, String director, String actor, String writer) {
+			setP_id(p_id);
+			setKind(kind);
+			setTitle(title);
+			setGenre(genre);
+			setAge_grade(age_grade);
+			setRelease(release);
+			setEdition(edition);
+			setRental(isRental);
+			setRentalCnt(rentalCnt);
+			setSupply(supply);
+			setDirector(director);
+			setActor(actor);
+			setWriter(writer);
+			System.out.println(kind);
+	}
+			
+	
+	
 	public int getP_id() {
 		return p_id;
 	}
