@@ -2,91 +2,149 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="product" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="product.ProductMenuController">
-   <left>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="452.0" prefWidth="181.0" BorderPane.alignment="CENTER">
-         <top>
+<BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
+   <center>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <bottom>
+            <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <ScrollPane prefHeight="546.0" prefWidth="819.0" BorderPane.alignment="CENTER">
+               <content>
+                  <TableView prefHeight="517.0" prefWidth="771.0">
+                    <columns>
+                        <TableColumn prefWidth="75.0" text="상품번호" />
+                      <TableColumn prefWidth="75.0" text="상품종류" />
+                      <TableColumn prefWidth="75.0" text="제목" />
+                        <TableColumn prefWidth="75.0" text="장르" />
+                        <TableColumn prefWidth="75.0" text="연령등급" />
+                        <TableColumn prefWidth="75.0" text="출시일" />
+                        <TableColumn prefWidth="75.0" text="대여여부" />
+                        <TableColumn prefWidth="75.0" text="대여횟수" />
+                        <TableColumn prefWidth="75.0">
+                           <graphic>
+                              <CheckBox mnemonicParsing="false" />
+                           </graphic></TableColumn>
+                    </columns>
+                  </TableView>
+               </content>
+            </ScrollPane>
+         </center>
+         <right>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <Button mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#9600ff" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </top>
+               <left>
+                  <TextArea prefHeight="469.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </left>
+            </BorderPane>
+         </right>
+         <left>
+            <TabPane prefHeight="545.0" prefWidth="34.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab text="조회" />
+                <Tab text="추가" />
+                  <Tab text="수정/삭제">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </left>
+      </BorderPane>
+   </center>
+   <top>
+      <BorderPane prefHeight="128.0" prefWidth="915.0" BorderPane.alignment="CENTER">
+         <center>
+            <BorderPane prefHeight="173.0" prefWidth="871.0" BorderPane.alignment="CENTER">
+               <right>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <bottom>
+                        <ComboBox prefWidth="150.0" promptText="전체" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="42.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/homeLSq.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </center>
+                  </BorderPane>
+               </right>
+               <bottom>
+                  <BorderPane prefHeight="35.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <right>
+                              <ChoiceBox prefWidth="150.0" BorderPane.alignment="CENTER" />
+                           </right>
+                        </BorderPane>
+                     </left>
+                     <center>
+                        <TextArea prefHeight="36.0" prefWidth="208.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="20.0" right="50.0" />
+                           </BorderPane.margin>
+                        </TextArea>
+                     </center>
+                     <right>
+                        <Button mnemonicParsing="false" text="검색" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets right="200.0" />
+                           </BorderPane.margin>
+                        </Button>
+                     </right>
+                  </BorderPane>
+               </bottom>
+               <top>
+                  <Label prefHeight="42.0" prefWidth="283.0" text="상품관리" textAlignment="CENTER" textFill="#9600ff" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets bottom="-10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </top>
+            </BorderPane>
+         </center>
+         <left>
             <ImageView fitHeight="100.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@images/vncLogoWh.png" />
                </image>
             </ImageView>
-         </top>
-         <center>
-            <VBox prefHeight="293.0" prefWidth="181.0" spacing="10.0" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <ToggleButton fx:id="p_searchToggle" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" style="-fx-background-color: white;" text="검색" textFill="#9600ff">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <toggleGroup>
-                        <ToggleGroup fx:id="pToggleGroup" />
-                     </toggleGroup>
-                  </ToggleButton>
-                  <ToggleButton fx:id="p_manageToggle" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: white;" text="관리" textFill="#9600ff" toggleGroup="$pToggleGroup">
-                     <font>
-                        <Font size="24.0" />
-                     </font></ToggleButton>
-               </children>
-            </VBox>
-         </center>
-         <bottom>
-            <Button fx:id="p_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-               <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/homeLSq.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </bottom>
+         </left>
       </BorderPane>
-   </left>
-   <center>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-         </center>
-         <top>
-            <GridPane prefHeight="51.0" prefWidth="571.0" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </top>
-         <bottom>
-            <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
-   </center>
+   </top>
 </BorderPane>
