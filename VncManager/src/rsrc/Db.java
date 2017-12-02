@@ -200,6 +200,24 @@ public class Db {
 		return bookDatas;
 	}
 	
+	public ArrayList<CustomerDatas> selectCustomerDatas(){
+		ArrayList<CustomerDatas> customerDatas = new ArrayList<CustomerDatas>();
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_CUSTOMER);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				customerDatas.add(new CustomerDatas(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)));
+			}
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return customerDatas;
+	}
+	
 	public ArrayList<ProductDatas> selectProductDatas(){
 		ArrayList<ProductDatas> productDatas = new ArrayList<ProductDatas>();
 		connect();

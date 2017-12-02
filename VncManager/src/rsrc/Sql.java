@@ -24,7 +24,9 @@ public class Sql {
 	public static final String USP_BOOK = "{call usp_book(?,?,?)}";
 	
 	//select문
-	public static final String SELECT_CUSTOMER = "";
+	public static final String SELECT_CUSTOMER = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
+			+ "from customer c left outer join (select id, count(id) cntid "
+			+ "from family group by id) d on c.id=d.id";
 	public static final String SELECT_PRODUCT = 
 			"select p_id, kind, title, genre, age_grade, "
 			+ "r_date, edition, is_rental, rental_count, "
@@ -33,7 +35,6 @@ public class Sql {
 			"select r.p_id, r.id, c.name, p.title, r.rent_date, r.due_date, r.return_date, "
 			+ "r.late_days, r.overdue_fee, c.tel from product p right outer join rent_return r on "
 			+ "p.p_id = r.p_id left outer join customer c on r.id = c.id"; 
-
 	public static final String SELECT_BOOKDATA = 
 			"select b.ID, c.name, c.tel, b.p_id, p.title, b.b_no, r.due_date, p.kind" //	
 			+ " from customer c join booking b on b.id = c.id"
