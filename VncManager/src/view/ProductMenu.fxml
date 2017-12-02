@@ -24,11 +24,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
+<BorderPane fx:id="product" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
    <center>
       <TabPane side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab closable="false" text="조회">
+            <Tab fx:id="p_searchTab" closable="false" text="조회">
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <bottom>
@@ -37,7 +37,7 @@
                      <center>
                         <ScrollPane prefHeight="546.0" prefWidth="819.0" BorderPane.alignment="CENTER">
                            <content>
-                              <TableView prefHeight="517.0" prefWidth="771.0">
+                              <TableView fx:id="rsvListTable" prefHeight="517.0" prefWidth="771.0">
                                 <columns>
                                     <TableColumn prefWidth="95.0" text="상품번호" />
                                   <TableColumn prefWidth="95.0" text="상품종류" />
@@ -55,7 +55,7 @@
                      <right>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <top>
-                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#f27200" BorderPane.alignment="CENTER">
+                              <Button fx:id="p_addinfBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#f27200" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -65,7 +65,7 @@
                               </Button>
                            </top>
                            <left>
-                              <TextArea prefHeight="443.0" prefWidth="194.0" BorderPane.alignment="CENTER">
+                              <TextArea fx:id="p_addinfTexta" prefHeight="443.0" prefWidth="194.0" BorderPane.alignment="CENTER">
                                  <effect>
                                     <DropShadow />
                                  </effect></TextArea>
@@ -85,7 +85,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox prefWidth="150.0" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" style="-fx-background-color: white;">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="20.0" />
                                  </GridPane.margin>
@@ -93,11 +93,11 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </ComboBox>
-                              <TextField prefHeight="23.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <TextField fx:id="searchText" prefHeight="23.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                  <effect>
                                     <DropShadow color="#f27200" />
                                  </effect></TextField>
-                              <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: white;" text="검 색" GridPane.columnIndex="3">
+                              <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: white;" text="검 색" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -105,7 +105,7 @@
                                     <DropShadow color="#ffa100" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
                                  <GridPane.margin>
                                     <Insets right="20.0" />
                                  </GridPane.margin>
@@ -122,7 +122,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab closable="false" text="추가">
+            <Tab fx:id="p_addTab" closable="false" text="추가">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="970.0">
                      <children>
@@ -192,7 +192,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <TextField GridPane.columnIndex="1">
+                                          <TextField fx:id="P_titleTextf" GridPane.columnIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="150.0" />
                                              </GridPane.margin>
@@ -200,7 +200,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="p_genreTextf" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="90.0" />
                                              </GridPane.margin>
@@ -208,7 +208,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <TextField fx:id="P_ageGradeTextf" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets top="30.0" />
                                              </GridPane.margin>
@@ -216,7 +216,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <TextField fx:id="P_releaseTextf" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <GridPane.margin>
                                                 <Insets bottom="30.0" />
                                              </GridPane.margin>
@@ -224,7 +224,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <TextField fx:id="P_produTextf" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <GridPane.margin>
                                                 <Insets bottom="90.0" />
                                              </GridPane.margin>
@@ -232,7 +232,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                          <TextField fx:id="P_producNumTextf" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <GridPane.margin>
                                                 <Insets bottom="150.0" />
                                              </GridPane.margin>
@@ -281,7 +281,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <TextField GridPane.columnIndex="1">
+                                          <TextField fx:id="P_directorTextf" GridPane.columnIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="110.0" />
                                              </GridPane.margin>
@@ -289,7 +289,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="P_actorTextf" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="50.0" />
                                              </GridPane.margin>
@@ -297,7 +297,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <TextField fx:id="P_writerTextf" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets bottom="230.0" />
                                              </GridPane.margin>
@@ -307,7 +307,7 @@
                                           </TextField>
                                           <HBox prefHeight="150.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="추가">
+                                                <Button fx:id="P_addBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="추가">
                                                    <HBox.margin>
                                                       <Insets left="5.0" top="20.0" />
                                                    </HBox.margin>
@@ -315,7 +315,7 @@
                                                       <Font size="24.0" />
                                                    </font>
                                                 </Button>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="취소">
+                                                <Button fx:id="P_cancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="취소">
                                                    <HBox.margin>
                                                       <Insets left="5.0" top="20.0" />
                                                    </HBox.margin>
@@ -333,7 +333,7 @@
                            <right>
                               <BorderPane prefHeight="598.0" prefWidth="157.0" BorderPane.alignment="CENTER">
                                  <center>
-                                    <ChoiceBox prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: WhiTE;" BorderPane.alignment="CENTER">
+                                    <ChoiceBox fx:id="P_kindChoiceBox" prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: WhiTE;" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
                                           <Insets bottom="450.0" left="20.0" right="40.0" />
                                        </BorderPane.margin>
@@ -359,7 +359,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab closable="false" text="수정/삭제">
+            <Tab fx:id="p_modifyTab" closable="false" text="수정/삭제">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -429,7 +429,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <TextField GridPane.columnIndex="1">
+                                          <TextField fx:id="P_modiTitleTextf" GridPane.columnIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="150.0" />
                                              </GridPane.margin>
@@ -437,7 +437,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="p_modiGenreTextf" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="90.0" />
                                              </GridPane.margin>
@@ -445,7 +445,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <TextField fx:id="P_modiAgeGradeTextf" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets top="30.0" />
                                              </GridPane.margin>
@@ -453,7 +453,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <TextField fx:id="P_modiReleaseTextf" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <GridPane.margin>
                                                 <Insets bottom="30.0" />
                                              </GridPane.margin>
@@ -461,7 +461,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <TextField fx:id="P_modiProduTextf" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <GridPane.margin>
                                                 <Insets bottom="90.0" />
                                              </GridPane.margin>
@@ -469,7 +469,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                          <TextField fx:id="P_modiProducNumTextf" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <GridPane.margin>
                                                 <Insets bottom="150.0" />
                                              </GridPane.margin>
@@ -512,13 +512,13 @@
                                           </Label>
                                           <Label text="작   가" GridPane.rowIndex="2">
                                              <GridPane.margin>
-                                                <Insets bottom="230.0" left="10.0" />
+                                                <Insets bottom="200.0" left="10.0" />
                                              </GridPane.margin>
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <TextField GridPane.columnIndex="1">
+                                          <TextField fx:id="P_modiDirectorTextf" GridPane.columnIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="110.0" />
                                              </GridPane.margin>
@@ -526,7 +526,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="P_modiActorTextf" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="50.0" />
                                              </GridPane.margin>
@@ -534,9 +534,9 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <TextField fx:id="P_modiWriterTextf" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
-                                                <Insets bottom="230.0" />
+                                                <Insets bottom="200.0" />
                                              </GridPane.margin>
                                              <font>
                                                 <Font size="24.0" />
@@ -544,7 +544,7 @@
                                           </TextField>
                                           <HBox prefHeight="150.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="수정">
+                                                <Button fx:id="P_modiAddBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" text="수정">
                                                    <HBox.margin>
                                                       <Insets left="5.0" top="20.0" />
                                                    </HBox.margin>
@@ -552,7 +552,7 @@
                                                       <Font size="24.0" />
                                                    </font>
                                                 </Button>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="취소">
+                                                <Button fx:id="P_modiCancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" text="취소">
                                                    <HBox.margin>
                                                       <Insets left="5.0" top="20.0" />
                                                    </HBox.margin>
@@ -560,7 +560,7 @@
                                                       <Font size="24.0" />
                                                    </font>
                                                 </Button>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" text="삭제">
+                                                <Button fx:id="P_modiDelBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="106.0" text="삭제">
                                                    <HBox.margin>
                                                       <Insets left="10.0" top="20.0" />
                                                    </HBox.margin>
@@ -578,7 +578,7 @@
                            <right>
                               <BorderPane prefHeight="598.0" prefWidth="157.0" BorderPane.alignment="CENTER">
                                  <center>
-                                    <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                    <ChoiceBox fx:id="P_modiKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
                                           <Insets bottom="450.0" left="20.0" right="40.0" />
                                        </BorderPane.margin>
@@ -625,7 +625,7 @@
             </Label>
             <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="p_homeBtn" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/homeSqO.png" />
                      </image>

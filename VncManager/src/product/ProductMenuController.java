@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -38,13 +39,45 @@ public class ProductMenuController implements Initializable {
 	@FXML private BorderPane product;
 	@FXML private Button p_homeBtn;
 	@FXML private Tab p_searchTab;
-	@FXML private Tab p_addTap;
+	@FXML private Tab p_addTab;
+	@FXML private Tab p_modifyTab;
 	@FXML private ChoiceBox<String> pKindChoiceBox;
 	@FXML private ComboBox<String> searchKindComboBox;
-	@FXML private TextField searchText;
+	@FXML private TextField searchTextf;
 	@FXML private Button searchBtn;
 	@FXML private TableView<ProductDataModel> rsvListTable;
+	@FXML private Button p_addinfBtn;
+	@FXML private TextArea p_addinfTexta;
 	
+	//추가 탭 정보
+	@FXML private TextField P_titleTextf;
+	@FXML private TextField p_genreTextf;
+	@FXML private TextField P_ageGradeTextf;
+	@FXML private TextField P_releaseTextf;
+	@FXML private TextField P_produTextf;
+	@FXML private TextField P_producNumTextf;
+	@FXML private TextField P_directorTextf;
+	@FXML private TextField P_actorTextf;
+	@FXML private TextField P_writerTextf;
+	@FXML private ChoiceBox<String> P_kindChoiceBox;
+	@FXML private Button P_addBtn;
+	@FXML private Button P_cancleBtn;
+	
+	//수정/삭제 탭 정보
+	@FXML private TextField P_modiTitleTextf;
+	@FXML private TextField p_modiGenreTextf;
+	@FXML private TextField P_modiAgeGradeTextf;
+	@FXML private TextField P_modiReleaseTextf;
+	@FXML private TextField P_modiProduTextf;
+	@FXML private TextField P_modiProducNumTextf;
+	@FXML private TextField P_modiDirectorTextf;
+	@FXML private TextField P_modiActorTextf;
+	@FXML private TextField P_modiWriterTextf;
+	
+	@FXML private ChoiceBox<String> P_modiKindChoiceBox;
+	@FXML private Button P_modiAddBtn;
+	@FXML private Button P_modiCancleBtn;
+	@FXML private Button P_modiDelBtn;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -75,10 +108,7 @@ public class ProductMenuController implements Initializable {
 		rsvListTable.setItems(productList);
 		
 	}
-	public void handleSearchBtn(ActionEvent e) {
-		String search = searchText.getText();
-		
-	}
+	
 	public void gotoHome(ActionEvent e) {
 		try {
 			StackPane root = (StackPane) p_homeBtn.getScene().getRoot();
