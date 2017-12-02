@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tab;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,10 +33,12 @@ public class RentMenuController implements Initializable {
 	private ArrayList<RentReturnDatas> rds = new ArrayList<RentReturnDatas>();
 	private ArrayList<RentReturnDatasModel> rdms = new ArrayList<RentReturnDatasModel>();
 	
-	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "비디오", "만화책");
+	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "대여중", "반납");
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("상품번호", "제목", "이름", "대여일", "반납예정일", "전화번호");
 	private ObservableList<RentReturnDatasModel> rentReturnList = FXCollections.observableArrayList();
 	
+	private ObservableList<String> infoTitleList = FXCollections.observableArrayList();
+	private ObservableList<String> infoDataList = FXCollections.observableArrayList();
 	
 	@FXML private BorderPane rent;
 	@FXML private Button r_homeBtn;
@@ -43,6 +47,8 @@ public class RentMenuController implements Initializable {
 	@FXML private TextField searchText;
 	@FXML private Button searchBtn;
 	@FXML private TableView<RentReturnDatasModel> rentListTable;
+	@FXML private ListView<String> infoTitleListView;
+	@FXML private ListView<String> infoDataListView;
 	
 	
 	@Override
@@ -53,24 +59,16 @@ public class RentMenuController implements Initializable {
 		searchKindComboBox.setItems(searchKindList);
 		
 		TableColumn<RentReturnDatasModel, Integer> tcP_id = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(0);
-		TableColumn<RentReturnDatasModel, Integer> tcId = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(1);
-		TableColumn<RentReturnDatasModel, String> tcName = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(2);
-		TableColumn<RentReturnDatasModel, String> tcTitle = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(3);
-		TableColumn<RentReturnDatasModel, String> tcRentDate = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(4);
-		TableColumn<RentReturnDatasModel, String> tcDueDate = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(5);
-		TableColumn<RentReturnDatasModel, String> tcReturnDate = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(6);
-		TableColumn<RentReturnDatasModel, Integer> tcLateDays = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(7);
-		TableColumn<RentReturnDatasModel, Integer> tcOverdueFee = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(8);
+		TableColumn<RentReturnDatasModel, String> tcTitle = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(1);
+		TableColumn<RentReturnDatasModel, Integer> tcId = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(2);
+		TableColumn<RentReturnDatasModel, String> tcName = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(3);
+		TableColumn<RentReturnDatasModel, String> tcPhone = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(4);
 		
-		tcP_id. setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("P_id"));
-		tcId.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("name"));
+		tcP_id. setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("p_id"));
+		tcId.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("id"));
 		tcName.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, String>("name"));
 		tcTitle.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, String>("title"));
-		tcRentDate.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, String>("rentdate"));
-		tcDueDate.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, String>("duedate"));
-		tcReturnDate.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, String>("returndate"));
-		tcLateDays.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("latedays"));
-		tcOverdueFee.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("overduefee"));
+		tcPhone.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, String>("phone"));
 			
 		rds = db.selectRentReturnDatas();
 		for(RentReturnDatas rd : rds){
@@ -78,6 +76,29 @@ public class RentMenuController implements Initializable {
 		}
 		rentReturnList.addAll(rdms);
 		rentListTable.setItems(rentReturnList);
+		
+		rentListTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<RentReturnDatasModel>() {
+
+			@Override
+			public void changed(ObservableValue<? extends RentReturnDatasModel> observable, RentReturnDatasModel oldValue,
+					RentReturnDatasModel newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null) {
+					if(!infoTitleList.isEmpty()) {
+						infoTitleList.removeAll("대여일", "반납예정일", "반납일", "연체일", "연체료");
+						infoDataList.removeAll(oldValue.getRentDate().toString(), oldValue.getDueDate().toString(),
+								oldValue.getReturnDate().toString(), String.valueOf(oldValue.getLateDays()), String.valueOf(oldValue.getOverdueFee()));
+					}
+					
+					infoTitleList.addAll("대여일", "반납예정일", "반납일", "연체일", "연체료");
+					infoTitleListView.setItems(infoTitleList);
+					infoDataList.addAll(newValue.getRentDate().toString(), newValue.getDueDate().toString(),
+							newValue.getReturnDate().toString(), String.valueOf(newValue.getLateDays()), String.valueOf(newValue.getOverdueFee()));
+					infoDataListView.setItems(infoDataList);
+				}
+			}
+			
+		});
 		
 	}
 	

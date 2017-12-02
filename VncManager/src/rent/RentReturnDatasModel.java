@@ -25,9 +25,14 @@ public class RentReturnDatasModel {
 		this.title = new SimpleStringProperty(rrd.getTitle());
 		this.rentDate = new SimpleStringProperty(rrd.getRentDate().toString());
 		this.dueDate = new SimpleStringProperty(rrd.getDueDate().toString());
-		this.returnDate = new SimpleStringProperty(rrd.getReturnDate().toString());
+		if(rrd.getReturnDate().toString().equals("1901-01-01")) {
+			this.returnDate = new SimpleStringProperty("미반납");
+		} else {
+			this.returnDate = new SimpleStringProperty(rrd.getReturnDate().toString());
+		}
 		this.lateDays = new SimpleIntegerProperty(rrd.getLateDays());
-		this.overdueFee = new SimpleIntegerProperty(rrd.getOverdueFee());	
+		this.overdueFee = new SimpleIntegerProperty(rrd.getOverdueFee());
+		this.phone = new SimpleStringProperty(rrd.getPhone());
 	}
 	
 	public int getP_id() {

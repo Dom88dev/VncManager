@@ -32,8 +32,8 @@ public class Sql {
 			+ "r_date, edition, is_rental, rental_count, "
 			+ "supply_c_id, director, main_actor, writer from product";
 	public static final String SELECT_RENT =  
-			"select r.p_id, r.id, c.name, p.title, r.rent_date, r.due_date, r.return_date, "
-			+ "r.late_days, r.overdue_fee, c.tel from product p right outer join rent_return r on "
+			"select r.p_id, r.id, c.name, p.title, r.rent_date, r.due_date, nvl(r.return_date, to_date(19010101)), "
+			+ "nvl(r.late_days, 0), nvl(r.overdue_fee, 0), c.tel from product p right outer join rent_return r on "
 			+ "p.p_id = r.p_id left outer join customer c on r.id = c.id"; 
 	public static final String SELECT_BOOKDATA = 
 			"select b.ID, c.name, c.tel, b.p_id, p.title, b.b_no, r.due_date, p.kind" //	
