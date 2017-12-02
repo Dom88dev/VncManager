@@ -24,10 +24,14 @@ public class Sql {
 	public static final String USP_BOOK = "{call usp_book(?,?,?)}";
 	
 	//select문
-	public static final String SELECT_CUSTOMER = "";
+	public static final String SELECT_CUSTOMER = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
+			+ "from customer c left outer join (select id, count(id) cntid "
+			+ "from family group by id) d on c.id=d.id";
+	
 	public static final String SELECT_PRODUCT = "select p_id, kind, title, genre, age_grade,"
 			+ "release, edition, isRental, rentalCnt,supply, director, actor, writer "
 			+ "from Product;";
+	
 	public static final String SELECT_RENT =  "selelct r.p_id, r.id, c.name, p.title, r.rentdate, r.duedate, "
 			+ "r.returndate, r.latedays, r.overduefee, " + 
 			"from rent_return r inner join customer c on r.id = c.id  "

@@ -15,9 +15,20 @@ public class CustomerDatas {
 	private String tel;
 	private Date birth;
 	private int age;
-	private String pw;
+	private int countFamily;
+	private int pw;
 	
 	
+	public CustomerDatas(int id, String name, String addr, String tel, Date birth, int age, int countFamily, int pw) {
+		setId(id);
+		setName(name);
+		setAddr(addr);
+		setTel(tel);
+		setBirth(birth);
+		setAge(age);
+		setCountFamily(countFamily);
+		setPw(pw);
+	}
 
 	public int getId() {
 		return id;
@@ -75,13 +86,21 @@ public class CustomerDatas {
 	public void setAge(int age) {
 		this.age = age;
 	}
-
-	public String getPw() {
+	
+	public int getCountFamily() {
+		return countFamily;
+	}
+	
+	public void setCountFamily(int countFamily) {
+		this.countFamily = countFamily;
+	}
+	
+	public int getPw() {
 		return pw;
 	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
+	
+	public void setPw(int pw) {
+		this.pw=pw;
 	}
 
 }
