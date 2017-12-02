@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 
+import book.BookDatas;
 import customer.CustomerDatas;
 import product.ProductDatas;
 /**
@@ -177,4 +179,23 @@ public class Db {
 		return result;
 	}
 	
+	//TODO 데이터값 불러오는 메소드 작성
+	public ArrayList<BookDatas> selectBookDatas() {
+		ArrayList<BookDatas> bookDatas = new ArrayList<BookDatas>();
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_BOOKDATA);
+	        rs = stmt.executeQuery();
+	        
+	        while(rs.next()) {
+	        	bookDatas.add(new BookDatas(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getDate(7), rs.getString(8)));
+	        }
+	        close();
+	        
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bookDatas;
+	}
 }
