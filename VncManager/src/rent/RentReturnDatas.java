@@ -14,10 +14,11 @@ public class RentReturnDatas {
 	private Date returnDate;
 	private int lateDays;
 	private int overdueFee;
+	private String phone;
 	
-	public RentReturnDatas(int P_id, int id, String name, String title,
+	public RentReturnDatas(int p_id, int id, String name, String title,
 			Date rentDate, Date dueDate, Date returnDate,
-			int lateDays, int overdueFee) {
+			int lateDays, int overdueFee, String phone) {
 		setP_id(p_id);
 		setId(id);
 		setName(name);
@@ -27,7 +28,7 @@ public class RentReturnDatas {
 		setReturnDate(returnDate);
 		setLateDays(lateDays);
 		setOverdueFee(overdueFee);
-		
+		setPhone(phone);
 	}
 	
 	public int getP_id() {
@@ -92,6 +93,14 @@ public class RentReturnDatas {
 	}
 	public void setOverdueFee(int overdueFee) {
 		this.overdueFee = overdueFee;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 	

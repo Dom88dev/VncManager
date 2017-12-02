@@ -25,13 +25,14 @@ public class Sql {
 	
 	//select문
 	public static final String SELECT_CUSTOMER = "";
-	public static final String SELECT_PRODUCT = "select p_id, kind, title, genre, age_grade,"
-			+ "release, edition, isRental, rentalCnt,supply, director, actor, writer "
-			+ "from Product;";
-	public static final String SELECT_RENT =  "selelct r.p_id, r.id, c.name, p.title, r.rentdate, r.duedate, "
-			+ "r.returndate, r.latedays, r.overduefee, " + 
-			"from rent_return r inner join customer c on r.id = c.id  "
-			+ "inner join product p on r.id = p.id "; 
+	public static final String SELECT_PRODUCT = 
+			"select p_id, kind, title, genre, age_grade, "
+			+ "r_date, edition, is_rental, rental_count, "
+			+ "supply_c_id, director, main_actor, writer from product";
+	public static final String SELECT_RENT =  
+			"select r.p_id, r.id, c.name, p.title, r.rent_date, r.due_date, r.return_date, "
+			+ "r.late_days, r.overdue_fee, c.tel from product p right outer join rent_return r on "
+			+ "p.p_id = r.p_id left outer join customer c on r.id = c.id"; 
 
 	public static final String SELECT_BOOKDATA = 
 			"select b.ID, c.name, c.tel, b.p_id, p.title, b.b_no, r.due_date, p.kind" //	

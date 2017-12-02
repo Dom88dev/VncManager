@@ -16,6 +16,7 @@ public class RentReturnDatasModel {
 	private SimpleStringProperty returnDate;
 	private SimpleIntegerProperty lateDays;
 	private SimpleIntegerProperty overdueFee;
+	private SimpleStringProperty phone;
 	
 	public RentReturnDatasModel(RentReturnDatas rrd) {
 		this.p_id = new SimpleIntegerProperty(rrd.getP_id());
@@ -86,6 +87,11 @@ public class RentReturnDatasModel {
 	public void setOverdueFee(int overdueFee) {
 		this.overdueFee.set(overdueFee);
 	}
-	
+	public String getPhone() {
+		return phone.get();
+	}
+	public void setPhone(String phone) {
+		this.phone.set(phone);
+	}
 	
 }

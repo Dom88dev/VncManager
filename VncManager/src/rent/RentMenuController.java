@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import book.BookDataModel;
-import book.BookDatas;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -22,7 +20,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -31,11 +28,12 @@ import rsrc.Db;
 
 public class RentMenuController implements Initializable {
 	private Db db = new Db();
-	private ArrayList<RentReturnDatas> rd = new ArrayList<RentReturnDatas>();
+	private ArrayList<RentReturnDatas> rds = new ArrayList<RentReturnDatas>();
+	private ArrayList<RentReturnDatasModel> rdms = new ArrayList<RentReturnDatasModel>();
 	
 	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "비디오", "만화책");
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("상품번호", "제목", "이름", "대여일", "반납예정일", "전화번호");
-	private ObservableList<RentReturnDatasModel> rentreturnList = FXCollections.observableArrayList();
+	private ObservableList<RentReturnDatasModel> rentReturnList = FXCollections.observableArrayList();
 	
 	
 	@FXML private BorderPane rent;
@@ -47,22 +45,22 @@ public class RentMenuController implements Initializable {
 	@FXML private ComboBox<String> searchKindComboBox;
 	@FXML private TextField searchText;
 	@FXML private Button searchBtn;
-	@FXML private TableView<RentReturnDatasModel> rsvListTable;
+	@FXML private TableView<RentReturnDatasModel> rentListTable;
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
-		TableColumn<RentReturnDatasModel, Integer> tcP_id = (TableColumn<RentReturnDatasModel, Integer>) rsvListTable.getColumns().get(0);
-		TableColumn<RentReturnDatasModel, Integer> tcId = (TableColumn<RentReturnDatasModel, Integer>) rsvListTable.getColumns().get(1);
-		TableColumn<RentReturnDatasModel, String> tcName = (TableColumn<RentReturnDatasModel, String>) rsvListTable.getColumns().get(2);
-		TableColumn<RentReturnDatasModel, String> tcTitle = (TableColumn<RentReturnDatasModel, String>) rsvListTable.getColumns().get(3);
-		TableColumn<RentReturnDatasModel, String> tcRentDate = (TableColumn<RentReturnDatasModel, String>) rsvListTable.getColumns().get(4);
-		TableColumn<RentReturnDatasModel, String> tcDueDate = (TableColumn<RentReturnDatasModel, String>) rsvListTable.getColumns().get(5);
-		TableColumn<RentReturnDatasModel, String> tcReturnDate = (TableColumn<RentReturnDatasModel, String>) rsvListTable.getColumns().get(6);
-		TableColumn<RentReturnDatasModel, Integer> tcLateDays = (TableColumn<RentReturnDatasModel, Integer>) rsvListTable.getColumns().get(7);
-		TableColumn<RentReturnDatasModel, Integer> tcOverdueFee = (TableColumn<RentReturnDatasModel, Integer>) rsvListTable.getColumns().get(8);
+		TableColumn<RentReturnDatasModel, Integer> tcP_id = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(0);
+		TableColumn<RentReturnDatasModel, Integer> tcId = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(1);
+		TableColumn<RentReturnDatasModel, String> tcName = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(2);
+		TableColumn<RentReturnDatasModel, String> tcTitle = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(3);
+		TableColumn<RentReturnDatasModel, String> tcRentDate = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(4);
+		TableColumn<RentReturnDatasModel, String> tcDueDate = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(5);
+		TableColumn<RentReturnDatasModel, String> tcReturnDate = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(6);
+		TableColumn<RentReturnDatasModel, Integer> tcLateDays = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(7);
+		TableColumn<RentReturnDatasModel, Integer> tcOverdueFee = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(8);
 		
 		tcP_id. setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("P_id"));
 		tcId.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("name"));
@@ -74,11 +72,12 @@ public class RentMenuController implements Initializable {
 		tcLateDays.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("latedays"));
 		tcOverdueFee.setCellValueFactory(new PropertyValueFactory<RentReturnDatasModel, Integer>("overduefee"));
 			
-		//rd = db.selectRentreturnDatas();
-		for(RentReturnDatas bd : rd){
-			rentreturnList.add(new RentReturnDatasModel(bd));
+		rds = db.selectRentReturnDatas();
+		for(RentReturnDatas rd : rds){
+			rdms.add(new RentReturnDatasModel(rd));
 		}
-		rsvListTable.setItems(rentreturnList);
+		rentReturnList.addAll(rdms);
+		rentListTable.setItems(rentReturnList);
 		
 	}
 	
