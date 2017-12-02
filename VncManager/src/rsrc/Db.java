@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import book.BookDatas;
 import customer.CustomerDatas;
 import product.ProductDatas;
+import rent.RentReturnDatas;
 /**
  * JDBC 를 각 기능별로 메소드화 한 클래스<br><br>
  * JDBC를 해야하는 클래스에서 선언을 하고 conncet() 메소드를 사용하면 DB와 연결된다.<br>
@@ -198,4 +199,45 @@ public class Db {
 		}
 		return bookDatas;
 	}
+	
+	public ArrayList<ProductDatas> selectProductDatas(){
+		ArrayList<ProductDatas> productDatas = new ArrayList<ProductDatas>();
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_PRODUCT);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				productDatas.add(new ProductDatas(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+							rs.getDate(6), rs.getString(7), rs.getBoolean(8), rs.getInt(9),rs.getInt(10),
+							rs.getString(11),rs.getString(12), rs.getString(13)));
+			}
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return productDatas;
+		}
+	
+	public ArrayList<RentReturnDatas> selectRentReturnDatas(){
+		ArrayList<RentReturnDatas> rentreturnDatas = new ArrayList<RentReturnDatas>();
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_RENT);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				rentreturnDatas.add(new RentReturnDatas(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5),
+							rs.getDate(6), rs.getDate(7), rs.getInt(8), rs.getInt(9)));
+			}
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return rentreturnDatas;
+		}
 }
+
+
