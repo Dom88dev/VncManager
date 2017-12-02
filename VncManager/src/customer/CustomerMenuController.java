@@ -16,9 +16,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -44,6 +47,37 @@ public class CustomerMenuController implements Initializable{
 	@FXML private Tab c_modifyTab;
 	@FXML private Button c_homeBtn;
 	@FXML private TableView<CustomerDataModel> customerListTable;
+	@FXML private Button c_searchBtn;
+	@FXML private TextField c_searchFtext;
+	@FXML private Button c_addInfoBtn;
+	@FXML private TextArea c_addInfoTextArea;
+	
+	//추가 탭 정보
+	@FXML private TextField c_addNameFtext;
+	@FXML private TextField c_addAgeFtext;
+	@FXML private TextField c_addAddrFText;
+	@FXML private TextField c_addTelFText;
+	@FXML private TextField c_addBirthFText;
+	@FXML private Button c_JoinBtn;
+	@FXML private Button c_JoinCancleBtn;
+	
+	//수정 및 탈퇴 정보
+	@FXML private Label c_modifyId; 
+	@FXML private TextField c_modifyNameFtext;
+	@FXML private TextField c_modifyAgeFtext;
+	@FXML private TextField c_modifyAddrFtext;
+	@FXML private TextField c_modifyTelFtext;
+	@FXML private TextField c_modifyBirthFtext;
+	@FXML private TextField c_modifyPwFtext;
+	@FXML private TextField c_modifyFnameFText;
+	@FXML private TextField c_modifyFrelationFText;
+	@FXML private Button c_modifyBtn;
+	@FXML private Button c_modifyCancleBtn;
+	@FXML private Button c_modifyAddBtn;
+	@FXML private Button c_modifyFixBtn;
+	@FXML private Button c_modifyDelBtn;
+	@FXML private Button c_customerDropBtn;
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

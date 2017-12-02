@@ -28,7 +28,7 @@
    <center>
       <TabPane side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab closable="false" text="조회">
+            <Tab fx:id="c_searchTab" closable="false" text="조회">
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <bottom>
@@ -37,7 +37,7 @@
                      <center>
                         <ScrollPane prefHeight="546.0" prefWidth="819.0" BorderPane.alignment="CENTER">
                            <content>
-                              <TableView prefHeight="517.0" prefWidth="771.0">
+                              <TableView fx:id="customerListTable" prefHeight="517.0" prefWidth="771.0">
                                 <columns>
                                     <TableColumn prefWidth="95.0" text="회원번호" />
                                   <TableColumn prefWidth="95.0" text="이름" />
@@ -55,7 +55,7 @@
                      <right>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <top>
-                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#f27200" BorderPane.alignment="CENTER">
+                              <Button fx:id="c_addInfoBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#f27200" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -65,7 +65,7 @@
                               </Button>
                            </top>
                            <left>
-                              <TextArea prefHeight="469.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                              <TextArea fx:id="c_addInfoTextArea" prefHeight="469.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </left>
                         </BorderPane>
                      </right>
@@ -84,7 +84,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox prefWidth="150.0" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" style="-fx-background-color: white;">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </GridPane.margin>
@@ -92,8 +92,8 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </ComboBox>
-                              <TextField prefWidth="468.0" GridPane.columnIndex="1" GridPane.columnSpan="3" />
-                              <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="59.0" style="-fx-background-color: #f27200;" text="검 색" textFill="WHITE" GridPane.columnIndex="4">
+                              <TextField fx:id="c_searchFtext" prefWidth="468.0" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                              <Button fx:id="c_searchBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="59.0" style="-fx-background-color: #f27200;" text="검 색" textFill="WHITE" GridPane.columnIndex="4">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -101,7 +101,7 @@
                                     <DropShadow color="#ffa100" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="6">
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="6">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
@@ -109,7 +109,7 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </ChoiceBox>
-                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="5">
+                              <ChoiceBox fx:id="fKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="5">
                                  <GridPane.margin>
                                     <Insets right="10.0" />
                                  </GridPane.margin>
@@ -126,7 +126,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab closable="false" text="추가">
+            <Tab fx:id="c_joinTab" closable="false" text="추가">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="970.0">
                      <children>
@@ -188,7 +188,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <TextField GridPane.columnIndex="1">
+                                          <TextField fx:id="c_addNameFtext" GridPane.columnIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="150.0" />
                                              </GridPane.margin>
@@ -196,7 +196,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                          <TextField fx:id="c_addAgeFtext" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets top="90.0" />
                                              </GridPane.margin>
@@ -204,7 +204,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <TextField fx:id="c_addAddrFText" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets top="30.0" />
                                              </GridPane.margin>
@@ -212,7 +212,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <TextField fx:id="c_addTelFText" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <GridPane.margin>
                                                 <Insets bottom="30.0" />
                                              </GridPane.margin>
@@ -220,7 +220,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </TextField>
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <TextField fx:id="c_addBirthFText" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <GridPane.margin>
                                                 <Insets bottom="90.0" />
                                              </GridPane.margin>
@@ -247,7 +247,7 @@
                                        <children>
                                           <HBox prefHeight="150.0" prefWidth="291.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" style="-fx-background-color: white;" text="가입" textFill="#f27200">
+                                                <Button fx:id="c_JoinBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="99.0" style="-fx-background-color: white;" text="가입" textFill="#f27200">
                                                    <HBox.margin>
                                                       <Insets left="5.0" top="20.0" />
                                                    </HBox.margin>
@@ -255,7 +255,7 @@
                                                       <Font size="24.0" />
                                                    </font>
                                                 </Button>
-                                                <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: white;" text="취소" textFill="#f27200">
+                                                <Button fx:id="c_JoinCancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="100.0" style="-fx-background-color: white;" text="취소" textFill="#f27200">
                                                    <HBox.margin>
                                                       <Insets left="50.0" top="20.0" />
                                                    </HBox.margin>
@@ -274,7 +274,7 @@
                               <BorderPane prefHeight="598.0" prefWidth="157.0" BorderPane.alignment="CENTER" />
                            </right>
                            <top>
-                              <Label prefHeight="0.0" prefWidth="191.0" text="*회원 가입*" textFill="#f27200" BorderPane.alignment="CENTER">
+                              <Label prefHeight="0.0" prefWidth="191.0" text="회원 가입" textFill="#f27200" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
@@ -288,7 +288,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab closable="false" text="수정/삭제">
+            <Tab fx:id="c_modifyTab" closable="false" text="수정/삭제">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -330,7 +330,7 @@
                                  <center>
                                     <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TextField>
+                                          <TextField fx:id="c_modifyFnameFText">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -338,7 +338,7 @@
                                                 <Insets left="10.0" right="30.0" top="45.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <TextField>
+                                          <TextField fx:id="c_modifyFrelationFText">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -352,7 +352,7 @@
                                  <bottom>
                                     <HBox prefHeight="148.0" prefWidth="317.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: white;" text="추가" textFill="#f27200">
+                                          <Button fx:id="c_modifyAddBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="추가" textFill="#f27200">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -360,7 +360,7 @@
                                                 <Insets left="20.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: white;" text="수정" textFill="#f27200">
+                                          <Button fx:id="c_modifyFixBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="수정" textFill="#f27200">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -368,7 +368,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: white;" text="삭제" textFill="#f27200">
+                                          <Button fx:id="c_modifyDelBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="삭제" textFill="#f27200">
                                              <font>
                                                 <Font size="24.0" />
                                              </font>
@@ -389,7 +389,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="25.0" />
+                                          <Insets left="130.0" top="25.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="이   름" textFill="#f27200">
@@ -397,7 +397,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="30.0" />
+                                          <Insets left="130.0" top="30.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="나   이" textFill="#f27200">
@@ -405,7 +405,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="30.0" />
+                                          <Insets left="130.0" top="30.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="주   소" textFill="#f27200">
@@ -413,7 +413,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="35.0" />
+                                          <Insets left="130.0" top="30.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="전화번호" textFill="#f27200">
@@ -421,7 +421,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="35.0" />
+                                          <Insets left="110.0" top="30.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="생년월일" textFill="#f27200">
@@ -429,7 +429,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="30.0" />
+                                          <Insets left="110.0" top="30.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="비밀번호" textFill="#f27200">
@@ -437,7 +437,7 @@
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets left="120.0" top="25.0" />
+                                          <Insets left="110.0" top="25.0" />
                                        </VBox.margin>
                                     </Label>
                                  </children>
@@ -446,15 +446,23 @@
                            <center>
                               <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <TextField>
+                                    <Label fx:id="c_modifyId" prefHeight="28.0" prefWidth="429.0" textAlignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets top="20.0" />
+                                          <Insets top="25.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="c_modifyNameFtext">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="25.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField>
+                                    <TextField fx:id="c_modifyAgeFtext">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -462,7 +470,7 @@
                                           <Insets top="15.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField>
+                                    <TextField fx:id="c_modifyAddrFtext">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -470,7 +478,15 @@
                                           <Insets top="15.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField>
+                                    <TextField fx:id="c_modifyTelFtext">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <TextField fx:id="c_modifyBirthFtext">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -478,28 +494,12 @@
                                           <Insets top="15.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField>
+                                    <TextField fx:id="c_modifyPwFtext">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets top="15.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField>
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="15.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField>
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets top="15.0" />
+                                          <Insets top="10.0" />
                                        </VBox.margin>
                                     </TextField>
                                  </children>
@@ -508,7 +508,7 @@
                            <bottom>
                               <HBox prefHeight="81.0" prefWidth="969.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: white;" text="수정" textFill="#f27200">
+                                    <Button fx:id="c_modifyBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="수정" textFill="#f27200">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -516,7 +516,7 @@
                                           <Insets left="250.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: white;" text="취소" textFill="#f27200">
+                                    <Button fx:id="c_modifyCancleBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="취소" textFill="#f27200">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -524,7 +524,7 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: white;" text="탈퇴" textFill="#f27200">
+                                    <Button fx:id="c_customerDropBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="탈퇴" textFill="#f27200">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -568,7 +568,7 @@
             </Label>
             <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="c_homeBtn" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/homeSqO.png" />
                      </image>
