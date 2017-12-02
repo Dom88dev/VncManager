@@ -14,6 +14,7 @@ public class BookDataModel {
 	private SimpleStringProperty title;
 	private SimpleIntegerProperty rsvNo;
 	private SimpleStringProperty returnDate;
+	private SimpleStringProperty kind;
 	
 	public BookDataModel(BookDatas bd) {
 		this.id = new SimpleIntegerProperty(bd.getId());
@@ -23,6 +24,7 @@ public class BookDataModel {
 		this.title = new SimpleStringProperty(bd.getTitle());
 		this.rsvNo = new SimpleIntegerProperty(bd.getRsvNo());
 		this.returnDate = new SimpleStringProperty(bd.getReturnDate().toString());
+		this.kind = new SimpleStringProperty(bd.getKind());
 	}
 	
 	
@@ -68,6 +70,11 @@ public class BookDataModel {
 	public void setReturnDate(Date returnDate) {
 		this.returnDate.set(returnDate.toString());
 	}
-	
+	public String getKind() {
+		return kind.get();
+	}
+	public void setKind(String kind) {
+		this.kind.set(kind);
+	}
 	
 }

@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +31,6 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import rsrc.Db;
 
@@ -115,6 +116,31 @@ public class ReservationMenuController implements Initializable {
 		rsvListTable.setPlaceholder(label);
 		customerSearchTable.setPlaceholder(label);
 		productSearchTable.setPlaceholder(label);
+		
+		productKind.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+				bookingList.removeAll(bdms);
+				if(newValue.equals("전체")) {
+					bookingList.addAll(bdms);
+				} else {
+					for(BookDataModel bd : bdms) {
+						switch(newValue) {
+						case "비디오":
+							if(bd.getKind().equals("V"))	bookingList.add(bd);
+							break;
+						case "만화책":
+							if(bd.getKind().equals("C"))	bookingList.add(bd);
+							break;
+						}
+					}
+				}
+				
+			}
+			
+		});
 	}
 
 	public void handleSearchBtn(ActionEvent e) {
