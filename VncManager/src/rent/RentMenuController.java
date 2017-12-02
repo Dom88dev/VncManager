@@ -38,9 +38,6 @@ public class RentMenuController implements Initializable {
 	
 	@FXML private BorderPane rent;
 	@FXML private Button r_homeBtn;
-	@FXML private Tab r_searchTab;
-	@FXML private Tab r_rentalTab;
-	@FXML private Tab r_returnTab;
 	@FXML private ChoiceBox<String> pKindChoiceBox;
 	@FXML private ComboBox<String> searchKindComboBox;
 	@FXML private TextField searchText;
@@ -51,6 +48,9 @@ public class RentMenuController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		pKindChoiceBox.setValue("전체");
+		pKindChoiceBox.setItems(productKindList);
+		searchKindComboBox.setItems(searchKindList);
 		
 		TableColumn<RentReturnDatasModel, Integer> tcP_id = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(0);
 		TableColumn<RentReturnDatasModel, Integer> tcId = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(1);
