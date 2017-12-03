@@ -27,10 +27,42 @@ public class Sql {
 	public static final String SELECT_CUSTOMER = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
 			+ "from customer c left outer join (select id, count(id) cntid "
 			+ "from family group by id) d on c.id=d.id";
+	
+	public static final String SELECT_CUSTOMER_ID = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
+			+ "from customer c left outer join (select id, count(id) cntid "
+			+ "from family group by id) d on c.id=d.id where c.id like ?";
+	public static final String SELECT_CUSTOMER_NAME = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
+			+ "from customer c left outer join (select id, count(id) cntid "
+			+ "from family group by id) d on c.id=d.id where c.name like ?";
+	public static final String SELECT_CUSTOMER_TEL = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
+			+ "from customer c left outer join (select id, count(id) cntid "
+			+ "from family group by id) d on c.id=d.id where c.tel like ?";
+	
+	
 	public static final String SELECT_PRODUCT = 
 			"select p_id, kind, title, genre, age_grade, "
 			+ "r_date, edition, is_rental, rental_count, "
 			+ "supply_c_id, director, main_actor, writer from product";
+	
+	public static final String SELECT_PRODUCT_PID = 
+			"select p_id, kind, title, genre, age_grade, "
+			+ "r_date, edition, is_rental, rental_count, "
+			+ "supply_c_id, director, main_actor, writer from product where p_id like ?";
+	
+	public static final String SELECT_PRODUCT_TITLE = 
+			"select p_id, kind, title, genre, age_grade, "
+			+ "r_date, edition, is_rental, rental_count, "
+			+ "supply_c_id, director, main_actor, writer from product where title like ?";
+	public static final String SELECT_PRODUCT_GENRE = 
+			"select p_id, kind, title, genre, age_grade, "
+			+ "r_date, edition, is_rental, rental_count, "
+			+ "supply_c_id, director, main_actor, writer from product where genre like ?";
+	public static final String SELECT_PRODUCT_RDATE = 
+			"select p_id, kind, title, genre, age_grade, "
+			+ "r_date, edition, is_rental, rental_count, "
+			+ "supply_c_id, director, main_actor, writer from product where r_date like ?";
+	
+	
 	public static final String SELECT_RENT =  
 			"select r.p_id, r.id, c.name, p.title, r.rent_date, r.due_date, nvl(r.return_date, to_date(19010101)), "
 			+ "nvl(r.late_days, 0), nvl(r.overdue_fee, 0), c.tel from product p right outer join rent_return r on "
@@ -40,4 +72,7 @@ public class Sql {
 			+ " from customer c join booking b on b.id = c.id"
 			+ " join product p on b.p_id = p.p_id"
 			+ " join rent_return r on p.p_id = r.p_id";
+	
+	//delete문
+	public static final String DELETE_BOOK = "delete booking where id=? and P_id=?";
 }

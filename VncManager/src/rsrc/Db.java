@@ -68,6 +68,7 @@ public class Db {
 	public int usp_register(CustomerDatas datas) {
 		int result = 0;
 		try {
+			connect();
 			callStmt = con.prepareCall(Sql.USP_REGISTER);
 			callStmt.setString(1, datas.getName());
 			callStmt.setString(2, datas.getTel());
@@ -77,6 +78,7 @@ public class Db {
 	        callStmt.executeQuery();
 	        
 	        result = callStmt.getInt(5);
+	        close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,6 +99,7 @@ public class Db {
 	public int usp_addv(ProductDatas datas) {
 		int result = 0;
 		try {
+			connect();
 			callStmt = con.prepareCall(Sql.USP_ADDV);
 			callStmt.setString(1, datas.getTitle());
 			callStmt.setString(2, datas.getGenre());
@@ -109,6 +112,8 @@ public class Db {
 	        callStmt.executeQuery();
 	        
 	        result = callStmt.getInt(8);
+	        
+	        close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,6 +134,7 @@ public class Db {
 	public int usp_addc(ProductDatas datas) {
 		int result = 0;
 		try {
+			connect();
 			callStmt = con.prepareCall(Sql.USP_ADDC);
 			callStmt.setString(1, datas.getTitle());
 			callStmt.setString(2, datas.getGenre());
@@ -140,6 +146,8 @@ public class Db {
 	        callStmt.executeQuery();
 	        
 	        result = callStmt.getInt(7);
+	        
+	        close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,6 +173,7 @@ public class Db {
 	public int usp_rrb(int p_id, int id, String procedure) {
 		int result = 0;
 		try {
+			connect();
 			callStmt = con.prepareCall(procedure);
 			callStmt.setInt(1, p_id);
 			callStmt.setInt(2, id);
@@ -172,6 +181,7 @@ public class Db {
 	        callStmt.executeQuery();
 	        
 	        result = callStmt.getInt(3);
+	        close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -218,6 +228,26 @@ public class Db {
 		return customerDatas;
 	}
 	
+	public ArrayList<CustomerDatas> selectCustomerDatasOption(String column, String optionValue){
+		ArrayList<CustomerDatas> customerDatas = new ArrayList<CustomerDatas>();
+		connect();
+		try {
+			
+			stmt = con.prepareStatement(column.equals("id")?Sql.SELECT_CUSTOMER_ID:column.equals("name")?Sql.SELECT_CUSTOMER_NAME:Sql.SELECT_CUSTOMER_TEL);
+			stmt.setString(1, "%"+optionValue+"%");
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				customerDatas.add(new CustomerDatas(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)));
+			}
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return customerDatas;
+	}
+	
 	public ArrayList<ProductDatas> selectProductDatas(){
 		ArrayList<ProductDatas> productDatas = new ArrayList<ProductDatas>();
 		connect();
@@ -236,7 +266,29 @@ public class Db {
 			e.printStackTrace();
 		}
 		return productDatas;
+	}
+	
+	
+	public ArrayList<ProductDatas> selectProductDatasOption(String column, String optionValue){
+		ArrayList<ProductDatas> productDatas = new ArrayList<ProductDatas>();
+		connect();
+		try {
+			stmt = con.prepareStatement(column.equals("p_id")?Sql.SELECT_PRODUCT_PID:column.equals("title")?Sql.SELECT_PRODUCT_TITLE:column.equals("genre")?Sql.SELECT_PRODUCT_GENRE:Sql.SELECT_PRODUCT_RDATE);
+			stmt.setString(1, "%"+optionValue+"%");
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				productDatas.add(new ProductDatas(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+							rs.getDate(6), rs.getString(7), rs.getInt(8)==1, rs.getInt(9),rs.getInt(10),
+							rs.getString(11),rs.getString(12), rs.getString(13)));
+			}
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
+		return productDatas;
+	}
 	
 	public ArrayList<RentReturnDatas> selectRentReturnDatas(){
 		ArrayList<RentReturnDatas> rentreturnDatas = new ArrayList<RentReturnDatas>();
@@ -256,7 +308,29 @@ public class Db {
 			e.printStackTrace();
 		}
 		return rentreturnDatas;
+	}
+	
+	
+	//delete문
+	
+	public int deleteBooking(int id, int pid) {
+		int result = 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.DELETE_BOOK);
+			stmt.setInt(1, id);
+			stmt.setInt(2, pid);
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return result;
+	}
+	
 }
 
 

@@ -30,7 +30,7 @@
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="rsvListTable" prefHeight="434.0" prefWidth="819.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="rsvListTable" prefHeight="434.0" prefWidth="819.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn editable="false" prefWidth="74.0" text="회원번호" />
                             <TableColumn editable="false" prefWidth="100.0" text="이름" />
@@ -49,9 +49,15 @@
                         </TableView>
                      </center>
                      <bottom>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="961.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Button" />
+                              <Button fx:id="rsvRemoveBtn" mnemonicParsing="false" onAction="#removeReservation" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: white;" text="예약취소" textFill="#9161c6">
+                                 <effect>
+                                    <DropShadow color="#9161c6" />
+                                 </effect>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Button>
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -70,7 +76,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" promptText="구분" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -124,11 +130,11 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ChoiceBox fx:id="customerSearchKind" prefWidth="150.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
+                                    <ComboBox fx:id="customerSearchKind" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
-                                    </ChoiceBox>
+                                    </ComboBox>
                                     <Label alignment="CENTER" prefHeight="19.0" prefWidth="940.0" text="회원선택" textFill="#9161c6" GridPane.columnSpan="2147483647">
                                        <font>
                                           <Font size="20.0" />
@@ -139,7 +145,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -152,7 +158,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </GridPane>
-                              <TableView fx:id="customerSearchTable" prefHeight="193.0" prefWidth="941.0" style="-fx-background-color: white;">
+                              <TableView fx:id="customerSearchTable" prefHeight="225.0" prefWidth="941.0" style="-fx-background-color: white;">
                                 <columns>
                                   <TableColumn prefWidth="75.0" text="회원번호" />
                                   <TableColumn prefWidth="122.0" text="이름" />
@@ -187,17 +193,17 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ChoiceBox fx:id="productSearchKind" prefWidth="150.0" style="-fx-background-color: white;" GridPane.rowIndex="1">
+                                    <ComboBox fx:id="productSearchKind" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
-                                    </ChoiceBox>
+                                    </ComboBox>
                                     <ChoiceBox fx:id="productKind" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </ChoiceBox>
-                                    <Label alignment="CENTER" prefHeight="19.0" prefWidth="953.0" text="상품선택" textFill="#9161c6" GridPane.columnSpan="2147483647">
+                                    <Label alignment="CENTER" prefHeight="36.0" prefWidth="921.0" text="상품선택" textFill="#9161c6" GridPane.columnSpan="2147483647">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -207,7 +213,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -220,7 +226,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </padding>
                               </GridPane>
-                              <TableView fx:id="productSearchTable" prefHeight="272.0" prefWidth="961.0" style="-fx-background-color: white;">
+                              <TableView fx:id="productSearchTable" prefHeight="258.0" prefWidth="941.0" style="-fx-background-color: white;">
                                 <columns>
                                   <TableColumn editable="false" prefWidth="86.0" text="상품번호" />
                                   <TableColumn prefWidth="84.0" text="상품종류" />
@@ -238,7 +244,7 @@
                      <bottom>
                         <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="961.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="bookingBtn" mnemonicParsing="false" prefHeight="39.0" prefWidth="82.0" style="-fx-background-color: white;" text="예약" textFill="#9161c6">
+                              <Button fx:id="bookingBtn" mnemonicParsing="false" onAction="#confirmBook" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: white;" text="예 약" textFill="#9161c6">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
