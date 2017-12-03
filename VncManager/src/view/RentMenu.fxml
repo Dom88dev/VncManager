@@ -92,6 +92,39 @@
                            </padding>
                         </GridPane>
                      </top>
+
+                     <right>
+                        <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <BorderPane prefHeight="549.0" prefWidth="244.0">
+                                 <top>
+                                    <Label fx:id="r_addinfleBtn" alignment="CENTER" prefHeight="51.0" prefWidth="228.0" text="추가정보" textFill="#9161c6" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
+                                 <center>
+                                    <ListView fx:id="infoDataListView" prefHeight="530.0" prefWidth="314.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets left="5.0" />
+                                       </BorderPane.margin>
+                                    </ListView>
+                                 </center>
+                                 <left>
+                                    <ListView fx:id="infoTitleListView" prefHeight="520.0" prefWidth="97.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </GridPane>
+                     </right>
+
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -101,6 +134,29 @@
             <Tab closable="false" text="대여">
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="rentListTable" prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn prefWidth="100.0" text="상품" />
+                              <TableColumn prefWidth="75.0" text="회원번호" />
+                              <TableColumn prefWidth="75.0" text="제목" />
+                              <TableColumn prefWidth="75.0" text="이름" />
+                              <TableColumn prefWidth="75.0" text="대여일" />
+                              <TableColumn fx:id="rentListTable" prefWidth="75.0" text="반납예정일" />
+                              <TableColumn prefWidth="75.0" text="반납일" />
+                              <TableColumn prefWidth="75.0" text="연체일 수" />
+                              <TableColumn prefWidth="152.0" text="연체대금" />
+                              <TableColumn prefWidth="170.40008544921875" />
+                           </columns>
+                           <BorderPane.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </BorderPane.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+
                      <top>
                         <GridPane prefHeight="51.0" prefWidth="571.0" BorderPane.alignment="CENTER">
                            <columnConstraints>
@@ -114,7 +170,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ComboBox prefWidth="150.0" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" style="-fx-background-color: white;">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -122,8 +178,8 @@
                                     <InnerShadow color="#cc00ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </ComboBox>
-                              <TextField GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Button" GridPane.columnIndex="3">
+                              <TextField fx:id="searchText" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <Button fx:id="searchBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="검색" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -131,7 +187,7 @@
                                     <DropShadow color="#f600ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
                                  <effect>
                                     <InnerShadow color="#e500ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
@@ -148,13 +204,16 @@
                               <Button mnemonicParsing="false" text="총 대여금액" BorderPane.alignment="CENTER" />
                            </top>
                            <center>
-                              <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+
+                              <ListView fx:id="infoTitleListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </center>
                            <bottom>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" text="대여" />
-                                    <Button mnemonicParsing="false" text="취소" />
+
+                                    <Button fx:id="r_rentBtn" mnemonicParsing="false" text="대여" />
+                                    <Button fx:id="r_cancleBtn" mnemonicParsing="false" text="취소" />
+
                                  </children>
                               </HBox>
                            </bottom>
@@ -190,7 +249,9 @@
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="rentListTable" prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
+
+                        <TableView fx:id="re_rentListTable" prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
+
                            <columns>
                               <TableColumn prefWidth="100.0" text="상품번호" />
                               <TableColumn prefWidth="75.0" text="회원번호" />
@@ -223,7 +284,9 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" style="-fx-background-color: white;">
+
+                              <ComboBox fx:id="re_addinfChoiceBox" prefWidth="150.0" style="-fx-background-color: white;">
+
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -231,8 +294,10 @@
                                     <InnerShadow color="#cc00ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </ComboBox>
-                              <TextField fx:id="searchText" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                              <Button fx:id="searchBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="검 색" GridPane.columnIndex="3">
+
+                              <TextField fx:id="re_searchText" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <Button fx:id="re_searchBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="Button" GridPane.columnIndex="3">
+
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -240,7 +305,9 @@
                                     <DropShadow color="#f600ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+
+                              <ChoiceBox fx:id="re_pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+
                                  <effect>
                                     <InnerShadow color="#e500ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
@@ -257,13 +324,24 @@
                               <Button mnemonicParsing="false" text="연체금" BorderPane.alignment="CENTER" />
                            </top>
                            <center>
-                              <TextArea prefHeight="398.0" prefWidth="219.0" BorderPane.alignment="CENTER" />
+
+                              <TextArea fx:id="re_Texta" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+
                            </center>
                            <bottom>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" text="반납" />
-                                    <Button mnemonicParsing="false" text="취소" />
+                                    <Button fx:id="re_returnhBtn" mnemonicParsing="false" text="반납">
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="re_cancleBtn" mnemonicParsing="false" text="취소">
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
+                                    </Button>
+
                                  </children>
                               </HBox>
                            </bottom>

@@ -77,11 +77,15 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </ComboBox>
+
                               <TextField fx:id="searchText" prefHeight="23.0" prefWidth="491.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.columnSpan="2">
+
                                  <effect>
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect></TextField>
+
                               <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: #f27200;" text="검 색" textFill="WHITE" GridPane.columnIndex="3">
+
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
