@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import book.BookDataModel;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -12,7 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -24,18 +27,22 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.util.Duration;
 import rsrc.Db;
 
 public class CustomerMenuController implements Initializable{
 	private Db db = new Db();
 	private ArrayList<CustomerDatas> bds = new ArrayList<CustomerDatas>();
+	private ArrayList<CustomerDataModel> bdms = new ArrayList<CustomerDataModel>();
 
 	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "비디오", "만화책");
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("회원번호", "이름", "전화번호", "주소");
 	private ObservableList<String> familyKindList = FXCollections.observableArrayList("전체", "가족 유", "가족 무");
+	
 	private ObservableList<CustomerDataModel> customerList = FXCollections.observableArrayList();
 	
 	@FXML private BorderPane customer;
@@ -48,7 +55,7 @@ public class CustomerMenuController implements Initializable{
 	@FXML private Button c_homeBtn;
 	@FXML private TableView<CustomerDataModel> customerListTable;
 	@FXML private Button c_searchBtn;
-	@FXML private TextField c_searchFtext;
+	@FXML private TextField c_searchFText;
 	@FXML private Button c_addInfoBtn;
 	@FXML private TextArea c_addInfoTextArea;
 	
@@ -95,6 +102,7 @@ public class CustomerMenuController implements Initializable{
 		TableColumn<CustomerDataModel, String> tcBirth = (TableColumn<CustomerDataModel, String>)customerListTable.getColumns().get(4);
 		TableColumn<CustomerDataModel, Integer> tcAge = (TableColumn<CustomerDataModel, Integer>)customerListTable.getColumns().get(5);
 		TableColumn<CustomerDataModel, Integer> tcCountFamily = (TableColumn<CustomerDataModel, Integer>)customerListTable.getColumns().get(6);
+		TableColumn<CustomerDataModel, Integer> tcPw = (TableColumn<CustomerDataModel, Integer>)customerListTable.getColumns().get(7);
 		
 		tcId.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("id"));
 		tcName.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("name"));
@@ -103,14 +111,64 @@ public class CustomerMenuController implements Initializable{
 		tcBirth.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("birth"));
 		tcAge.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("age"));
 		tcCountFamily.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("countFamily"));
+		tcPw.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("pw"));
 		
 		bds = db.selectCustomerDatas();
 		for(CustomerDatas bd: bds) {
-			customerList.add(new CustomerDataModel(bd));
+			bdms.add(new CustomerDataModel(bd));
 		}
 		customerListTable.setItems(customerList);
+		
+		customerListTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
+			@Override
+			public void handle(ScrollEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		Label label = new Label("검색한 결과가 없습니다.");
+		customerListTable.setPlaceholder(label);
+		
 	}
 	
+	public void handleSearchBtn(ActionEvent e) {
+		String search = c_searchFText.getText();
+		String sKind = searchKindComboBox.getValue();
+		if(sKind == null) {
+			
+			popNoti("조건을 선택하고 검색하세요.");
+			return;
+		}
+		customerList.removeAll(bdms);
+		if(search.equals("")) {
+			customerList.addAll(bdms);
+		}else {
+			for(CustomerDataModel bd : bdms) {
+				switch(sKind) {
+					case "회원번호": 
+						if(String.valueOf(bd.getId()).equals(search))customerList.add(bd);
+						break;
+					case "이름": 
+						if(bd.getName().toLowerCase().contains(search.toLowerCase()))customerList.add(bd);
+						break;
+					case "전화번호": 
+						if(bd.getTel().contains(search))customerList.add(bd);
+						break;
+					case "주소": 
+						if(bd.getAddr().toLowerCase().contains(search.toLowerCase()))customerList.add(bd);
+						break;
+					case "생년월일": 
+						if(bd.getBirth().equals(search.toLowerCase()))customerList.add(bd);
+						break;
+				}
+				
+				
+			}
+		}
+		
+	}
+
 	public void gotoHome(ActionEvent e) {
 		try {
 			StackPane root = (StackPane) c_homeBtn.getScene().getRoot();
@@ -136,5 +194,26 @@ public class CustomerMenuController implements Initializable{
 			ex.printStackTrace();
 		}
 	}
+	
+	private void popNoti(String notice) {
+		Popup noti = new Popup();
+		
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource("/view/Notification.fxml"));
+			Label noticeText = (Label)parent.lookup("#noticeText");
+			noticeText.setText(notice);
+			
+			noti.getContent().add(parent);
+			noti.setAutoHide(true);
+			noti.show(customer.getScene().getWindow());
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("popNoti메소드 에러");
+		}
+		
+	}
 
 }
+
+
