@@ -7,11 +7,29 @@ import rsrc.Util;
 public class RentReturnDatas {
 	private int p_id;
 	private int id;
+	private String name;
+	private String title;
 	private Date rentDate;
 	private Date dueDate;
 	private Date returnDate;
 	private int lateDays;
 	private int overdueFee;
+	private String phone;
+	
+	public RentReturnDatas(int p_id, int id, String name, String title,
+			Date rentDate, Date dueDate, Date returnDate,
+			int lateDays, int overdueFee, String phone) {
+		setP_id(p_id);
+		setId(id);
+		setName(name);
+		setTitle(title);
+		setRentDate(rentDate);
+		setDueDate(dueDate);
+		setReturnDate(returnDate);
+		setLateDays(lateDays);
+		setOverdueFee(overdueFee);
+		setPhone(phone);
+	}
 	
 	public int getP_id() {
 		return p_id;
@@ -24,6 +42,18 @@ public class RentReturnDatas {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public Date getRentDate() {
 		return rentDate;
@@ -63,6 +93,14 @@ public class RentReturnDatas {
 	}
 	public void setOverdueFee(int overdueFee) {
 		this.overdueFee = overdueFee;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 	

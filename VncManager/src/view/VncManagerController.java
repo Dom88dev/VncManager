@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import book.ReservationMenuController;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,7 +14,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 /**
@@ -132,5 +135,22 @@ public class VncManagerController implements Initializable {
 		}
 	}
 	
+	public void popNoti(String notice) {
+		Popup noti = new Popup();
+		
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource("Notification.fxml"));
+			Label noticeText = (Label)parent.lookup("#noticeText");
+			noticeText.setText(notice);
+			
+			noti.getContent().add(parent);
+			noti.setAutoHide(true);
+			noti.show(primaryStage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("popNoti메소드 에러");
+		}
+	}
 	
 }

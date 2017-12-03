@@ -2,10 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,80 +20,575 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
-<left>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="452.0" prefWidth="181.0" BorderPane.alignment="CENTER">
-         <top>
-            <ImageView fitHeight="100.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+<BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
+   <center>
+      <TabPane side="LEFT" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab fx:id="c_searchTab" closable="false" text="조회">
+               <content>
+                  <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
+                     <bottom>
+                        <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <TableView fx:id="customerListTable" prefHeight="517.0" prefWidth="771.0">
+                          <columns>
+                              <TableColumn prefWidth="55.0" text="회원번호" />
+                            <TableColumn prefWidth="75.0" text="이름" />
+                            <TableColumn prefWidth="130.0" text="주소" />
+                              <TableColumn prefWidth="130.0" text="전화번호" />
+                              <TableColumn prefWidth="130.0" text="생년월일" />
+                              <TableColumn prefWidth="50.0" text="나이" />
+                              <TableColumn prefWidth="50.0" text="가족 수" />
+                              <TableColumn prefWidth="130.0" text="비밀번호" />
+                          </columns>
+                        </TableView>
+                     </center>
+                     <right>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <Button fx:id="c_addInfoBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="추가 정보" textFill="#f27200" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </BorderPane.margin>
+                              </Button>
+                           </top>
+                           <center>
+                              <ListView fx:id="c_addInfoListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                     </right>
+                     <top>
+                        <GridPane prefHeight="66.0" prefWidth="970.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" style="-fx-background-color: white;">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </ComboBox>
+                              <TextField fx:id="c_searchFtext" prefWidth="468.0" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                              <Button fx:id="c_searchBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="59.0" style="-fx-background-color: #f27200;" text="검 색" textFill="WHITE" GridPane.columnIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <DropShadow color="#ffa100" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </Button>
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="6">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </ChoiceBox>
+                              <ChoiceBox fx:id="fKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="5">
+                                 <GridPane.margin>
+                                    <Insets right="10.0" />
+                                 </GridPane.margin>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </ChoiceBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="c_joinTab" closable="false" text="추가">
+               <content>
+                  <BorderPane prefHeight="597.0" prefWidth="969.0" style="-fx-background-color: white;">
+                     <left>
+                        <GridPane alignment="CENTER" prefHeight="438.0" prefWidth="771.0" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="117.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="307.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="이   름" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="주   소" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="전화번호" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="생년월일" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="c_addNameFtext" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_addAddrFText" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_addTelFText" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_addBirthFText" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </BorderPane.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="40.0" right="20.0" top="20.0" />
+                           </padding>
+                        </GridPane>
+                     </left>
+                     <bottom>
+                        <HBox prefHeight="115.0" prefWidth="961.0" spacing="20.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="19.0" prefWidth="216.0" />
+                              <Button fx:id="c_JoinBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: white;" text="추가" textFill="#f27200">
+                                 <HBox.margin>
+                                    <Insets left="5.0" top="20.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </Button>
+                              <Button fx:id="c_JoinCancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="취소" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets left="5.0" top="20.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </Button>
+                              <Label prefHeight="19.0" prefWidth="218.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="c_modifyTab" closable="false" text="수정/삭제">
+               <content>
+                  <BorderPane prefHeight="597.0" prefWidth="969.0" style="-fx-background-color: white;">
+                     <left>
+                        <GridPane alignment="CENTER" prefHeight="435.0" prefWidth="442.0" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="117.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.0" minWidth="10.0" prefWidth="307.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="65.0" minHeight="10.0" prefHeight="33.000030517578125" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="69.99996948242188" minHeight="10.0" prefHeight="69.99996948242188" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="이   름" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="주   소" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="전화번호" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="생년월일" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="c_modifyNameFtext" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_modifyAddrFtext" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_modifyTelFtext" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_modifyBirthFtext" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="아이디" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="비밀번호" textFill="#f27200" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="c_modifyPwFtext" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <Label fx:id="c_modifyId" prefHeight="21.0" prefWidth="284.0" textFill="#f27200" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </BorderPane.margin>
+                           <padding>
+                              <Insets bottom="20.0" left="40.0" right="20.0" top="20.0" />
+                           </padding>
+                        </GridPane>
+                     </left>
+                     <center>
+                        <GridPane prefHeight="405.0" prefWidth="509.0" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.33331298828125" minWidth="10.0" prefWidth="130.66668701171875" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="325.0" minWidth="10.0" prefWidth="318.33331298828125" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="216.0" minHeight="10.0" prefHeight="157.33334350585938" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="205.66665649414062" minHeight="10.0" prefHeight="169.66665649414062" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="가족관계" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets bottom="50.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="c_modifyFnameFText" maxWidth="1.7976931348623157E308" prefWidth="319.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets top="50.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <TextField fx:id="c_modifyFrelationFText" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets bottom="50.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                              </TextField>
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="가족이름" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets top="50.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <Button fx:id="c_modifyAddBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="123.0" style="-fx-background-color: white;" text="추가" textFill="#f27200" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </Button>
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <Button fx:id="c_modifyCancleBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="123.0" style="-fx-background-color: white;" text="수정" textFill="#f27200">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <effect>
+                                          <DropShadow color="#f27200" />
+                                       </effect>
+                                    </Button>
+                                    <Button fx:id="c_modifyDelBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="123.0" style="-fx-background-color: #f27200;" text="삭제" textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </GridPane.margin>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="40.0" top="20.0" />
+                           </padding>
+                        </GridPane>
+                     </center>
+                     <bottom>
+                        <HBox prefHeight="115.0" prefWidth="884.0" spacing="20.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="19.0" prefWidth="216.0" />
+                              <Button fx:id="c_modifyBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: white;" text="추가" textFill="#f27200">
+                                 <HBox.margin>
+                                    <Insets left="5.0" top="20.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </Button>
+                              <Button fx:id="c_modifyCancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: white;" text="취소" textFill="#f27200">
+                                 <HBox.margin>
+                                    <Insets left="15.0" top="20.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow color="#f27200" />
+                                 </effect>
+                              </Button>
+                              <Label prefHeight="19.0" prefWidth="218.0" />
+                              <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="탈퇴" textFill="WHITE">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <BorderPane.margin>
+                              <Insets right="80.0" />
+                           </BorderPane.margin>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="100.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/vncLogoWh.png" />
                </image>
             </ImageView>
-         </top>
-         <center>
-            <VBox prefHeight="293.0" prefWidth="181.0" spacing="10.0" BorderPane.alignment="CENTER">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <children>
-                  <ToggleButton fx:id="c_searchToggle" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" style="-fx-background-color: white;" text="검색" textFill="#9600ff">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="csToggleGroup" />
-                     </toggleGroup>
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </ToggleButton>
-                  <ToggleButton fx:id="c_manageToggle" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: white;" text="관리" textFill="#9600ff" toggleGroup="$csToggleGroup">
-                     <font>
-                        <Font size="24.0" />
-                     </font></ToggleButton>
-               </children>
-            </VBox>
-         </center>
-         <bottom>
-            <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="56.0" prefWidth="169.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" prefHeight="57.0" prefWidth="741.0" text="회원관리" textAlignment="CENTER" textFill="#f27200">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="110.0" prefWidth="121.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="42.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/homeLSq.png" />
+                        <Image url="@images/homeSqO.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-         </bottom>
-      </BorderPane>
-   </left>
-   <center>
-      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-         </center>
-         <top>
-            <GridPane prefHeight="51.0" prefWidth="571.0" BorderPane.alignment="CENTER">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-         </top>
-         <bottom>
-            <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
-   </center>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </top>
 </BorderPane>
