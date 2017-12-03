@@ -73,8 +73,8 @@ public class RentReturnDatasModel {
 		this.dueDate.set(dueDate.toString());
 	}
 	
-	public Date getReturnDate() {
-		return Date.valueOf(returnDate.get());
+	public String getReturnDate() {
+		return returnDate.get();
 	}
 	public void setReturnDate(Date returnDate) {
 		this.returnDate.set(returnDate.toString());

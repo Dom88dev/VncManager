@@ -114,9 +114,10 @@ public class CustomerMenuController implements Initializable{
 		tcPw.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("pw"));
 		
 		bds = db.selectCustomerDatas();
-		for(CustomerDatas bd: bds) {
-			bdms.add(new CustomerDataModel(bd));
+		for(CustomerDatas cd: bds) {
+			bdms.add(new CustomerDataModel(cd));
 		}
+		customerList.addAll(bdms);
 		customerListTable.setItems(customerList);
 		
 		customerListTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
@@ -194,6 +195,7 @@ public class CustomerMenuController implements Initializable{
 			ex.printStackTrace();
 		}
 	}
+	
 	
 	private void popNoti(String notice) {
 		Popup noti = new Popup();

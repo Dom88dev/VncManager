@@ -63,6 +63,7 @@ public class ProductMenuController implements Initializable {
 	@FXML private Button p_addBtn;
 	@FXML private Button p_cancleBtn;
 	
+	
 	//수정/삭제 탭 정보
 	@FXML private TextField p_modiTitleTextf;
 	@FXML private TextField p_modiGenreTextf;
@@ -88,18 +89,20 @@ public class ProductMenuController implements Initializable {
 		TableColumn<ProductDataModel, String> tcKind = (TableColumn<ProductDataModel, String>) rsvListTable.getColumns().get(1);
 		TableColumn<ProductDataModel, String> tcTitle = (TableColumn<ProductDataModel, String>) rsvListTable.getColumns().get(2);
 		TableColumn<ProductDataModel, String> tcGenre = (TableColumn<ProductDataModel, String>) rsvListTable.getColumns().get(3);
-		TableColumn<ProductDataModel, String> tcRdate = (TableColumn<ProductDataModel, String>) rsvListTable.getColumns().get(4);
-		TableColumn<ProductDataModel, Integer> tcIsrental = (TableColumn<ProductDataModel, Integer>) rsvListTable.getColumns().get(5);
-		TableColumn<ProductDataModel, Integer> tcRentalCnt = (TableColumn<ProductDataModel, Integer>) rsvListTable.getColumns().get(6);
+		TableColumn<ProductDataModel, Integer> tcAgeG = (TableColumn<ProductDataModel, Integer>) rsvListTable.getColumns().get(4);
+		TableColumn<ProductDataModel, String> tcRdate = (TableColumn<ProductDataModel, String>) rsvListTable.getColumns().get(5);
+		TableColumn<ProductDataModel, String> tcIsrental = (TableColumn<ProductDataModel, String>) rsvListTable.getColumns().get(6);
+		TableColumn<ProductDataModel, Integer> tcRentalCnt = (TableColumn<ProductDataModel, Integer>) rsvListTable.getColumns().get(7);
 		tcP_id.setCellValueFactory(new PropertyValueFactory<ProductDataModel, Integer>("p_id"));
 		tcKind.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("kind"));
 		tcTitle.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("title"));
 		tcGenre.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("genre"));
-		tcRdate.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("rdate"));
-		tcIsrental.setCellValueFactory(new PropertyValueFactory<ProductDataModel, Integer>("isrental"));
+		tcAgeG.setCellValueFactory(new PropertyValueFactory<ProductDataModel, Integer>("age_grade"));
+		tcRdate.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("release"));
+		tcIsrental.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("isRental"));
 		tcRentalCnt.setCellValueFactory(new PropertyValueFactory<ProductDataModel, Integer>("rentalCnt"));
 		
-		//pds = pd.selectProductDatas();
+		pds = db.selectProductDatas();
 		for(ProductDatas pd : pds){
 			productList.add(new ProductDataModel(pd));
 		}

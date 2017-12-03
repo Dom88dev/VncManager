@@ -19,7 +19,7 @@ public class ProductDataModel {
 	private SimpleIntegerProperty age_grade;
 	private SimpleStringProperty release;
 	private SimpleStringProperty edition;
-	private SimpleBooleanProperty isRental;
+	private SimpleStringProperty isRental;
 	private SimpleIntegerProperty rentalCnt;
 	private SimpleIntegerProperty supply;
 	private SimpleStringProperty director;
@@ -34,7 +34,8 @@ public class ProductDataModel {
 		this.age_grade = new SimpleIntegerProperty(pd.getAge_grade());
 		this.release = new SimpleStringProperty(pd.getRelease().toString());
 		this.edition = new SimpleStringProperty(pd.getEdition());
-		this.isRental = new SimpleBooleanProperty(pd.isRental());
+		this.isRental = new SimpleStringProperty((pd.isRental()==true?"대여중":"대여가능"));
+		this.rentalCnt = new SimpleIntegerProperty(pd.getRentalCnt());
 		this.supply = new SimpleIntegerProperty(pd.getSupply());
 		this.director = new SimpleStringProperty(pd.getDirector());
 		this.actor = new SimpleStringProperty(pd.getActor());
@@ -87,11 +88,11 @@ public class ProductDataModel {
 	public void setEdition(String edition) {
 		this.edition.set(edition);
 	}
-	public boolean isRental() {
+	public String getIsRental() {
 		return isRental.get();
 	}
 	public void setRental(boolean isRental) {
-		this.isRental.set(isRental);
+		this.isRental.set((isRental?"대여중":"대여가능"));
 	}
 	public int getRentalCnt() {
 		return rentalCnt.get();

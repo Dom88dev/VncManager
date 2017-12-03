@@ -26,6 +26,7 @@ public class ProductDatas {
 	
 	public ProductDatas(int p_id, String kind, String title, String genre, int age_grade, Date release,
 			String edition, boolean isRental, int rentalCnt, int supply, String director, String actor, String writer) {
+		
 			setP_id(p_id);
 			setKind(kind);
 			setTitle(title);
@@ -39,7 +40,7 @@ public class ProductDatas {
 			setDirector(director);
 			setActor(actor);
 			setWriter(writer);
-			System.out.println(kind);
+			System.out.println(isRental);
 	}
 			
 	

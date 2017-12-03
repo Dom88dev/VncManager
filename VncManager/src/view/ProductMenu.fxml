@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="product" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
+<BorderPane fx:id="product" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="product.ProductMenuController">
    <center>
       <TabPane side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
@@ -696,9 +696,9 @@
                   <Insets />
                </HBox.margin>
             </Label>
-            <Button fx:id="c_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="110.0" prefWidth="121.0" style="-fx-background-color: white;">
+            <Button fx:id="p_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="110.0" prefWidth="121.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fx:id="p_homeBtn" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/homeSqO.png" />
                      </image>
