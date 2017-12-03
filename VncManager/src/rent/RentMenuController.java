@@ -113,6 +113,8 @@ public class RentMenuController implements Initializable {
 			
 		});
 		
+		
+		
 	}
 	
 	public void gotoHome(ActionEvent e) {
