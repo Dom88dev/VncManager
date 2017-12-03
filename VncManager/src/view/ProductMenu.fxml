@@ -93,11 +93,11 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </ComboBox>
-                              <TextField fx:id="searchText" prefHeight="23.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <TextField fx:id="p_searchTextf" prefHeight="23.0" prefWidth="491.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                  <effect>
                                     <DropShadow color="#f27200" />
                                  </effect></TextField>
-                              <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: white;" text="검 색" GridPane.columnIndex="3">
+                              <Button fx:id="p_searchBtn" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: white;" text="검 색" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>

@@ -18,9 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +51,18 @@ public class RentMenuController implements Initializable {
 	@FXML private TableView<RentReturnDatasModel> rentListTable;
 	@FXML private ListView<String> infoTitleListView;
 	@FXML private ListView<String> infoDataListView;
+	@FXML private Button r_rentBtn;
+	@FXML private Button r_cancleBtn;
+	@FXML private Label r_addinfleBtn;
 	
+	@FXML private ComboBox<String> re_addinfChoiceBox;
+	@FXML private TextField re_searchText;
+	@FXML private Button re_searchBtn;
+	@FXML private ChoiceBox<String> re_pKindChoiceBox;
+	@FXML private TableView<RentReturnDatasModel> re_rentListTable;
+	@FXML private TextArea re_Texta;
+	@FXML private Button re_returnhBtn;
+	@FXML private Button re_cancleBtn;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
