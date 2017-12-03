@@ -49,7 +49,13 @@
                         </TableView>
                      </center>
                      <bottom>
-                        <HBox prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <HBox alignment="CENTER_RIGHT" prefHeight="36.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" text="Button" />
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding></HBox>
                      </bottom>
                      <top>
                         <GridPane prefHeight="44.0" prefWidth="819.0" BorderPane.alignment="CENTER">
