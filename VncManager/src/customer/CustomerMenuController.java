@@ -142,7 +142,6 @@ public class CustomerMenuController implements Initializable{
 		String search = c_searchFText.getText();
 		String sKind = searchKindComboBox.getValue();
 		if(sKind == null) {
-			
 			popNoti("조건을 선택하고 검색하세요.");
 			return;
 		}
