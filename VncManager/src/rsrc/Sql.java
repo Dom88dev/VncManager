@@ -36,8 +36,8 @@ public class Sql {
 			+ "nvl(r.late_days, 0), nvl(r.overdue_fee, 0), c.tel from product p right outer join rent_return r on "
 			+ "p.p_id = r.p_id left outer join customer c on r.id = c.id"; 
 	public static final String SELECT_BOOKDATA = 
-			"select b.ID, c.name, c.tel, b.p_id, p.title, b.b_no, r.due_date, p.kind" //	
+			"select b.ID, c.name, c.tel, b.p_id, p.title, b.b_no, r.due_date, p.kind"
 			+ " from customer c join booking b on b.id = c.id"
 			+ " join product p on b.p_id = p.p_id"
-			+ " join rent_return r on p.p_id = r.p_id and r.return_date is null";
+			+ " join rent_return r on p.p_id = r.p_id";
 }

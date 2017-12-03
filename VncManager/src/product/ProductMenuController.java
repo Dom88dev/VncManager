@@ -50,34 +50,31 @@ public class ProductMenuController implements Initializable {
 	@FXML private TextArea p_addinfTexta;
 	
 	//추가 탭 정보
-	@FXML private TextField P_titleTextf;
+	@FXML private TextField p_titleTextf;
 	@FXML private TextField p_genreTextf;
-	@FXML private TextField P_ageGradeTextf;
-	@FXML private TextField P_releaseTextf;
-	@FXML private TextField P_produTextf;
-	@FXML private TextField P_producNumTextf;
-	@FXML private TextField P_directorTextf;
-	@FXML private TextField P_actorTextf;
-	@FXML private TextField P_writerTextf;
-	@FXML private ChoiceBox<String> P_kindChoiceBox;
-	@FXML private Button P_addBtn;
-	@FXML private Button P_cancleBtn;
+	@FXML private TextField p_ageGradeTextf;
+	@FXML private TextField p_releaseTextf;
+	@FXML private TextField p_producNumTextf;
+	@FXML private TextField p_directorTextf;
+	@FXML private TextField p_actorTextf;
+	@FXML private TextField p_writerTextf;
+	@FXML private ChoiceBox<String> p_kindChoiceBox;
+	@FXML private Button p_addBtn;
+	@FXML private Button p_cancleBtn;
 	
 	//수정/삭제 탭 정보
-	@FXML private TextField P_modiTitleTextf;
+	@FXML private TextField p_modiTitleTextf;
 	@FXML private TextField p_modiGenreTextf;
-	@FXML private TextField P_modiAgeGradeTextf;
-	@FXML private TextField P_modiReleaseTextf;
-	@FXML private TextField P_modiProduTextf;
-	@FXML private TextField P_modiProducNumTextf;
-	@FXML private TextField P_modiDirectorTextf;
-	@FXML private TextField P_modiActorTextf;
-	@FXML private TextField P_modiWriterTextf;
+	@FXML private TextField p_modiAgeGradeTextf;
+	@FXML private TextField p_modiReleaseTextf;
+	@FXML private TextField p_modiProducNumTextf;
+	@FXML private TextField p_modiDirectorTextf;
+	@FXML private TextField p_modiActorTextf;
+	@FXML private TextField p_modiWriterTextf;
 	
 	@FXML private ChoiceBox<String> P_modiKindChoiceBox;
-	@FXML private Button P_modiAddBtn;
-	@FXML private Button P_modiCancleBtn;
-	@FXML private Button P_modiDelBtn;
+	@FXML private Button p_modiAddBtn;
+	@FXML private Button p_modiDelBtn;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
