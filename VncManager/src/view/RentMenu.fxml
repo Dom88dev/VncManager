@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rent.RentMenuController">
+<BorderPane fx:id="rent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rent.RentMenuController">
    <center>
       <TabPane side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
@@ -102,7 +102,7 @@
                            <children>
                               <BorderPane prefHeight="549.0" prefWidth="244.0">
                                  <top>
-                                    <Label alignment="CENTER" prefHeight="51.0" prefWidth="228.0" text="추가정보" textFill="#9161c6" BorderPane.alignment="CENTER">
+                                    <Label fx:id="r_addinfleBtn" alignment="CENTER" prefHeight="51.0" prefWidth="228.0" text="추가정보" textFill="#9161c6" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -132,14 +132,14 @@
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="rentListTable" prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn prefWidth="100.0" text="상품" />
                               <TableColumn prefWidth="75.0" text="회원번호" />
                               <TableColumn prefWidth="75.0" text="제목" />
                               <TableColumn prefWidth="75.0" text="이름" />
                               <TableColumn prefWidth="75.0" text="대여일" />
-                              <TableColumn prefWidth="75.0" text="반납예정일" />
+                              <TableColumn fx:id="rentListTable" prefWidth="75.0" text="반납예정일" />
                               <TableColumn prefWidth="75.0" text="반납일" />
                               <TableColumn prefWidth="75.0" text="연체일 수" />
                               <TableColumn prefWidth="152.0" text="연체대금" />
@@ -166,7 +166,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ComboBox prefWidth="150.0" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" style="-fx-background-color: white;">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -174,8 +174,8 @@
                                     <InnerShadow color="#cc00ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </ComboBox>
-                              <TextField GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Button" GridPane.columnIndex="3">
+                              <TextField fx:id="searchText" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <Button fx:id="searchBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="검색" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -183,7 +183,7 @@
                                     <DropShadow color="#f600ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
                                  <effect>
                                     <InnerShadow color="#e500ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
@@ -200,13 +200,13 @@
                               <Label text="Label" BorderPane.alignment="CENTER" />
                            </top>
                            <center>
-                              <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                              <ListView fx:id="infoTitleListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </center>
                            <bottom>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Button" />
-                                    <Button mnemonicParsing="false" text="Button" />
+                                    <Button fx:id="r_rentBtn" mnemonicParsing="false" text="대여" />
+                                    <Button fx:id="r_cancleBtn" mnemonicParsing="false" text="취소" />
                                  </children>
                               </HBox>
                            </bottom>
@@ -219,7 +219,7 @@
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="re_rentListTable" prefHeight="513.0" prefWidth="904.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn prefWidth="100.0" text="상품" />
                               <TableColumn prefWidth="75.0" text="회원번호" />
@@ -253,7 +253,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ComboBox prefWidth="150.0" style="-fx-background-color: white;">
+                              <ComboBox fx:id="re_addinfChoiceBox" prefWidth="150.0" style="-fx-background-color: white;">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -261,8 +261,8 @@
                                     <InnerShadow color="#cc00ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </ComboBox>
-                              <TextField GridPane.columnIndex="1" GridPane.columnSpan="2" />
-                              <Button mnemonicParsing="false" style="-fx-background-color: white;" text="Button" GridPane.columnIndex="3">
+                              <TextField fx:id="re_searchText" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+                              <Button fx:id="re_searchBtn" mnemonicParsing="false" style="-fx-background-color: white;" text="Button" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -270,7 +270,7 @@
                                     <DropShadow color="#f600ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="re_pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
                                  <effect>
                                     <InnerShadow color="#e500ff" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
@@ -291,17 +291,17 @@
                               </Label>
                            </top>
                            <center>
-                              <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                              <TextArea fx:id="re_Texta" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                            </center>
                            <bottom>
                               <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                  <children>
-                                    <Button mnemonicParsing="false" text="반납">
+                                    <Button fx:id="re_returnhBtn" mnemonicParsing="false" text="반납">
                                        <HBox.margin>
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" text="취소">
+                                    <Button fx:id="re_cancleBtn" mnemonicParsing="false" text="취소">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>
@@ -332,7 +332,7 @@
             </Label>
             <Button fx:id="r_homeBtn" mnemonicParsing="false" onAction="#gotoHome" prefHeight="110.0" prefWidth="106.0" style="-fx-background-color: white;">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="r_homeBtn" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/homeSqV.png" />
                      </image>
