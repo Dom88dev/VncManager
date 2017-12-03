@@ -8,6 +8,8 @@ import book.BookDataModel;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +18,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,11 +62,10 @@ public class CustomerMenuController implements Initializable{
 	@FXML private Button c_searchBtn;
 	@FXML private TextField c_searchFText;
 	@FXML private Button c_addInfoBtn;
-	@FXML private TextArea c_addInfoTextArea;
+	@FXML private ListView c_addInfoListView;
 	
 	//추가 탭 정보
 	@FXML private TextField c_addNameFtext;
-	@FXML private TextField c_addAgeFtext;
 	@FXML private TextField c_addAddrFText;
 	@FXML private TextField c_addTelFText;
 	@FXML private TextField c_addBirthFText;
@@ -71,7 +75,6 @@ public class CustomerMenuController implements Initializable{
 	//수정 및 탈퇴 정보
 	@FXML private Label c_modifyId; 
 	@FXML private TextField c_modifyNameFtext;
-	@FXML private TextField c_modifyAgeFtext;
 	@FXML private TextField c_modifyAddrFtext;
 	@FXML private TextField c_modifyTelFtext;
 	@FXML private TextField c_modifyBirthFtext;
@@ -131,7 +134,9 @@ public class CustomerMenuController implements Initializable{
 		Label label = new Label("검색한 결과가 없습니다.");
 		customerListTable.setPlaceholder(label);
 		
+		
 	}
+	
 	
 	public void handleSearchBtn(ActionEvent e) {
 		String search = c_searchFText.getText();
@@ -145,22 +150,22 @@ public class CustomerMenuController implements Initializable{
 		if(search.equals("")) {
 			customerList.addAll(bdms);
 		}else {
-			for(CustomerDataModel bd : bdms) {
+			for(CustomerDataModel cd : bdms) {
 				switch(sKind) {
 					case "회원번호": 
-						if(String.valueOf(bd.getId()).equals(search))customerList.add(bd);
+						if(String.valueOf(cd.getId()).equals(search))customerList.add(cd);
 						break;
 					case "이름": 
-						if(bd.getName().toLowerCase().contains(search.toLowerCase()))customerList.add(bd);
+						if(cd.getName().toLowerCase().contains(search.toLowerCase()))customerList.add(cd);
 						break;
 					case "전화번호": 
-						if(bd.getTel().contains(search))customerList.add(bd);
+						if(cd.getTel().contains(search))customerList.add(cd);
 						break;
 					case "주소": 
-						if(bd.getAddr().toLowerCase().contains(search.toLowerCase()))customerList.add(bd);
+						if(cd.getAddr().toLowerCase().contains(search.toLowerCase()))customerList.add(cd);
 						break;
 					case "생년월일": 
-						if(bd.getBirth().equals(search.toLowerCase()))customerList.add(bd);
+						if(cd.getBirth().equals(search.toLowerCase()))customerList.add(cd);
 						break;
 				}
 				
@@ -169,7 +174,8 @@ public class CustomerMenuController implements Initializable{
 		}
 		
 	}
-
+	
+	
 	public void gotoHome(ActionEvent e) {
 		try {
 			StackPane root = (StackPane) c_homeBtn.getScene().getRoot();
