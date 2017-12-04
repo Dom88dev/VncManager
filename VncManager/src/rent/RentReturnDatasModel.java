@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import rsrc.Util;
 
 public class RentReturnDatasModel {
 	private SimpleIntegerProperty p_id;
@@ -17,6 +16,7 @@ public class RentReturnDatasModel {
 	private SimpleIntegerProperty lateDays;
 	private SimpleIntegerProperty overdueFee;
 	private SimpleStringProperty phone;
+	private SimpleStringProperty kind;
 	
 	public RentReturnDatasModel(RentReturnDatas rrd) {
 		this.p_id = new SimpleIntegerProperty(rrd.getP_id());
@@ -33,6 +33,7 @@ public class RentReturnDatasModel {
 		this.lateDays = new SimpleIntegerProperty(rrd.getLateDays());
 		this.overdueFee = new SimpleIntegerProperty(rrd.getOverdueFee());
 		this.phone = new SimpleStringProperty(rrd.getPhone());
+		this.kind = new SimpleStringProperty(rrd.getKind());
 	}
 	
 	public int getP_id() {
@@ -97,6 +98,13 @@ public class RentReturnDatasModel {
 	}
 	public void setPhone(String phone) {
 		this.phone.set(phone);
+	}
+	
+	public String getKind() {
+		return kind.get();
+	}
+	public void setKind(String kind) {
+		this.kind.set(kind);
 	}
 	
 }

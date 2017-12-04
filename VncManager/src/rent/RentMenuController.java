@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import book.BookDataModel;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -36,7 +37,7 @@ public class RentMenuController implements Initializable {
 	private ArrayList<RentReturnDatasModel> rdms = new ArrayList<RentReturnDatasModel>();
 	
 	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "대여중", "반납");
-	private ObservableList<String> searchKindList = FXCollections.observableArrayList("상품번호", "제목", "이름", "대여일", "반납예정일", "전화번호");
+	private ObservableList<String> searchKindList = FXCollections.observableArrayList("상품번호", "제목", "회원번호", "이름", "전화번호");
 	private ObservableList<RentReturnDatasModel> rentReturnList = FXCollections.observableArrayList();
 	
 	private ObservableList<String> infoTitleList = FXCollections.observableArrayList();
@@ -44,32 +45,24 @@ public class RentMenuController implements Initializable {
 	
 	@FXML private BorderPane rent;
 	@FXML private Button r_homeBtn;
-	@FXML private ChoiceBox<String> pKindChoiceBox;
-	@FXML private ComboBox<String> searchKindComboBox;
-	@FXML private TextField searchText;
-	@FXML private Button searchBtn;
+	@FXML private ChoiceBox<String> rent_t1_pKindChoiceBox;
+	@FXML private ComboBox<String> rent_t1_searchKindComboBox;
+	@FXML private TextField rent_t1_searchText;
+	@FXML private Button rent_t1_searchBtn;
 	@FXML private TableView<RentReturnDatasModel> rentListTable;
-	@FXML private ListView<String> infoTitleListView;
-	@FXML private ListView<String> infoDataListView;
-	@FXML private Button r_rentBtn;
-	@FXML private Button r_cancleBtn;
-	@FXML private Label r_addinfleBtn;
+	@FXML private ListView<String> rent_t1_infoTitleListView;
+	@FXML private ListView<String> rent_t1_infoDataListView;
 	
-	@FXML private ComboBox<String> re_addinfChoiceBox;
-	@FXML private TextField re_searchText;
-	@FXML private Button re_searchBtn;
-	@FXML private ChoiceBox<String> re_pKindChoiceBox;
-	@FXML private TableView<RentReturnDatasModel> re_rentListTable;
-	@FXML private TextArea re_Texta;
-	@FXML private Button re_returnhBtn;
-	@FXML private Button re_cancleBtn;
+	@FXML private ComboBox<String> rent_t3_searchKindComboBox;
+	
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		pKindChoiceBox.setValue("전체");
-		pKindChoiceBox.setItems(productKindList);
-		searchKindComboBox.setItems(searchKindList);
+		rent_t1_pKindChoiceBox.setValue("전체");
+		rent_t1_pKindChoiceBox.setItems(productKindList);
+		rent_t1_searchKindComboBox.setItems(searchKindList);
 		
 		TableColumn<RentReturnDatasModel, Integer> tcP_id = (TableColumn<RentReturnDatasModel, Integer>) rentListTable.getColumns().get(0);
 		TableColumn<RentReturnDatasModel, String> tcTitle = (TableColumn<RentReturnDatasModel, String>) rentListTable.getColumns().get(1);
@@ -104,16 +97,40 @@ public class RentMenuController implements Initializable {
 					}
 					
 					infoTitleList.addAll("대여일", "반납예정일", "반납일", "연체일", "연체료");
-					infoTitleListView.setItems(infoTitleList);
+					rent_t1_infoTitleListView.setItems(infoTitleList);
 					infoDataList.addAll(newValue.getRentDate().toString(), newValue.getDueDate().toString(),
 							newValue.getReturnDate().toString(), String.valueOf(newValue.getLateDays()), String.valueOf(newValue.getOverdueFee()));
-					infoDataListView.setItems(infoDataList);
+					rent_t1_infoDataListView.setItems(infoDataList);
 				}
 			}
 			
 		});
 		
-		
+		rent_t1_pKindChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null){
+					rentReturnList.removeAll(rdms);
+					if(newValue.equals("전체")) {
+						rentReturnList.addAll(rdms);
+					} else {
+						for(RentReturnDatasModel bd : rdms) {
+							switch(newValue) {
+							case "비디오":
+								if(bd.getKind().equals("V"))	rentReturnList.add(bd);
+								break;
+							case "만화책":
+								if(bd.getKind().equals("C"))	rentReturnList.add(bd);
+								break;
+							}
+						}
+					}
+				}
+				
+			}
+		});
 		
 	}
 	

@@ -299,7 +299,7 @@ public class Db {
 			
 			while(rs.next()) {
 				rentreturnDatas.add(new RentReturnDatas(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5),
-							rs.getDate(6), rs.getDate(7), rs.getInt(8), rs.getInt(9), rs.getString(10)));
+							rs.getDate(6), rs.getDate(7), rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11)));
 				
 			}
 			close();
