@@ -29,6 +29,7 @@ public class Sql {
 			+ "from family group by id) d on c.id=d.id";
 	
 	public static final String SELECT_FAMILY = "select name, relation from family where id = ?";
+	
 	public static final String SELECT_ID_AFTER_REGISTER = "select max(id) from customer";
 	
 	public static final String SELECT_CUSTOMER_ID = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "

@@ -363,7 +363,7 @@ public class Db {
 		try {
 			stmt = con.prepareStatement(Sql.SELECT_ID_AFTER_REGISTER);
 			rs = stmt.executeQuery();
-			int maxId = rs.getInt(0);
+			int maxId = rs.getInt(1);
 			
 			close();
 			
@@ -420,7 +420,8 @@ public class Db {
 		}
 		return result;
 	}
-	
 }
+	
+
 
 
