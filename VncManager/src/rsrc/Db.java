@@ -232,6 +232,8 @@ public class Db {
 		return bookDatas;
 	}
 	
+	
+	// DB의 customer 테이블 값을 가져오는 메소드
 	public ArrayList<CustomerDatas> selectCustomerDatas(){
 		ArrayList<CustomerDatas> customerDatas = new ArrayList<CustomerDatas>();
 		connect();
