@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import book.BookDataModel;
-import book.BookDatas;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -19,26 +17,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
-import rent.RentReturnDatasModel;
 import rsrc.Db;
 
 /**
@@ -52,14 +45,14 @@ import rsrc.Db;
 
 public class CustomerMenuController implements Initializable{
 	/**
-	 *<db>에 대한 설명.
+	 *DB에 대한 설명.
 	 *@param db DataBase를 연결해주는 Db 클래스의 db메소드 호출하는 참조 변수
 	 */
 	
 	private Db db = new Db();
 	
 	/**
-	 * <bds>에 대한 설명.
+	 * bds에 대한 설명.
 	 * @param bds CustomerDatas 데이터타입인 ArrayList 컬렉션을 호출하는 참조 변수
 	 * @see CustomerDatas
 	 */
@@ -67,7 +60,7 @@ public class CustomerMenuController implements Initializable{
 	private ArrayList<CustomerDatas> bds = new ArrayList<CustomerDatas>();
 	
 	/**
-	 * <bdms>에 대한 설명
+	 * bdms에 대한 설명
 	 * @param bdms CustomerDataModel 데이터타입인 ArriList 컬렉션 호출하는 참조 변수
 	 * @see CustomerDataModel
 	 */
@@ -76,35 +69,35 @@ public class CustomerMenuController implements Initializable{
 	
 
 	/**
-	 * <searchKindList>에 대한 설명
+	 * searchKindList에 대한 설명
 	 * @param 조회/수정/삭제 창 조회 탭에서 콤보박스의 검색 카테고리 값을 저장해주는 FXCollections 참조 변수
 	 */
 	
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("회원번호", "이름", "전화번호", "주소");
 	
 	/**
-	 * <searchFamilyKindList>에 대한 설명
+	 * searchFamilyKindList에 대한 설명
 	 * @param 조회/수정/삭제 창 회원 가족 관리 탭에서 콤보박스의 검색 카테고리 값을 저장해주는 FXCollections 참조 변수
 	 */
 	
 	private ObservableList<String> searchFamilyKindList = FXCollections.observableArrayList("회원번호", "이름", "전화번호");
 	
 	/**
-	 * <familyKindList>에 대한 설명
+	 * familyKindList에 대한 설명
 	 * @param 조회/수정/삭제 창 조회탭에서 초이스박스의 카테고리 값을 저장해주는 FXCollections 참조 변수
 	 */
 
 	private ObservableList<String> familyKindList = FXCollections.observableArrayList("전체", "가족 유", "가족 무");
 	
 	/**
-	 * <customerList>에 대한 설명
+	 * customerList에 대한 설명
 	 * @param 조회/수정/삭제 창 조회탭에서 DataBase에서 불러운 값을 CustomerDataModel 형시에 따라 저장해주는 FXCollections 참조 변수
 	 */
 	
 	private ObservableList<CustomerDataModel> customerList = FXCollections.observableArrayList();
 	
 	/**
-	 * <infoTitleList>에 대한 설명
+	 * infoTitleList에 대한 설명
 	 * @param 조회/수정/삭제 창 조회탭의 추가 정보란에서 추가 정보 데이터(이름)을 담는 FXCollections 참조 변수
 	 */
 	
@@ -112,7 +105,7 @@ public class CustomerMenuController implements Initializable{
 	
 	
 	/**
-	 * <infoDataList>에 대한 설명
+	 * infoDataList에 대한 설명
 	 * @param 조회/수정/삭제 창 조회탭의 추가 정보란에서 추가 정보 데이터(추가 정보)를 담는 FXCollections 참조 변수
 	 */
 	
@@ -124,14 +117,14 @@ public class CustomerMenuController implements Initializable{
 	 * @param fKindChoiceBox 가족 유, 무, 전체 카테고리를 가진 ChoiceBox
 	 * @param searchKindComboBox 검색 카테고리 ComboBox
 	 * @param c_searchTab 조회/수정/삭제 Tab
-	 * @param c_homeBtn <버튼> - 회원관리 창에서 처음 창으로 돌아가는 Button
+	 * @param c_homeBtn  회원관리 창에서 처음 창으로 돌아가는 Button
 	 * @param customerListTable 조회/수정/삭제의 회원정보를 나타내는 TableView.
 	 * @param c_searchBtn  조회/수정/삭제 탭의 검색 Button
 	 * @param c_searchFText  조회/수정/삭제 탭의 검색 TextField
-	 * @param c_addInfoBtn <버튼> - 조회/수정/삭제 탭의 추가 수정 정보 Button
+	 * @param c_addInfoBtn  조회/수정/삭제 탭의 추가 수정 정보 Button
 	 * @param c_addInfoListView1   조회/수정/삭제 탭의 추가 정보 란에서 테이블에서 선택된 레이블의 정보를 출력하는 ListView
 	 * @param c_addInfoListView2  조회/수정/삭제 탭의 추가 정보 란에서 테이블에서 선택된 레이블의 정보를 출력해주는 ListView
-	 * @param c_modifyId <라벨> -  조회/수정/삭제 탭에 회원정보의 아이디를 알려주는 라벨
+	 * @param c_modifyId   조회/수정/삭제 탭에 회원정보의 아이디를 알려주는 라벨
 	 * @param c_modifyNameFtext  조회/수정/삭제 탭에서 회원정보의 이름을 수정해주는 텍스트 필드 
 	 * @param c_modifyAddrFtext  조회/수정/삭제 탭에서 회원정보의 이름을 수정해주는 텍스트 필드
 	 * @param c_modifyTelFtext  조회/수정/삭제 탭에서 회원정보의 전화번호를 수정해주는 텍스트 필드
@@ -139,8 +132,8 @@ public class CustomerMenuController implements Initializable{
 	 * @param c_modifyPwFtext  조회/수정/삭제 탭에서 회원정보의 비밀번호를 수정해주는 텍스트 필드
 	 * @param c_modifyFnameFText //  조회/수정/삭제 탭의 가족 이름를 추가하거나 수정하는 텍스트 필드
 	 * @param c_modifyFrelationFText   조회/수정/삭제 탭의 가족 관계를 추가하거나 수정하는 텍스트 필드
-	 * @param c_modifyBtn <버튼> -  조회/수정/삭제 탭에 회원정보 수정을 실행해주는 '수정' 버튼
-	 * @param c_modifyCancleBtn <버튼> -  조회/수정/삭제 탭에 회원정보 수정하는 중 취소하는 '취소' 버튼
+	 * @param c_modifyBtn   조회/수정/삭제 탭에 회원정보 수정을 실행해주는 '수정' 버튼
+	 * @param c_modifyCancleBtn   조회/수정/삭제 탭에 회원정보 수정하는 중 취소하는 '취소' 버튼
 	 * @param c_modifyAddBtn  조회/수정/삭제 탭에 가족 정보 추가하는 '추가' 버튼
 	 * @param c_modifyFixBtn  조회/수정/삭제 탭에 가족 정보 수정하는 '수정' 버튼
 	 * @param c_modifyDelBtn  조회/수정/삭제 탭에 가족 정보 삭제하는 '삭제' 버튼
@@ -157,8 +150,8 @@ public class CustomerMenuController implements Initializable{
 	@FXML private Button c_searchBtn;                                                 
 	@FXML private TextField c_searchFText;                                          
 	@FXML private Button c_addInfoBtn;                                               
-	@FXML private ListView c_addInfoListView1;                                      
-	@FXML private ListView c_addInfoListView2;
+	@FXML private ListView<String> c_addInfoListView1;                                      
+	@FXML private ListView<String> c_addInfoListView2;
 	@FXML private Label c_modifyId;                                                   
 	@FXML private TextField c_modifyNameFtext;                                  
 	@FXML private TextField c_modifyAddrFtext;                                   
@@ -181,8 +174,8 @@ public class CustomerMenuController implements Initializable{
 	 * @param c_addAddrFText 회원가입 탭에서 회원정보 중 주소를 추가해주는 TextField
 	 * @param c_addTelFText 회원가입 탭에서 회원정보 중 전화번호를 추가해주는 TextField
 	 * @param c_addBirthFText 회원가입 탭에서 회원정보 중 생년월일을 추가해주는 TextField
-	 * @param c_JoinBtn <버튼> - 회원가입 탭에 회원 가입의 가입을 실행해주는 '가입' Button
-	 * @param c_JoinCancleBtn <버튼> - 회원가입 탭에 회원 가입 중 취소를 실행해주는 '취소' Button
+	 * @param c_JoinBtn  회원가입 탭에 회원 가입의 가입을 실행해주는 '가입' Button
+	 * @param c_JoinCancleBtn  회원가입 탭에 회원 가입 중 취소를 실행해주는 '취소' Button
 	 */
 	
 	
@@ -202,8 +195,8 @@ public class CustomerMenuController implements Initializable{
 	 * @param c_searchFamilyBtn 회원가족관리 탭에서 검색을 실행하는 Button
 	 * @param c_customerFamilyNameField 회원가족관리 탭에서 회원의 가족 이름을 알려주는 TextField
 	 * @param c_customerFamilyRelationField 회원가족관리 탭에서 회원의 가족 관계를 알려주는 TextField
-	 * @param c_customerFamilyModiBtn <버튼> - 회원가족관리 탭에 회원 가입 중 수정을 실행해주는 '수정' Button
-	 * @param c_customerFamilyCancleBtn <버튼> - 회원가족관리 탭에 회원 가입 중 수정을 취소해주는 '취소' Button
+	 * @param c_customerFamilyModiBtn 회원가족관리 탭에 회원 가입 중 수정을 실행해주는 '수정' Button
+	 * @param c_customerFamilyCancleBtn  회원가족관리 탭에 회원 가입 중 수정을 취소해주는 '취소' Button
 	 */
 	
 	// 가족 조회 수정 탭
@@ -385,15 +378,10 @@ public class CustomerMenuController implements Initializable{
 	
 	// <메소드> - 가입 탭에 회원 가입 중 취소 버튼을 실행하는 메소드 
 	public void handleCancleAction(ActionEvent e) {
-		String jName = c_addNameFtext.getText();
-		String jAddr = c_addAddrFText.getText();
-		String jTel = c_addTelFText.getText();
-		String jBirth = c_addBirthFText.getText();
-		
-		jName = null;
-		jAddr = null;
-		jTel = null;
-		jBirth = null;
+		c_addNameFtext.setText("");
+		c_addAddrFText.setText("");
+		c_addTelFText.setText("");
+		c_addBirthFText.setText("");
 		
 		popNoti("가입을 취소 하셨습니다.");
 	}
