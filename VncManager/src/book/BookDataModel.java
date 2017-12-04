@@ -24,7 +24,7 @@ public class BookDataModel {
 		this.title = new SimpleStringProperty(bd.getTitle());
 		this.rsvNo = new SimpleIntegerProperty(bd.getRsvNo());
 		this.returnDate = new SimpleStringProperty(bd.getReturnDate().toString());
-		this.kind = new SimpleStringProperty(bd.getKind());
+		this.kind = new SimpleStringProperty(bd.getKind().equals("V")?"비디오":"만화책");
 	}
 	
 	
@@ -71,7 +71,7 @@ public class BookDataModel {
 		this.returnDate.set(returnDate.toString());
 	}
 	public String getKind() {
-		return kind.get();
+		return kind.get().equals("V")?"비디오":"만화책";
 	}
 	public void setKind(String kind) {
 		this.kind.set(kind);
