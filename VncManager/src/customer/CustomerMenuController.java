@@ -191,10 +191,14 @@ public class CustomerMenuController implements Initializable{
 	
 	
 	public void handleJoinAction(ActionEvent e) {
-		String Jname = c_addNameFtext.getText();
-		String Jaddr = c_addAddrFText.getText();
-		String Jtel = c_addTelFText.getText();
-		String Jbirth = c_addBirthFText.getText();
+		String jName = c_addNameFtext.getText();
+		String jAddr = c_addAddrFText.getText();
+		String jTel = c_addTelFText.getText();
+		String jBirth = c_addBirthFText.getText();
+		
+		int result = db.usp_register(jName, jTel, jAddr, jBirth);
+		
+		//TODO 처리된 result값에 따라 다이얼로그로 결과 처리
 
 	}
 	

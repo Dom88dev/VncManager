@@ -86,6 +86,28 @@ public class Db {
 		
 		return result;
 	}
+	
+	public int usp_register(String name, String tel, String addr, String birth) {
+		int result = 0;
+		try {
+			connect();
+			callStmt = con.prepareCall(Sql.USP_REGISTER);
+			callStmt.setString(1, name);
+			callStmt.setString(2, tel);
+			callStmt.setString(3, addr);
+			callStmt.setDate(4, Util.transformDate(birth));
+	        callStmt.registerOutParameter(5, Types.NUMERIC);
+	        callStmt.executeQuery();
+	        
+	        result = callStmt.getInt(5);
+	        close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 	/**
 	 * DB에 생성되어 있는 비디오 추가 프로시저를 실행하는 메소드.
 	 * @param datas
@@ -331,6 +353,13 @@ public class Db {
 		return result;
 	}
 
+	
+	//회원가입 직후 회원번호를 가져오는 메소드
+	public int getMemberId(){
+		int id = 0;
+		
+		return id;
+	}
 	
 }
 
