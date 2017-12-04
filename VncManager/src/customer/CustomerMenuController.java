@@ -223,28 +223,32 @@ public class CustomerMenuController implements Initializable{
 		
 		int result = db.usp_register(jName, jTel, jAddr, jBirth);
 		if(result >0) {
-			for(CustomerDatas cp : bds) {
-				compare.add(new CustomerDataModel(cp));
-			}
-			if(jTel.equals(customerListTable.getItems()))
-			popNoti("회원 가입이 되었습니다.");
-			
+			int joinId = db.getMemberId();
+			popNoti(jName+"님 " + "회원 가입이 되었습니다." + "\nID는 " + joinId + " 입니다.");
+		}
+		else {
+			popNoti("가입과정에서 오류가 발생했습니다.");
 		}
 		
 		//TODO 처리된 result값에 따라 다이얼로그로 결과 처리
 
 	}
+	// <메소드> - 가입 탭에 회원 가입 중 취소 버튼을 실행하는 메소드 
+	public void handleCancleAction(ActionEvent e) {
+		String jName = c_addNameFtext.getText();
+		String jAddr = c_addAddrFText.getText();
+		String jTel = c_addTelFText.getText();
+		String jBirth = c_addBirthFText.getText();
+		
+		jName = null;
+		jAddr = null;
+		jTel = null;
+		jBirth = null;
+		
+		popNoti("가입을 취소 하셨습니다.");
+	}
 	
-	public void refreshList() {
-		customerList.removeAll(bdms);                         // bdms의 값이 담긴 값을 다 삭제한다.
-		bdms = new ArrayList<CustomerDataModel>();   // 값을 삭제한 bdms에 다시 DB의 값을 저장한다.
-		bds = db.selectCustomerDatas();                     //
-		for(CustomerDatas bd : bds) {                        //
-			bdms.add(new CustomerDataModel(bd));      //
-		}                                      
-		customerList.addAll(bdms);                             //
-		customerListTable.setItems(customerList);        //
-		}
+	
 	
 	// <메소드> - 조회 탭에서 검색할 카테고리를 콤보박스에서 선택하고 검색창에 검색어를 입력후 검색 버튼을 눌러 실행하는 메소드
 	public void handleSearchBtn(ActionEvent e) {

@@ -243,7 +243,7 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </Button>
-                              <Button fx:id="c_JoinCancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="취소" textFill="WHITE">
+                              <Button fx:id="c_JoinCancleBtn" mnemonicParsing="false" onAction="#handleCancleAction" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="취소" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="5.0" top="20.0" />
                                  </HBox.margin>
