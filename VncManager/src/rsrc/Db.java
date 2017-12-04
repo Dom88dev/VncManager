@@ -232,6 +232,8 @@ public class Db {
 		return bookDatas;
 	}
 	
+	
+	// DB의 customer 테이블 값을 가져오는 메소드
 	public ArrayList<CustomerDatas> selectCustomerDatas(){
 		ArrayList<CustomerDatas> customerDatas = new ArrayList<CustomerDatas>();
 		connect();
@@ -357,6 +359,17 @@ public class Db {
 	//회원가입 직후 회원번호를 가져오는 메소드
 	public int getMemberId(){
 		int id = 0;
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_ID_AFTER_REGISTER);
+			rs = stmt.executeQuery();
+			int maxId = rs.getInt(0);
+			
+			close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		return id;
 	}

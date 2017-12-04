@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
+<BorderPane fx:id="customer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CustomerMenuController">
    <center>
       <TabPane side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
@@ -37,12 +37,11 @@
                           <columns>
                               <TableColumn prefWidth="55.0" text="회원번호" />
                             <TableColumn prefWidth="75.0" text="이름" />
-                            <TableColumn prefWidth="130.0" text="주소" />
-                              <TableColumn prefWidth="130.0" text="전화번호" />
-                              <TableColumn prefWidth="130.0" text="생년월일" />
+                            <TableColumn prefWidth="180.0" text="주소" />
+                              <TableColumn prefWidth="180.0" text="전화번호" />
+                              <TableColumn prefWidth="180.0" text="생년월일" />
                               <TableColumn prefWidth="50.0" text="나이" />
                               <TableColumn prefWidth="50.0" text="가족 수" />
-                              <TableColumn prefWidth="130.0" text="비밀번호" />
                           </columns>
                         </TableView>
                      </center>
@@ -143,7 +142,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="주   소" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="전화번호" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -154,7 +153,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="전화번호" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="주   소" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -244,7 +243,7 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </Button>
-                              <Button fx:id="c_JoinCancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="취소" textFill="WHITE">
+                              <Button fx:id="c_JoinCancleBtn" mnemonicParsing="false" onAction="#handleCancleAction" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="취소" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="5.0" top="20.0" />
                                  </HBox.margin>
@@ -294,7 +293,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="주   소" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="전화번호" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -305,7 +304,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="전화번호" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                              <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="주    소" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -511,7 +510,7 @@
                         <HBox prefHeight="115.0" prefWidth="884.0" spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label prefHeight="19.0" prefWidth="216.0" />
-                              <Button fx:id="c_modifyBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: white;" text="추가" textFill="#f27200">
+                              <Button fx:id="c_modifyBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: white;" text="수정" textFill="#f27200">
                                  <HBox.margin>
                                     <Insets left="5.0" top="20.0" />
                                  </HBox.margin>
