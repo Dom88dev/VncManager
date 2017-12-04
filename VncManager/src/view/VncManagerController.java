@@ -48,7 +48,7 @@ public class VncManagerController implements Initializable {
 	 */
 	public void openCustomerMenu(ActionEvent e) {
 		try {
-			Parent cMenu = FXMLLoader.load(getClass().getResource("CustomerMenu.fxml"));
+			Parent cMenu = FXMLLoader.load(Class.forName(this.getClass().getName()).getResource("CustomerMenu.fxml"));
 			StackPane root = (StackPane) menu1.getScene().getRoot();
 			root.getChildren().add(cMenu);
 			
@@ -62,6 +62,9 @@ public class VncManagerController implements Initializable {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 	
@@ -71,7 +74,7 @@ public class VncManagerController implements Initializable {
 	 */
 	public void openProductMenu(ActionEvent e) {
 		try {
-			Parent pMenu = FXMLLoader.load(getClass().getResource("ProductMenu.fxml"));
+			Parent pMenu = FXMLLoader.load(Class.forName(this.getClass().getName()).getResource("ProductMenu.fxml"));
 			StackPane root = (StackPane) menu1.getScene().getRoot();
 			root.getChildren().add(pMenu);
 			
@@ -85,6 +88,9 @@ public class VncManagerController implements Initializable {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 	
@@ -94,7 +100,7 @@ public class VncManagerController implements Initializable {
 	 */
 	public void openRentReturnMenu(ActionEvent e) {
 		try {
-			Parent rMenu = FXMLLoader.load(getClass().getResource("RentMenu.fxml"));
+			Parent rMenu = FXMLLoader.load(Class.forName(this.getClass().getName()).getResource("RentMenu.fxml"));
 			StackPane root = (StackPane) menu1.getScene().getRoot();
 			root.getChildren().add(rMenu);
 			
@@ -108,6 +114,9 @@ public class VncManagerController implements Initializable {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 	
@@ -117,7 +126,7 @@ public class VncManagerController implements Initializable {
 	 */
 	public void openReservationMenu(ActionEvent e) {
 		try {
-			Parent rMenu = FXMLLoader.load(getClass().getResource("ReservationMenu.fxml"));
+			Parent rMenu = FXMLLoader.load(Class.forName(this.getClass().getName()).getResource("ReservationMenu.fxml"));
 			StackPane root = (StackPane) menu4.getScene().getRoot();
 			root.getChildren().add(rMenu);
 			
@@ -132,6 +141,9 @@ public class VncManagerController implements Initializable {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 	
@@ -139,7 +151,7 @@ public class VncManagerController implements Initializable {
 		Popup noti = new Popup();
 		
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("Notification.fxml"));
+			Parent parent = FXMLLoader.load(Class.forName(this.getClass().getName()).getResource("Notification.fxml"));
 			Label noticeText = (Label)parent.lookup("#noticeText");
 			noticeText.setText(notice);
 			
@@ -150,6 +162,9 @@ public class VncManagerController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("popNoti메소드 에러");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

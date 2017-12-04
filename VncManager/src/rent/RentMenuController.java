@@ -413,6 +413,7 @@ public class RentMenuController implements Initializable {
 			if(lateReturnFee>0) popNoti("상품이 반납되었습니다. "+lateReturnFee+"원의 연체료가 있습니다.");
 			else popNoti("상품이 반납되었습니다.");
 			refreshList();
+			refreshList();
 		} else if(result ==2) {
 			popNoti("없는 상품입니다.");
 		} else if(result == 3) {
