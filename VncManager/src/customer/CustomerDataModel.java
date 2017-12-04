@@ -28,6 +28,9 @@ public class CustomerDataModel {
 	
 	}
 	
+	public CustomerDataModel() {
+		
+	}
 	
 	public int getId() {
 		return id.get();
