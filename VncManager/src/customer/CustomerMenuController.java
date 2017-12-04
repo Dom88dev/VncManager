@@ -37,23 +37,28 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+import rent.RentReturnDatasModel;
 import rsrc.Db;
+
 
 public class CustomerMenuController implements Initializable{
 	private Db db = new Db();
 	private ArrayList<CustomerDatas> bds = new ArrayList<CustomerDatas>();
 	private ArrayList<CustomerDataModel> bdms = new ArrayList<CustomerDataModel>();
-
+	private ArrayList<CustomerDatas> join = new ArrayList<CustomerDatas>();
+	
 	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "비디오", "만화책");
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("회원번호", "이름", "전화번호", "주소");
 	private ObservableList<String> familyKindList = FXCollections.observableArrayList("전체", "가족 유", "가족 무");
 	
 	private ObservableList<CustomerDataModel> customerList = FXCollections.observableArrayList();
 	
+	private ObservableList<String> infoTitleList = FXCollections.observableArrayList();
+	private ObservableList<String> infoDataList = FXCollections.observableArrayList();
+	
 	@FXML private BorderPane customer;
 	@FXML private ChoiceBox<String> fKindChoiceBox;
 	@FXML private ComboBox<String> searchKindComboBox;
-	@FXML private ChoiceBox<String> pKindChoiceBox;
 	@FXML private Tab c_searchTab;
 	@FXML private Tab c_joinTab;
 	@FXML private Tab c_modifyTab;
@@ -62,7 +67,8 @@ public class CustomerMenuController implements Initializable{
 	@FXML private Button c_searchBtn;
 	@FXML private TextField c_searchFText;
 	@FXML private Button c_addInfoBtn;
-	@FXML private ListView c_addInfoListView;
+	@FXML private ListView c_addInfoListView1;
+	@FXML private ListView c_addInfoListView2;
 	
 	//추가 탭 정보
 	@FXML private TextField c_addNameFtext;
@@ -92,8 +98,6 @@ public class CustomerMenuController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		pKindChoiceBox.setValue("전체");
-		pKindChoiceBox.setItems(productKindList);
 		fKindChoiceBox.setValue("전체");
 		fKindChoiceBox.setItems(familyKindList);
 		searchKindComboBox.setItems(searchKindList);
@@ -105,7 +109,7 @@ public class CustomerMenuController implements Initializable{
 		TableColumn<CustomerDataModel, String> tcBirth = (TableColumn<CustomerDataModel, String>)customerListTable.getColumns().get(4);
 		TableColumn<CustomerDataModel, Integer> tcAge = (TableColumn<CustomerDataModel, Integer>)customerListTable.getColumns().get(5);
 		TableColumn<CustomerDataModel, Integer> tcCountFamily = (TableColumn<CustomerDataModel, Integer>)customerListTable.getColumns().get(6);
-		TableColumn<CustomerDataModel, Integer> tcPw = (TableColumn<CustomerDataModel, Integer>)customerListTable.getColumns().get(7);
+		
 		
 		tcId.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("id"));
 		tcName.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("name"));
@@ -114,7 +118,7 @@ public class CustomerMenuController implements Initializable{
 		tcBirth.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("birth"));
 		tcAge.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("age"));
 		tcCountFamily.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("countFamily"));
-		tcPw.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("pw"));
+		
 		
 		bds = db.selectCustomerDatas();
 		for(CustomerDatas cd: bds) {
@@ -122,6 +126,27 @@ public class CustomerMenuController implements Initializable{
 		}
 		customerList.addAll(bdms);
 		customerListTable.setItems(customerList);
+		
+		customerListTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerDataModel>() {
+
+			@Override
+			public void changed(ObservableValue<? extends CustomerDataModel> observable, CustomerDataModel oldValue,
+					CustomerDataModel newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null) {
+					if(!infoTitleList.isEmpty()) {
+						infoTitleList.removeAll("이름", "비밀번호");
+						infoDataList.removeAll(oldValue.getName().toString(), String.valueOf(oldValue.getPw()));
+					}
+					
+					infoTitleList.addAll("이름", "비밀번호");
+					c_addInfoListView1.setItems(infoTitleList);
+					infoDataList.addAll(newValue.getName().toString(), String.valueOf(newValue.getPw()));
+					c_addInfoListView2.setItems(infoDataList);
+				}
+			}
+			
+		});
 		
 		customerListTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
 			@Override
@@ -135,6 +160,42 @@ public class CustomerMenuController implements Initializable{
 		customerListTable.setPlaceholder(label);
 		
 		
+		fKindChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null){
+					customerList.removeAll(bdms);
+					if(newValue.equals("전체")) {
+						customerList.addAll(bdms);
+					} else {
+						for(CustomerDataModel bd : bdms) {
+							switch(newValue) {
+							case "가족 유":
+								if(bd.getCountFamily()>0)	customerList.add(bd);
+								break;
+							case "가족 무":
+								if(bd.getCountFamily() == 0)	customerList.add(bd);
+								break;
+							}
+						}
+					}
+				}
+				
+			}
+			
+		});
+	}
+	
+	
+	
+	public void handleJoinAction(ActionEvent e) {
+		String Jname = c_addNameFtext.getText();
+		String Jaddr = c_addAddrFText.getText();
+		String Jtel = c_addTelFText.getText();
+		String Jbirth = c_addBirthFText.getText();
+
 	}
 	
 	
@@ -153,7 +214,7 @@ public class CustomerMenuController implements Initializable{
 			for(CustomerDataModel cd : bdms) {
 				switch(sKind) {
 					case "회원번호": 
-						if(String.valueOf(cd.getId()).equals(search))customerList.add(cd);
+						if(String.valueOf(cd.getId()).toLowerCase().contains(search))customerList.add(cd);
 						break;
 					case "이름": 
 						if(cd.getName().toLowerCase().contains(search.toLowerCase()))customerList.add(cd);

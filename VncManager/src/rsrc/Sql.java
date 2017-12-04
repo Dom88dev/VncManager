@@ -28,6 +28,8 @@ public class Sql {
 			+ "from customer c left outer join (select id, count(id) cntid "
 			+ "from family group by id) d on c.id=d.id";
 	
+	public static final String SELECT_FAMILY = "select, name, relation from family group by id";
+	
 	public static final String SELECT_CUSTOMER_ID = "select c.id, c.name, c.addr, c.tel, c.birth, c.age, nvl(d.cntid, 0), c.pw "
 			+ "from customer c left outer join (select id, count(id) cntid "
 			+ "from family group by id) d on c.id=d.id where c.id like ?";
