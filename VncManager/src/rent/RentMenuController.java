@@ -204,7 +204,7 @@ public class RentMenuController implements Initializable {
 						rent_t1_infoDataListView.setItems(infoDataList);
 						returnPid = newValue.getP_id();
 						returnId = newValue.getId();
-						isReturn = !newValue.getRentDate().equals("미반납");
+						isReturn = !newValue.getReturnDate().equals("미반납");
 					}
 				}
 			
@@ -412,10 +412,11 @@ public class RentMenuController implements Initializable {
 		if(result == 1) {
 			if(lateReturnFee>0) popNoti("상품이 반납되었습니다. "+lateReturnFee+"원의 연체료가 있습니다.");
 			else popNoti("상품이 반납되었습니다.");
+			refreshList();
 		} else if(result ==2) {
 			popNoti("없는 상품입니다.");
 		} else if(result == 3) {
-			popNoti("대여 처리 중 오류가 발생했습니다.");
+			popNoti("반납 처리 중 오류가 발생했습니다.");
 		}
 	}
 	

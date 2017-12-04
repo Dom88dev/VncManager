@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -60,7 +61,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="rent_t1_searchKindComboBox" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;">
+                              <ComboBox fx:id="rent_t1_searchKindComboBox" prefWidth="150.0" promptText="검색조건" styleClass="Violet" stylesheets="@application.css">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -68,11 +69,11 @@
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </ComboBox>
-                              <TextField fx:id="rent_t1_searchText" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <TextField fx:id="rent_t1_searchText" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.columnSpan="2">
                                  <effect>
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect></TextField>
-                              <Button fx:id="rent_t1_searchBtn" mnemonicParsing="false" onAction="#searchRentList" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3">
+                              <Button fx:id="rent_t1_searchBtn" mnemonicParsing="false" onAction="#searchRentList" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -80,7 +81,7 @@
                                     <DropShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox fx:id="rent_t1_pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="rent_t1_pKindChoiceBox" prefWidth="150.0" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="4">
                                  <effect>
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
@@ -92,7 +93,7 @@
                         </GridPane>
                      </top>
                      <right>
-                        <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
+                        <GridPane BorderPane.alignment="CENTER">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                            </columnConstraints>
@@ -108,15 +109,22 @@
                                        </font>
                                     </Label>
                                  </top>
-                                 <center>
-                                    <ListView fx:id="rent_t1_infoDataListView" prefHeight="530.0" prefWidth="314.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                                 <right>
+                                    <ListView fx:id="rent_t1_infoDataListView" prefHeight="405.0" prefWidth="128.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER_LEFT">
                                        <BorderPane.margin>
                                           <Insets left="5.0" />
                                        </BorderPane.margin>
                                     </ListView>
+                                 </right>
+                                 <center>
+                                    <ListView fx:id="rent_t1_infoTitleListView" prefHeight="405.0" prefWidth="82.0" style="-fx-background-color: white; -fx-text-fill: #9161c6;" BorderPane.alignment="CENTER_RIGHT" />
                                  </center>
                                  <left>
-                                    <ListView fx:id="rent_t1_infoTitleListView" prefHeight="520.0" prefWidth="97.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" style="-fx-opacity: 0.5;" BorderPane.alignment="CENTER">
+                                       <effect>
+                                          <InnerShadow color="#9161c6" />
+                                       </effect>
+                                    </Separator>
                                  </left>
                               </BorderPane>
                            </children>
@@ -131,7 +139,7 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                            <children>
-                              <Button fx:id="ReturnBtn" mnemonicParsing="false" onAction="#clickReturn" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: white;" text="반 납" textFill="#9161c6">
+                              <Button fx:id="ReturnBtn" mnemonicParsing="false" onAction="#clickReturn" prefHeight="40.0" prefWidth="100.0" styleClass="Violet" stylesheets="@application.css" text="반 납" textFill="#9161c6">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -164,7 +172,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <ComboBox fx:id="customerSearchKind" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;" GridPane.rowIndex="1">
+                                    <ComboBox fx:id="customerSearchKind" prefWidth="150.0" promptText="검색조건" styleClass="Violet" stylesheets="@application.css" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -174,12 +182,12 @@
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="customerSearchText" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                    <TextField fx:id="customerSearchText" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -227,12 +235,12 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <ComboBox fx:id="productSearchKind" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;" GridPane.rowIndex="1">
+                                    <ComboBox fx:id="productSearchKind" prefWidth="150.0" promptText="검색조건" styleClass="Violet" stylesheets="@application.css" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </ComboBox>
-                                    <ChoiceBox fx:id="productKind" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                    <ChoiceBox fx:id="productKind" prefWidth="150.0" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -242,12 +250,12 @@
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="productSearchText" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                    <TextField fx:id="productSearchText" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -278,7 +286,7 @@
                      <bottom>
                         <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="961.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="RentalBtn" mnemonicParsing="false" onAction="#clickRent" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: white;" text="대 여" textFill="#9161c6">
+                              <Button fx:id="RentalBtn" mnemonicParsing="false" onAction="#clickRent" prefHeight="40.0" prefWidth="100.0" styleClass="Violet" stylesheets="@application.css" text="대 여" textFill="#9161c6">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

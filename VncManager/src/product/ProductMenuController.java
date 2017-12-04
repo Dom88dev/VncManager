@@ -38,6 +38,7 @@ public class ProductMenuController implements Initializable {
 	private ArrayList<ProductDatas> pds = new ArrayList<ProductDatas>();
 	private ArrayList<ProductDataModel> pdms = new ArrayList<ProductDataModel>();
 	
+	private ObservableList<String> productKindListForModi = FXCollections.observableArrayList("비디오", "만화책");
 	private ObservableList<String> productKindList = FXCollections.observableArrayList("전체", "비디오", "만화책");
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("상품번호", "제목", "장르", "연령 등급", "출시일");
 	private ObservableList<ProductDataModel> productList = FXCollections.observableArrayList();
@@ -61,29 +62,29 @@ public class ProductMenuController implements Initializable {
 	
 	
 	//tab1 - 수정/삭제 섹션 컨트롤
-	@FXML private TextField p_modiTitleTextf;
-	@FXML private TextField p_modiGenreTextf;
-	@FXML private TextField p_modiAgeGradeTextf;
-	@FXML private TextField p_modiReleaseTextf;
-	@FXML private TextField p_modiProducNumTextf;
-	@FXML private TextField p_modiDirectorTextf;
-	@FXML private TextField p_modiActorTextf;
-	@FXML private TextField p_modiWriterTextf;
+	@FXML private TextField p_modiTitleTextField;
+	@FXML private TextField p_modiGenreTextField;
+	@FXML private TextField p_modiAgeGradeTextField;
+	@FXML private TextField p_modiReleaseTextField;
+	@FXML private TextField p_modiProducNumTextField;
+	@FXML private TextField p_modiDirectorTextField;
+	@FXML private TextField p_modiActorTextField;
+	@FXML private TextField p_modiWriterTextField;
 	
-	@FXML private ChoiceBox<String> P_modiKindChoiceBox;
+	@FXML private ComboBox<String> p_modiKindChoiceBox;
 	@FXML private Button p_modiAddBtn;
 	@FXML private Button p_modiDelBtn;
 	
 	
 	//tab2 - 상품 추가 컨트롤
-	@FXML private TextField p_titleTextf;
-	@FXML private TextField p_genreTextf;
-	@FXML private TextField p_ageGradeTextf;
-	@FXML private TextField p_releaseTextf;
-	@FXML private TextField p_producNumTextf;
-	@FXML private TextField p_directorTextf;
-	@FXML private TextField p_actorTextf;
-	@FXML private TextField p_writerTextf;
+	@FXML private TextField p_titleTextField;
+	@FXML private TextField p_genreTextField;
+	@FXML private TextField p_ageGradeTextField;
+	@FXML private TextField p_releaseTextField;
+	@FXML private TextField p_producNumTextField;
+	@FXML private TextField p_directorTextField;
+	@FXML private TextField p_actorTextField;
+	@FXML private TextField p_writerTextField;
 	@FXML private ChoiceBox<String> p_kindChoiceBox;
 	@FXML private Button p_addBtn;
 	@FXML private Button p_cancleBtn;
@@ -97,6 +98,7 @@ public class ProductMenuController implements Initializable {
 		pKindChoiceBox.setValue("전체");
 		pKindChoiceBox.setItems(productKindList);
 		searchKindComboBox.setItems(searchKindList);
+		p_modiKindChoiceBox.setItems(productKindListForModi);
 		
 		TableColumn<ProductDataModel, Integer> tcP_id = (TableColumn<ProductDataModel, Integer>) productListTable.getColumns().get(0);
 		TableColumn<ProductDataModel, String> tcKind = (TableColumn<ProductDataModel, String>) productListTable.getColumns().get(1);
@@ -173,6 +175,28 @@ public class ProductMenuController implements Initializable {
 					
 					infoDataListView.setItems(infoDataList);
 					
+					//수정 화면에 각 속성 불러오기
+					p_modiKindChoiceBox.setValue(newValue.getKind());
+					p_modiTitleTextField.setText(newValue.getTitle());
+					p_modiGenreTextField.setText(newValue.getGenre());
+					p_modiAgeGradeTextField.setText(String.valueOf(newValue.getAge_grade()));
+					p_modiReleaseTextField.setText(newValue.getRelease().toString());
+					if(newValue.getKind().equals("비디오")) {
+						p_modiDirectorTextField.setEditable(true);
+						p_modiActorTextField.setEditable(true);
+						p_modiDirectorTextField.setText(newValue.getDirector());
+						p_modiActorTextField.setText(newValue.getActor());
+						p_modiWriterTextField.setText("");
+						p_modiWriterTextField.setEditable(false);
+					} else {
+						p_modiWriterTextField.setEditable(true);
+						p_modiWriterTextField.setText(newValue.getWriter());
+						p_modiDirectorTextField.setText("");
+						p_modiActorTextField.setText("");
+						p_modiDirectorTextField.setEditable(false);
+						p_modiActorTextField.setEditable(false);
+					}
+					p_modiProducNumTextField.setText(String.valueOf(newValue.getSupply()));
 				}
 			}
 			
@@ -181,6 +205,12 @@ public class ProductMenuController implements Initializable {
 		
 	}
 	
+	public void resetModiTextField() {
+		p_modiTitleTextField.setText("");
+		p_modiGenreTextField.setText("");
+		p_modiAgeGradeTextField.setText("");
+		p_modiReleaseTextField.setText("");
+	}
 	
 	public void handleSearchBtn(ActionEvent e) {
 		String search = searchTextField.getText();

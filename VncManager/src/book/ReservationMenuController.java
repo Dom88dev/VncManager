@@ -62,8 +62,6 @@ public class ReservationMenuController implements Initializable {
 	@FXML private BorderPane reservation;
 	@FXML private TabPane tab;
 	@FXML private Button b_homeBtn;
-	@FXML private Tab b_searchTab;
-	@FXML private Tab b_manageTap;
 	
 	//tab1 - 예약조회/삭제
 	@FXML private ChoiceBox<String> pKindChoiceBox;
