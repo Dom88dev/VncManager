@@ -28,7 +28,7 @@ public class ProductDataModel {
 	
 	public ProductDataModel(ProductDatas pd) {
 		this.p_id = new SimpleIntegerProperty(pd.getP_id());
-		this.kind = new SimpleStringProperty(pd.getKind());
+		this.kind = new SimpleStringProperty(pd.getKind().equals("V")?"비디오":"만화책");
 		this.title = new SimpleStringProperty(pd.getTitle());
 		this.genre = new SimpleStringProperty(pd.getGenre());
 		this.age_grade = new SimpleIntegerProperty(pd.getAge_grade());
@@ -55,7 +55,7 @@ public class ProductDataModel {
 		return kind.get();
 	}
 	public void setKind(String kind) {
-		this.kind.set(kind);
+		this.kind.set(kind.equals("V")?"비디오":"만화책");
 	}
 	public String getTitle() {
 		return title.get();

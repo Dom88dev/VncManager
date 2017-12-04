@@ -73,13 +73,13 @@ public class Util {
     	int result = 0;
     	
     	if(edition.equals("NEW")) {
-    		if(kind.equals("V")) {
+    		if(kind.equals("비디오")) {
     			result = 1000;
     		} else {
     			result = 300;
     		}
     	} else {
-    		if(kind.equals("V")) {
+    		if(kind.equals("비디오")) {
     			result = 500;
     		} else {
     			result = 200;
@@ -92,13 +92,13 @@ public class Util {
     	int result = 0;
     	
     	if(edition.equals("NEW")) {
-    		if(kind.equals("V")) {
+    		if(kind.equals("비디오")) {
     			result = 1500;
     		} else {
     			result = 500;
     		}
     	} else {
-    		if(kind.equals("V")) {
+    		if(kind.equals("비디오")) {
     			result = 1000;
     		} else {
     			result = 300;

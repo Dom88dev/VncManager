@@ -45,6 +45,7 @@ public class RentMenuController implements Initializable {
 	private ArrayList<RentReturnDatasModel> rdms = new ArrayList<RentReturnDatasModel>();
 	// 대여목록 선택시 해당 대여정보의 상품번호와 회원번호를 답아놓을 인스턴스
 	private int returnPid=0, returnId=0, lateReturnFee = 0;
+	private boolean isReturn = false;
 	
 	// 대여조회화면 콤보박스 및 초이스박스 선택항목 리스트
 	private ObservableList<String> rentKindList = FXCollections.observableArrayList("전체", "대여중", "반납");
@@ -72,7 +73,7 @@ public class RentMenuController implements Initializable {
 	private ArrayList<CustomerDatas> cds = new ArrayList<CustomerDatas>();
 	private ArrayList<CustomerDataModel> cdms = new ArrayList<CustomerDataModel>();
 	// 회원목록과 상품목록 선택시 해당정보의 상품번호와 회원번호를 답아놓을 인스턴스
-	private int rentPid=0, rentId=0, rentCost=0;
+	private int rentPid=0, rentId=0, rentCost=0, rentAge=0, rentAgeLimit=0;
 	
 	// 대여화면 콤보박스 및 초이스박스 선택항목 리스트
 	private ObservableList<String> cSearchKindList = FXCollections.observableArrayList("회원번호", "이름", "전화번호");
@@ -203,6 +204,7 @@ public class RentMenuController implements Initializable {
 						rent_t1_infoDataListView.setItems(infoDataList);
 						returnPid = newValue.getP_id();
 						returnId = newValue.getId();
+						isReturn = !newValue.getReturnDate().equals("미반납");
 					}
 				}
 			
@@ -252,10 +254,10 @@ public class RentMenuController implements Initializable {
 						for(ProductDataModel pd : pdms) {
 							switch(newValue) {
 							case "대여가능":
-								if(!Boolean.valueOf(pd.getIsRental()))	productList.add(pd);
+								if(pd.getIsRental().equals("대여가능"))	productList.add(pd);
 								break;
-							case "만화책":
-								if(Boolean.valueOf(pd.getIsRental()))	productList.add(pd);
+							case "대여불가":
+								if(pd.getIsRental().equals("대여중"))	productList.add(pd);
 								break;
 							}
 						}
@@ -273,7 +275,10 @@ public class RentMenuController implements Initializable {
 			public void changed(ObservableValue<? extends CustomerDataModel> arg0, CustomerDataModel old,
 					CustomerDataModel newValue) {
 				// TODO Auto-generated method stub
-				if(newValue!=null)	rentId = newValue.getId();
+				if(newValue!=null)	{
+					rentId = newValue.getId();
+					rentAge = newValue.getAge();
+				}
 			}
 			
 		});
@@ -287,6 +292,7 @@ public class RentMenuController implements Initializable {
 				if(newValue!=null) {
 					rentPid = newValue.getP_id();
 					rentCost = Util.getRentCost(newValue.getEdition(), newValue.getKind());
+					rentAgeLimit = newValue.getAge_grade();
 				}
 			}
 			
@@ -398,14 +404,19 @@ public class RentMenuController implements Initializable {
 			popNoti("반납할 정보를 선택하고 반납처리를 하십시오.");
 			return;
 		}
+		if(isReturn) {
+			popNoti("해당 회원에게서 이미 반납된 상품입니다.");
+			return;
+		}
 		int result = db.usp_rrb(returnPid, returnId, Sql.USP_RETURN);
 		if(result == 1) {
 			if(lateReturnFee>0) popNoti("상품이 반납되었습니다. "+lateReturnFee+"원의 연체료가 있습니다.");
 			else popNoti("상품이 반납되었습니다.");
+			refreshList();
 		} else if(result ==2) {
 			popNoti("없는 상품입니다.");
 		} else if(result == 3) {
-			popNoti("대여 처리 중 오류가 발생했습니다.");
+			popNoti("반납 처리 중 오류가 발생했습니다.");
 		}
 	}
 	
@@ -417,7 +428,10 @@ public class RentMenuController implements Initializable {
 			popNoti("상품과 회원을 선택하고 대여처리를 하십시오.");
 			return;
 		}
-		
+		if(rentAge<=rentAgeLimit) {
+			popNoti("현재 회원님은 해당 상품의 대여연령에 맞지 않습니다.");
+			return;
+		}
 		int result = db.usp_rrb(rentPid, rentId, Sql.USP_RENT);
 		if(result == 1) {
 			popNoti("상품이 대여되었습니다. 대여료는 "+rentCost+"원입니다.");

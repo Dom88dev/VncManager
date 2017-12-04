@@ -1,0 +1,32 @@
+.Orange {
+	-fx-background-color: white
+}
+
+.Orange:pressed {
+	-fx-background-color: #f27200
+}
+
+.wOrange {
+	
+	-fx-background-color: #f27200
+}
+
+.wOrange:pressed {
+	-fx-background-color: white
+}
+
+.Violet {
+	-fx-background-color: white
+}
+
+.Violet:pressed {
+	-fx-background-color: #9161c6
+}
+
+.wViolet {
+	-fx-background-color: #9161c6
+}
+
+.wViolet:pressed {
+	-fx-background-color: white
+}

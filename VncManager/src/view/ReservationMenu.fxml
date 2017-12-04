@@ -51,7 +51,7 @@
                      <bottom>
                         <HBox alignment="CENTER_RIGHT" prefHeight="65.0" prefWidth="961.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="rsvRemoveBtn" mnemonicParsing="false" onAction="#removeReservation" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: white;" text="예약취소" textFill="#9161c6">
+                              <Button fx:id="rsvRemoveBtn" mnemonicParsing="false" onAction="#removeReservation" prefHeight="40.0" prefWidth="100.0" styleClass="Violet" stylesheets="@application.css" text="예약취소" textFill="#9161c6">
                                  <effect>
                                     <DropShadow color="#9161c6" />
                                  </effect>
@@ -76,7 +76,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" prefWidth="150.0" promptText="검색조건" styleClass="Violet" stylesheets="@application.css">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -89,7 +89,7 @@
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3">
+                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -97,7 +97,7 @@
                                     <DropShadow color="#834dbe" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="4">
                                  <effect>
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
@@ -130,7 +130,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ComboBox fx:id="customerSearchKind" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;" GridPane.rowIndex="1">
+                                    <ComboBox fx:id="customerSearchKind" prefWidth="150.0" promptText="검색조건" styleClass="Violet" stylesheets="@application.css" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -145,7 +145,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -193,12 +193,12 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <ComboBox fx:id="productSearchKind" prefWidth="150.0" promptText="검색조건" style="-fx-background-color: white;" GridPane.rowIndex="1">
+                                    <ComboBox fx:id="productSearchKind" prefWidth="150.0" promptText="검색조건" styleClass="Violet" stylesheets="@application.css" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </ComboBox>
-                                    <ChoiceBox fx:id="productKind" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                    <ChoiceBox fx:id="productKind" prefWidth="150.0" styleClass="Violet" stylesheets="@application.css" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <effect>
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -213,7 +213,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" style="-fx-background-color: #9161c6;" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -244,7 +244,7 @@
                      <bottom>
                         <HBox alignment="CENTER_RIGHT" prefHeight="63.0" prefWidth="961.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="bookingBtn" mnemonicParsing="false" onAction="#confirmBook" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: white;" text="예 약" textFill="#9161c6">
+                              <Button fx:id="bookingBtn" mnemonicParsing="false" onAction="#confirmBook" prefHeight="40.0" prefWidth="100.0" styleClass="Violet" stylesheets="@application.css" text="예 약" textFill="#9161c6">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

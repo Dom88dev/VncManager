@@ -62,8 +62,6 @@ public class ReservationMenuController implements Initializable {
 	@FXML private BorderPane reservation;
 	@FXML private TabPane tab;
 	@FXML private Button b_homeBtn;
-	@FXML private Tab b_searchTab;
-	@FXML private Tab b_manageTap;
 	
 	//tab1 - 예약조회/삭제
 	@FXML private ChoiceBox<String> pKindChoiceBox;
@@ -166,10 +164,10 @@ public class ReservationMenuController implements Initializable {
 						for(BookDataModel bd : bdms) {
 							switch(newValue) {
 							case "비디오":
-								if(bd.getKind().equals("V"))	bookingList.add(bd);
+								if(bd.getKind().equals("비디오"))	bookingList.add(bd);
 								break;
 							case "만화책":
-								if(bd.getKind().equals("C"))	bookingList.add(bd);
+								if(bd.getKind().equals("만화책"))	bookingList.add(bd);
 								break;
 							}
 						}
@@ -196,10 +194,10 @@ public class ReservationMenuController implements Initializable {
 						for(ProductDataModel pd : pdms) {
 							switch(newValue) {
 							case "비디오":
-								if(pd.getKind().equals("V"))	productList.add(pd);
+								if(pd.getKind().equals("비디오"))	productList.add(pd);
 								break;
 							case "만화책":
-								if(pd.getKind().equals("C"))	productList.add(pd);
+								if(pd.getKind().equals("만화책"))	productList.add(pd);
 								break;
 							}
 						}
@@ -217,7 +215,7 @@ public class ReservationMenuController implements Initializable {
 			public void changed(ObservableValue<? extends CustomerDataModel> arg0, CustomerDataModel old,
 					CustomerDataModel newValue) {
 				// TODO Auto-generated method stub
-				bookingNo1 = newValue.getId();
+				if(newValue!=null)	bookingNo1 = newValue.getId();
 			}
 			
 		});
@@ -228,7 +226,7 @@ public class ReservationMenuController implements Initializable {
 			public void changed(ObservableValue<? extends ProductDataModel> arg0, ProductDataModel arg1,
 					ProductDataModel newValue) {
 				// TODO Auto-generated method stub
-				bookingNo2 = newValue.getP_id();
+				if(newValue!=null)	bookingNo2 = newValue.getP_id();
 			}
 			
 		});
