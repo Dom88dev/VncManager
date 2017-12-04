@@ -25,9 +25,9 @@
 
 <BorderPane fx:id="product" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="product.ProductMenuController">
    <center>
-      <TabPane side="LEFT" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tab" side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab fx:id="p_searchTab" closable="false" text="조회">
+            <Tab fx:id="searchTab" closable="false" text="조회/수정/삭제">
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <right>
@@ -70,7 +70,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="searchKindComboBox" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="검색 조건" style="-fx-background-color: white;">
+                              <ComboBox fx:id="searchKindComboBox" maxWidth="1.7976931348623157E308" prefWidth="150.0" promptText="검색 조건" styleClass="Orange" stylesheets="@application.css">
                                  <GridPane.margin>
                                     <Insets left="10.0" right="20.0" />
                                  </GridPane.margin>
@@ -79,13 +79,13 @@
                                  </effect>
                               </ComboBox>
 
-                              <TextField fx:id="searchTextField" prefHeight="23.0" prefWidth="491.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.columnSpan="2">
+                              <TextField fx:id="searchTextField" prefHeight="23.0" prefWidth="491.0" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.columnSpan="2">
 
                                  <effect>
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect></TextField>
 
-                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="23.0" prefWidth="68.0" styleClass="Orange" stylesheets="@application.css" text="검 색" textFill="#f27200" GridPane.columnIndex="3">
+                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" prefHeight="23.0" prefWidth="68.0" styleClass="wOrange" stylesheets="@application.css" text="검 색" textFill="WHITE" GridPane.columnIndex="3">
 
                                  <GridPane.margin>
                                     <Insets left="10.0" />
@@ -94,7 +94,7 @@
                                     <DropShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </Button>
-                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="4">
+                              <ChoiceBox fx:id="pKindChoiceBox" prefWidth="150.0" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="4">
                                  <GridPane.margin>
                                     <Insets right="20.0" />
                                  </GridPane.margin>
@@ -191,7 +191,7 @@
                                           <Insets right="10.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="p_modiTitleTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiTitleTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -202,7 +202,7 @@
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <TextField fx:id="p_modiGenreTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiGenreTextField" style="-fx-background-color: white;" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -213,7 +213,7 @@
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <TextField fx:id="p_modiAgeGradeTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiAgeGradeTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -224,7 +224,7 @@
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <TextField fx:id="p_modiReleaseTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiReleaseTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -235,7 +235,7 @@
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <ComboBox fx:id="p_modiKindChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="155.0" promptText="선택" style="-fx-background-color: WhiTE;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                    <ComboBox fx:id="p_modiKindChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="155.0" promptText="선택" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                        <effect>
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -282,7 +282,7 @@
                                           <Insets right="10.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="p_modiDirectorTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiDirectorTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -293,7 +293,7 @@
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <TextField fx:id="p_modiActorTextField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiActorTextField" maxWidth="1.7976931348623157E308" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -304,7 +304,7 @@
                                           <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <TextField fx:id="p_modiWriterTextField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiWriterTextField" maxWidth="1.7976931348623157E308" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -348,7 +348,7 @@
                                           <Insets right="10.0" />
                                        </padding>
                                     </Label>
-                                    <TextField fx:id="p_modiProducNumTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                                    <TextField fx:id="p_modiProducNumTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -361,7 +361,7 @@
                                     </TextField>
                                     <HBox alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="941.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
-                                          <Button fx:id="p_modiAddBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="33.0" prefWidth="153.0" style="-fx-background-color: white;" styleClass="Orange" stylesheets="@application.css" text="수정" textFill="#f27200">
+                                          <Button fx:id="p_modiAddBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modifyProduct" prefHeight="33.0" prefWidth="153.0" styleClass="Orange" stylesheets="@application.css" text="수정" textFill="#f27200">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -372,7 +372,7 @@
                                                 <DropShadow color="#f27200" />
                                              </effect>
                                           </Button>
-                                          <Button fx:id="p_modiDelBtn" mnemonicParsing="false" prefHeight="33.0" prefWidth="139.0" style="-fx-background-color: #f27200;" styleClass="Orange" stylesheets="@application.css" text="삭제" textFill="WHITE">
+                                          <Button fx:id="p_modiDelBtn" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="33.0" prefWidth="139.0" styleClass="wOrange" stylesheets="@application.css" text="삭제" textFill="WHITE">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -406,7 +406,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab fx:id="p_addTab" closable="false" text="추가">
+            <Tab fx:id="addTab" closable="false" text="추가">
                <content>
                   <BorderPane prefHeight="597.0" prefWidth="969.0" style="-fx-background-color: white;">
                      <left>
@@ -467,7 +467,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="p_titleTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_titleTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -478,7 +478,7 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <TextField fx:id="p_genreTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_genreTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -489,7 +489,7 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <TextField fx:id="p_ageGradeTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_ageGradeTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -500,7 +500,7 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <TextField fx:id="p_releaseTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_releaseTextField" promptText="날짜형식 : yyyy-mm-dd" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -511,11 +511,11 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <ChoiceBox fx:id="p_kindChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="155.0" style="-fx-background-color: WhiTE;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                              <ComboBox fx:id="p_kindChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="155.0" promptText="선택" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                  <effect>
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
-                              </ChoiceBox>
+                              </ComboBox>
                               <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="상품구분" textFill="#f27200" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                  <font>
                                     <Font size="18.0" />
@@ -557,7 +557,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="p_directorTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_directorTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -568,7 +568,7 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <TextField fx:id="p_actorTextField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_actorTextField" maxWidth="1.7976931348623157E308" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -579,7 +579,7 @@
                                     <InnerShadow color="#f27200" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <TextField fx:id="p_writerTextField" maxWidth="1.7976931348623157E308" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_writerTextField" maxWidth="1.7976931348623157E308" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -623,7 +623,7 @@
                                     <Insets right="10.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="p_producNumTextField" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+                              <TextField fx:id="p_producNumTextField" styleClass="Orange" stylesheets="@application.css" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -644,7 +644,7 @@
                         <HBox prefHeight="131.0" prefWidth="961.0" spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
                               <Label prefHeight="19.0" prefWidth="216.0" />
-                              <Button fx:id="p_addBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: white;" text="추가" textFill="#f27200">
+                              <Button fx:id="p_addBtn" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addProduct" prefHeight="44.0" prefWidth="220.0" styleClass="Orange" stylesheets="@application.css" text="추가" textFill="#f27200">
                                  <HBox.margin>
                                     <Insets left="5.0" top="20.0" />
                                  </HBox.margin>
@@ -655,7 +655,7 @@
                                     <DropShadow color="#f27200" />
                                  </effect>
                               </Button>
-                              <Button fx:id="p_cancleBtn" mnemonicParsing="false" prefHeight="44.0" prefWidth="220.0" style="-fx-background-color: #f27200;" text="취소" textFill="WHITE">
+                              <Button fx:id="p_cancleBtn" mnemonicParsing="false" onAction="#cancelAddProduct" prefHeight="44.0" prefWidth="220.0" styleClass="wOrange" stylesheets="@application.css" text="취소" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets left="5.0" top="20.0" />
                                  </HBox.margin>

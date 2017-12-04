@@ -375,6 +375,51 @@ public class Db {
 	}
 	
 	
+	public int updateProduct(ProductDatas p) {
+		int result = 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.UPDATE_PRODUCT);
+			stmt.setString(1, p.getKind());
+			stmt.setString(2, p.getTitle());
+			stmt.setString(3, p.getGenre());
+			stmt.setInt(4, p.getAge_grade());
+			stmt.setDate(5, p.getRelease());
+			stmt.setInt(6, p.getSupply());
+			stmt.setString(7, p.getDirector());
+			stmt.setString(8, p.getActor());
+			stmt.setString(9, p.getWriter());
+			stmt.setInt(10, p.getP_id());
+			
+			
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteProduct(int p_id) {
+		int result = 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.DELETE_PRODUCT);
+			stmt.setInt(1, p_id);
+
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }
 

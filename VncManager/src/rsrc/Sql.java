@@ -7,13 +7,13 @@ package rsrc;
 public class Sql {
 	//드라이버 정보
 	public static final String DB_DRIVER = "oracle.jdbc.OracleDriver";
-//	public static final String DB_ADDR = "jdbc:oracle:thin:@70.12.113.130:1521:orcl";
-//	public static final String DB_USER_NAME = "m2";
-//	public static final String DB_USER_PW = "1111";
+	public static final String DB_ADDR = "jdbc:oracle:thin:@70.12.113.130:1521:orcl";
+	public static final String DB_USER_NAME = "m2";
+	public static final String DB_USER_PW = "1111";
 	
-	public static final String DB_ADDR = "jdbc:oracle:thin:@localhost:1521:xe";
-	public static final String DB_USER_NAME = "user1";
-	public static final String DB_USER_PW = "user1";
+//	public static final String DB_ADDR = "jdbc:oracle:thin:@localhost:1521:xe";
+//	public static final String DB_USER_NAME = "user1";
+//	public static final String DB_USER_PW = "user1";
 	
 	//프로시저 쿼리문
 	public static final String USP_REGISTER = "{call usp_register(?,?,?,?,?)}";
@@ -76,8 +76,13 @@ public class Sql {
 			+ " join product p on b.p_id = p.p_id"
 			+ " join rent_return r on p.p_id = r.p_id";
 	
+	//update문
+	public static final String UPDATE_PRODUCT = "update product set kind = ?, title = ?, genre =?, age_grade=?, r_date=?, supply_c_id = ?, director = ?, main_actor=?, writer=? where p_id=?";
+	
+	
 	//delete문
 	public static final String DELETE_BOOK = "delete booking where id=? and P_id=?";
+	public static final String DELETE_PRODUCT = "delete product where p_id=?";
 	
 	
 }

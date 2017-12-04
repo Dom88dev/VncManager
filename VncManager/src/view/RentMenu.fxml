@@ -28,7 +28,7 @@
    <center>
       <TabPane fx:id="tab" side="LEFT" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab fx:id="searchTab" closable="false" text="조회">
+            <Tab fx:id="searchTab" closable="false" text="조회/반납">
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="602.0" prefWidth="961.0">
                      <center>
@@ -73,7 +73,7 @@
                                  <effect>
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect></TextField>
-                              <Button fx:id="rent_t1_searchBtn" mnemonicParsing="false" onAction="#searchRentList" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3">
+                              <Button fx:id="rent_t1_searchBtn" mnemonicParsing="false" onAction="#searchRentList" styleClass="wViolet" stylesheets="@application.css" text="검색" textFill="WHITE" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -187,7 +187,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" styleClass="wViolet" stylesheets="@application.css" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -255,7 +255,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" styleClass="wViolet" stylesheets="@application.css" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow height="10.0" radius="4.5" width="10.0" />
                                        </effect>

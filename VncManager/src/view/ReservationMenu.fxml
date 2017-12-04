@@ -89,7 +89,7 @@
                                     <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                  </effect>
                               </TextField>
-                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3">
+                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#handleSearchBtn" styleClass="wViolet" stylesheets="@application.css" text="검색" textFill="WHITE" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets left="5.0" />
                                  </GridPane.margin>
@@ -145,7 +145,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="customerSearchBtn" mnemonicParsing="false" onAction="#findCustomer" styleClass="wViolet" stylesheets="@application.css" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
@@ -213,7 +213,7 @@
                                           <InnerShadow color="#9161c6" height="10.0" radius="4.5" width="10.0" />
                                        </effect>
                                     </TextField>
-                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" styleClass="Violet" stylesheets="@application.css" text="검색" textFill="#9161c6" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                    <Button fx:id="productSearchBtn" mnemonicParsing="false" onAction="#findProduct" styleClass="wViolet" stylesheets="@application.css" text="검색" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                        <effect>
                                           <DropShadow height="10.0" radius="4.5" width="10.0" />
                                        </effect>

@@ -24,6 +24,10 @@ public class ProductDatas {
 	private String actor;
 	private String writer;
 	
+	public ProductDatas() {
+		
+	}
+	
 	public ProductDatas(int p_id, String kind, String title, String genre, int age_grade, Date release,
 			String edition, boolean isRental, int rentalCnt, int supply, String director, String actor, String writer) {
 		
