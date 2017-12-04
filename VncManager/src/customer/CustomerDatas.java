@@ -16,10 +16,14 @@ public class CustomerDatas {
 	private Date birth;
 	private int age;
 	private int countFamily;
-	private int pw;
+	private String pw;
+	
+	public CustomerDatas() {
+		
+	}
 	
 	
-	public CustomerDatas(int id, String name, String addr, String tel, Date birth, int age, int countFamily, int pw) {
+	public CustomerDatas(int id, String name, String addr, String tel, Date birth, int age, int countFamily, String pw) {
 		setId(id);
 		setName(name);
 		setAddr(addr);
@@ -95,11 +99,11 @@ public class CustomerDatas {
 		this.countFamily = countFamily;
 	}
 	
-	public int getPw() {
+	public String getPw() {
 		return pw;
 	}
 	
-	public void setPw(int pw) {
+	public void setPw(String pw) {
 		this.pw=pw;
 	}
 

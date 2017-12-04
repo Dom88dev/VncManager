@@ -329,7 +329,7 @@ public class ProductMenuController implements Initializable {
 			popNoti("상품정보를 변경했습니다.");
 			refreshList();
 		} else {
-			popNoti("상품정보 변경하지 못했습니다.");
+			popNoti("상품정보 변경을 하지 못했습니다.");
 		}
 	}
 	

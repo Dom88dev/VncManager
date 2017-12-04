@@ -77,13 +77,28 @@ public class Sql {
 			+ " join product p on b.p_id = p.p_id"
 			+ " join rent_return r on p.p_id = r.p_id";
 	
+	public static final String SELECT_COUNT_GENRE_NAME = "select genre from g_count where id =?";
+	public static final String SELECT_COUNT_DIRECTOR_NAME = "select director from d_count where id =?";
+	public static final String SELECT_COUNT_ACTOR_NAME = "select main_actor from a_count where id =?";
+	public static final String SELECT_COUNT_WRITER_NAME = "select writer from w_count where id =?";
+	public static final String SELECT_COUNT_GENRE = "select count from g_count where id=?";
+	public static final String SELECT_COUNT_DIRECTOR = "select count from d_count where id=?";
+	public static final String SELECT_COUNT_ACTOR = "select count from a_count where id=?";
+	public static final String SELECT_COUNT_WRITER = "select count from w_count where id=?";
+	public static final String SELECT_FAM = "select name, relation from family where id = ?";
+	
 	//update문
 	public static final String UPDATE_PRODUCT = "update product set kind = ?, title = ?, genre =?, age_grade=?, r_date=?, supply_c_id = ?, director = ?, main_actor=?, writer=? where p_id=?";
-	
+	public static final String UPDATE_CUSTOMER = "update customer set name = ?, tel = ?, addr = ?, birth = ?, age = ?, pw = ? where id = ?";
 	
 	//delete문
 	public static final String DELETE_BOOK = "delete booking where id=? and P_id=?";
 	public static final String DELETE_PRODUCT = "delete product where p_id=?";
+	public static final String DELETE_CUSTOMER = "delete customer where id=?";
+	public static final String DELETE_FAM = "delete family where id=? and name = ? and relation = ?";
+	
+	//insert
+	public static final String INSERT_FAM = "insert into family values(?,?,?)";
 	
 	
 }

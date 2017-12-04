@@ -1,6 +1,7 @@
 package customer;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -23,16 +24,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import rsrc.Db;
+import rsrc.Util;
 
 /**
  * @author Hee
@@ -50,6 +52,7 @@ public class CustomerMenuController implements Initializable{
 	 */
 	
 	private Db db = new Db();
+	private FamDataModel fdm;
 	
 	/**
 	 * bds에 대한 설명.
@@ -57,7 +60,7 @@ public class CustomerMenuController implements Initializable{
 	 * @see CustomerDatas
 	 */
 	
-	private ArrayList<CustomerDatas> bds = new ArrayList<CustomerDatas>();
+	private ArrayList<CustomerDatas> cds = new ArrayList<CustomerDatas>();
 	
 	/**
 	 * bdms에 대한 설명
@@ -65,7 +68,8 @@ public class CustomerMenuController implements Initializable{
 	 * @see CustomerDataModel
 	 */
 	
-	private ArrayList<CustomerDataModel> bdms = new ArrayList<CustomerDataModel>();
+	private ArrayList<CustomerDataModel> cdms = new ArrayList<CustomerDataModel>();
+	private ArrayList<FamDataModel> fdms = new ArrayList<FamDataModel>();
 	
 
 	/**
@@ -109,7 +113,9 @@ public class CustomerMenuController implements Initializable{
 	 * @param 조회/수정/삭제 창 조회탭의 추가 정보란에서 추가 정보 데이터(추가 정보)를 담는 FXCollections 참조 변수
 	 */
 	
-	private ObservableList<String> infoDataList = FXCollections.observableArrayList();
+	private ObservableList<Integer> infoDataList = FXCollections.observableArrayList();
+	
+	private ObservableList<FamDataModel> famList = FXCollections.observableArrayList();
 	
 	/**
 	 * 조회/수정/삭제 탭의 Xml의 fx:id 속성을 가진 Controller의 @FXML 어노테이션
@@ -141,7 +147,8 @@ public class CustomerMenuController implements Initializable{
 	 */                                 
 	
 	// 조회/수정/삭제 탭 
-	@FXML private BorderPane customer;                                              
+	@FXML private BorderPane customer; 
+	@FXML private TabPane tab;
 	@FXML private ChoiceBox<String> fKindChoiceBox;                         
 	@FXML private ComboBox<String> searchKindComboBox;               
 	@FXML private Tab c_searchTab;                                                     
@@ -150,22 +157,20 @@ public class CustomerMenuController implements Initializable{
 	@FXML private Button c_searchBtn;                                                 
 	@FXML private TextField c_searchFText;                                          
 	@FXML private Button c_addInfoBtn;                                               
-	@FXML private ListView<String> c_addInfoListView1;                                      
-	@FXML private ListView<String> c_addInfoListView2;
-	@FXML private Label c_modifyId;                                                   
-	@FXML private TextField c_modifyNameFtext;                                  
-	@FXML private TextField c_modifyAddrFtext;                                   
-	@FXML private TextField c_modifyTelFtext;                                      
-	@FXML private TextField c_modifyBirthFtext;                                   
-	@FXML private TextField c_modifyPwFtext;                                      
-	@FXML private TextField c_modifyFnameFText;                                
-	@FXML private TextField c_modifyFrelationFText;                            
-	@FXML private Button c_modifyBtn;                                                
-	@FXML private Button c_modifyCancleBtn;                                      
-	@FXML private Button c_modifyAddBtn;                                          
-	@FXML private Button c_modifyFixBtn;                                              
-	@FXML private Button c_modifyDelBtn;                                           
-	@FXML private Button c_customerDropBtn;    
+	@FXML private ListView<String> infoTitleListView;
+	@FXML private ListView<Integer> infoDataListView;
+	@FXML private Label c_modifyId;
+	@FXML private TextField c_modifyNameFtext;
+	@FXML private TextField c_modifyTelFtext;
+	@FXML private TextField c_modifyAddrFtext;
+	@FXML private TextField c_modifyBirthFtext;
+	@FXML private TextField c_modifyPwFtext;
+	@FXML private Button modifyBtn;
+	@FXML private Button removeBtn;
+	@FXML private TextField c_modifyFnameFText;
+	@FXML private TextField c_modifyFrelationFText;
+	@FXML private Button addFamBtn;
+	
 	
 	/**
 	 * 추가 탭의 Xml의 fx:id 속성을 가진 Controller의 @FXML 어노테이션
@@ -178,14 +183,15 @@ public class CustomerMenuController implements Initializable{
 	 * @param c_JoinCancleBtn  회원가입 탭에 회원 가입 중 취소를 실행해주는 '취소' Button
 	 */
 	
-	
-	@FXML private Tab c_joinTab;  
+	  
 	@FXML private TextField c_addNameFtext;                                        
 	@FXML private TextField c_addAddrFText;                                         
 	@FXML private TextField c_addTelFText;                                            
 	@FXML private TextField c_addBirthFText;                                         
 	@FXML private Button c_JoinBtn;                                                    
-	@FXML private Button c_JoinCancleBtn;                                          
+	@FXML private Button c_JoinCancleBtn;  
+	
+
 
 	/**
 	 * 회원가족관리 탭의 Xml의 fx:id 속성을 가진 Controller의 @FXML 어노테이션
@@ -200,15 +206,11 @@ public class CustomerMenuController implements Initializable{
 	 */
 	
 	// 가족 조회 수정 탭
-	@FXML private Tab c_modifyTab;   
-	@FXML private TextField c_searchFamilyField;
-	@FXML private ComboBox <String> c_searchFamilyComboBox;
-	@FXML private Button c_searchFamilyBtn;
-	@FXML private TextField c_customerFamilyNameField;
-	@FXML private TextField c_customerFamilyRelationField;
-	@FXML private Button c_customerFamilyModiBtn;
-	@FXML private Button c_customerFamilyCancleBtn;
+	@FXML private ComboBox<String> c_searchFamilyComboBox;
+	@FXML private TextField c_searchFamily;
 	
+	@FXML private TableView<CustomerDataModel> cListTableForF;
+	@FXML private TableView<FamDataModel> fListTable;
 	
 	/**
 	 * initialize() 메소드
@@ -237,11 +239,6 @@ public class CustomerMenuController implements Initializable{
 		 */
 		
 		searchKindComboBox.setItems(searchKindList);
-		
-		/**
-		 * 회원가족관리 탭에서 콤보박스에서 쓸 값이 담겨있는 searchFamilyKindList를 searchKindComboBox 넣은 메소드
-		 */
-		
 		c_searchFamilyComboBox.setItems(searchFamilyKindList);
 		
 		/**
@@ -266,17 +263,35 @@ public class CustomerMenuController implements Initializable{
 		tcAge.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("age"));
 		tcCountFamily.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("countFamily"));
 		
+		
+		TableColumn<CustomerDataModel, Integer> tcfId = (TableColumn<CustomerDataModel, Integer>)cListTableForF.getColumns().get(0);
+		TableColumn<CustomerDataModel, String> tcfName = (TableColumn<CustomerDataModel, String>)cListTableForF.getColumns().get(1);
+		TableColumn<CustomerDataModel, String> tcfAddr = (TableColumn<CustomerDataModel, String>)cListTableForF.getColumns().get(4);
+		TableColumn<CustomerDataModel, String> tcfTel = (TableColumn<CustomerDataModel, String>)cListTableForF.getColumns().get(2);
+		TableColumn<CustomerDataModel, Integer> tcfCountF = (TableColumn<CustomerDataModel, Integer>)cListTableForF.getColumns().get(3);
+		tcfId.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("id"));
+		tcfName.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("name"));
+		tcfAddr.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("addr"));
+		tcfTel.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, String>("tel"));
+		tcfCountF.setCellValueFactory(new PropertyValueFactory<CustomerDataModel, Integer>("countFamily"));
+		
+		TableColumn<FamDataModel, String> tcffName = (TableColumn<FamDataModel, String>)fListTable.getColumns().get(0);
+		TableColumn<FamDataModel, String> tcffRelation = (TableColumn<FamDataModel, String>)fListTable.getColumns().get(1);
+		tcffName.setCellValueFactory(new PropertyValueFactory<FamDataModel, String>("fName"));
+		tcffRelation.setCellValueFactory(new PropertyValueFactory<FamDataModel, String>("relation"));
+		
 		// DB에서 가져온 값을 저장하는 bds ArratList 컬렉션 메소드.
-		bds = db.selectCustomerDatas();
-		for(CustomerDatas cd: bds) {
-			bdms.add(new CustomerDataModel(cd));
+		cds = db.selectCustomerDatas();
+		for(CustomerDatas cd: cds) {
+			cdms.add(new CustomerDataModel(cd));
 		}
 		
 		// DB 값을 저장한 bds 값을 FX 컬렉션에 저장하는 메소드.
-		customerList.addAll(bdms);
+		customerList.addAll(cdms);
 		
 		// bdms의 값을 CustomerDataModel을 데이터 타입으로 한 테이블 뷰에 값을  넣은 로직.
 		customerListTable.setItems(customerList);
+		cListTableForF.setItems(customerList);
 		
 		
 		// 추가 정보란에 이름과 비밀번호 출력하는 이벤트
@@ -287,26 +302,40 @@ public class CustomerMenuController implements Initializable{
 					CustomerDataModel newValue) {
 				// TODO 추가 정보란에 이름과 비밀번호 출력하는 이벤트
 				if(newValue!=null) {
+					CustomerCountData count = new CustomerCountData();
 					if(!infoTitleList.isEmpty()) {
-						infoTitleList.removeAll("이름", "비밀번호");
-						infoDataList.removeAll(oldValue.getName().toString(), String.valueOf(oldValue.getPw()));
+						count = db.selectCount(oldValue.getId());
+						infoTitleList.removeAll(count.getCountName());
+						infoDataList.removeAll(count.getCount());
 					}
+					count = db.selectCount(newValue.getId());
+					infoTitleList.addAll(count.getCountName());
+					infoTitleListView.setItems(infoTitleList);
+					infoDataList.addAll(count.getCount());
+					infoDataListView.setItems(infoDataList);
 					
-					infoTitleList.addAll("이름", "비밀번호");
-					c_addInfoListView1.setItems(infoTitleList);
-					infoDataList.addAll(newValue.getName().toString(), String.valueOf(newValue.getPw()));
-					c_addInfoListView2.setItems(infoDataList);
+					c_modifyId.setText(String.valueOf(newValue.getId()));
+					c_modifyNameFtext.setEditable(true);
+					c_modifyNameFtext.setText(newValue.getName());
+					c_modifyTelFtext.setEditable(true);
+					c_modifyTelFtext.setText(newValue.getTel());
+					c_modifyAddrFtext.setEditable(true);
+					c_modifyAddrFtext.setText(newValue.getAddr());
+					c_modifyBirthFtext.setEditable(true);
+					c_modifyBirthFtext.setText(newValue.getBirth().toString());
+					c_modifyPwFtext.setEditable(true);
+					c_modifyPwFtext.setText(newValue.getPw());
+					removeBtn.setDisable(false);
+					modifyBtn.setDisable(false);
+					c_modifyFrelationFText.setEditable(true);
+					c_modifyFnameFText.setEditable(true);
+					addFamBtn.setDisable(false);
+					
+				} else {
+					resetModiTextField();
 				}
 			}
 			
-		});
-		
-		customerListTable.addEventFilter(ScrollEvent.ANY, new EventHandler<ScrollEvent>() {
-			@Override
-			public void handle(ScrollEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
 		});
 		
 		
@@ -314,7 +343,8 @@ public class CustomerMenuController implements Initializable{
 		// 조회 탭의 테이블 뷰에서 데이터를 찾을 수 없을 때 나타내 주는 라벨과 메소드
 		Label label = new Label("검색한 결과가 없습니다.");
 		customerListTable.setPlaceholder(label);
-		
+		cListTableForF.setPlaceholder(label);
+		fListTable.setPlaceholder(label);
 		
 		// <메소드> - 조회 탭에서 가족 유, 가족무, 전체를 체크하는 초이스 박스 메소드
 		fKindChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
@@ -323,17 +353,17 @@ public class CustomerMenuController implements Initializable{
 			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
 				// TODO 가족 유무 체크하는 초이스 박스
 				if(newValue!=null){
-					customerList.removeAll(bdms);
+					customerList.removeAll(cdms);
 					if(newValue.equals("전체")) {
-						customerList.addAll(bdms);
+						customerList.addAll(cdms);
 					} else {
-						for(CustomerDataModel bd : bdms) {
+						for(CustomerDataModel cd : cdms) {
 							switch(newValue) {
 							case "가족 유":
-								if(bd.getCountFamily()>0)	customerList.add(bd);
+								if(cd.getCountFamily()>0)	customerList.add(cd);
 								break;
 							case "가족 무":
-								if(bd.getCountFamily() == 0)	customerList.add(bd);
+								if(cd.getCountFamily() == 0)	customerList.add(cd);
 								break;
 							}
 						}
@@ -343,6 +373,115 @@ public class CustomerMenuController implements Initializable{
 			}
 			
 		});
+		
+		cListTableForF.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerDataModel>() {
+
+			@Override
+			public void changed(ObservableValue<? extends CustomerDataModel> arg0, CustomerDataModel arg1,
+					CustomerDataModel newVal) {
+				// TODO Auto-generated method stub
+				if(newVal != null) {
+					famList.removeAll(fdms);
+					fdms = new ArrayList<FamDataModel>();
+					fdms = db.selectFam(newVal.getId());
+					famList.addAll(fdms);
+					fListTable.setItems(famList);
+				}
+			}
+			
+		});
+		
+		fListTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<FamDataModel>() {
+
+			@Override
+			public void changed(ObservableValue<? extends FamDataModel> arg0, FamDataModel arg1, FamDataModel newVal) {
+				// TODO Auto-generated method stub
+				if(newVal != null) {
+					fdm=newVal;
+				} else {
+					fdm=null;
+				}
+			}
+			
+		});
+		
+
+		//tab change Listener 구현
+		tab.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1, Tab newTab) {
+				// TODO Auto-generated method stub
+				if(newTab.getId().equals("searchTab"))	refreshList();
+				else if(newTab.getId().equals("fSearchTab")) refreshList();
+			}
+			
+		});
+	}
+	
+	
+	public void resetModiTextField() {
+		c_modifyId.setText("");
+		c_modifyNameFtext.setEditable(false);
+		c_modifyNameFtext.setText("");
+		c_modifyTelFtext.setEditable(false);
+		c_modifyTelFtext.setText("");
+		c_modifyAddrFtext.setEditable(false);
+		c_modifyAddrFtext.setText("");
+		c_modifyBirthFtext.setEditable(false);
+		c_modifyBirthFtext.setText("");
+		c_modifyPwFtext.setEditable(false);
+		c_modifyPwFtext.setText("");
+		c_modifyFnameFText.setEditable(false);
+		c_modifyFnameFText.setText("");
+		c_modifyFrelationFText.setEditable(false);
+		c_modifyFrelationFText.setText("");
+		modifyBtn.setDisable(true);
+		removeBtn.setDisable(true);
+		addFamBtn.setDisable(true);
+	}
+	
+	public void modifyCustomer(ActionEvent e) {
+		CustomerDatas c = new CustomerDatas();
+		c.setId(Integer.valueOf(c_modifyId.getText()));
+		c.setName(c_modifyNameFtext.getText());
+		c.setTel(c_modifyTelFtext.getText());
+		c.setAddr(c_modifyAddrFtext.getText());
+		c.setBirth(Date.valueOf(c_modifyBirthFtext.getText()));
+		c.setPw(c_modifyPwFtext.getText());
+		
+		int result = db.updateCustomer(c);
+		if(result>0) {
+			popNoti("회원정보를 변경했습니다.");
+			refreshList();
+		} else {
+			popNoti("회원정보 변경을 하지 못했습니다.");
+		}
+		
+	}
+	
+	
+	public void removeCustomer(ActionEvent e) {
+		int result = db.deleteCustomer(Integer.valueOf(c_modifyId.getText()));
+		
+		if(result>0) {
+			popNoti("회원정보를 삭제했습니다.");
+			refreshList();
+		} else {
+			popNoti("회원정보 삭제를 하지 못했습니다.");
+		}
+	}
+	
+	
+	public void addFam(ActionEvent e) {
+				
+		int result = db.insertFam(c_modifyFnameFText.getText(), c_modifyFrelationFText.getText(), Integer.valueOf(c_modifyId.getText()));
+		if(result>0) {
+			popNoti("가족정보를 추가했습니다.");
+			refreshList();
+		} else {
+			popNoti("가족정보 추가에 실패했습니다.");
+		}
 	}
 	
 	
@@ -353,8 +492,8 @@ public class CustomerMenuController implements Initializable{
 		String jTel = c_addTelFText.getText();
 		String jBirth = c_addBirthFText.getText();
 		
-		int result = db.usp_register(jName, jTel, jAddr, jBirth);
-		if(result >0) {
+		int result = db.usp_register(jName, jTel, jAddr, Util.transformDate(jBirth));
+		if(result ==1) {
 			int joinId = db.getMemberId();
 			popNoti(jName+"님 " + "회원 가입이 되었습니다." + "\nID는 " + joinId + " 입니다.");
 		}
@@ -366,14 +505,15 @@ public class CustomerMenuController implements Initializable{
 	
 	// 회원 등록시 테이블에 새로고침 해주는 메소드
 	public void refreshList() {
-		customerList.removeAll(bdms);
-		bdms = new ArrayList<CustomerDataModel>();
-		bds = db.selectCustomerDatas();
-		for(CustomerDatas bd : bds){
-			bdms.add(new CustomerDataModel(bd));
+		customerList.removeAll(cdms);
+		cdms = new ArrayList<CustomerDataModel>();
+		cds = db.selectCustomerDatas();
+		for(CustomerDatas cd : cds){
+			cdms.add(new CustomerDataModel(cd));
 		}
-		customerList.addAll(bdms);
+		customerList.addAll(cdms);
 		customerListTable.setItems(customerList);
+		cListTableForF.setItems(customerList);
 	}
 	
 	// <메소드> - 가입 탭에 회원 가입 중 취소 버튼을 실행하는 메소드 
@@ -382,8 +522,6 @@ public class CustomerMenuController implements Initializable{
 		c_addAddrFText.setText("");
 		c_addTelFText.setText("");
 		c_addBirthFText.setText("");
-		
-		popNoti("가입을 취소 하셨습니다.");
 	}
 	
 	
@@ -396,11 +534,11 @@ public class CustomerMenuController implements Initializable{
 			popNoti("조건을 선택하고 검색하세요.");
 			return;
 		}
-		customerList.removeAll(bdms);
+		customerList.removeAll(cdms);
 		if(search.equals("")) {
-			customerList.addAll(bdms);
+			customerList.addAll(cdms);
 		}else {
-			for(CustomerDataModel cd : bdms) {
+			for(CustomerDataModel cd : cdms) {
 				switch(sKind) {
 					case "회원번호": 
 						if(String.valueOf(cd.getId()).toLowerCase().contains(search))customerList.add(cd);
@@ -425,6 +563,52 @@ public class CustomerMenuController implements Initializable{
 		
 	}
 	
+	public void searchCF(ActionEvent e) {
+		String search = c_searchFamily.getText();
+		String sKind = c_searchFamilyComboBox.getValue();
+		if(sKind == null) {
+			popNoti("조건을 선택하고 검색하세요.");
+			return;
+		}
+		customerList.removeAll(cdms);
+		if(search.equals("")) {
+			customerList.addAll(cdms);
+		} else {
+			for(CustomerDataModel cd : cdms) {
+				switch(sKind) {
+					case "회원번호": 
+						if(String.valueOf(cd.getId()).contains(search)) customerList.add(cd);
+						break;
+					case "이름": 
+						if(cd.getName().toLowerCase().contains(search.toLowerCase())) customerList.add(cd);
+						break;
+					case "전화번호": 
+						if(cd.getTel().contains(search)) customerList.add(cd);
+						break;
+					
+				}
+				
+				
+			}
+		}
+		
+	}
+	
+	
+	public void removeFam(ActionEvent e) {
+		if(fdm==null) {
+			popNoti("삭제할 가족 정보를 선택 하십시오.");
+			return;
+		} else {
+			int result = db.deleteFam(fdm);
+			
+			if(result>0) {
+				popNoti("가족정보가 삭제되었습니다.");
+			} else {
+				popNoti("가족정보를 삭제하지 못했습니다.");
+			}
+		}
+	}
 	
 	// <메소드> - 각 창으로 넘어갈 때 애니메이션 효과를 나타내주는 메소드
 	public void gotoHome(ActionEvent e) {

@@ -2,6 +2,7 @@ package rsrc;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,9 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 import book.BookDatas;
+import customer.CustomerCountData;
 import customer.CustomerDatas;
+import customer.FamDataModel;
 import product.ProductDatas;
 import rent.RentReturnDatas;
 /**
@@ -57,37 +60,18 @@ public class Db {
 	}
 	/**
 	 * DB에 생성되어 있는 회원가입 프로시져를 실행하는 메소드.
-	 * @param datas
-	 * 회원의 정보를 담은 CustomerDatas객체
+	 * @param name
+	 * @param tel
+	 * @param addr
+	 * @param birth
+	 * 
 	 * @return
 	 * 처리 결과에 따라 다른 값이 반환된다.<br>
 	 * 1 : 해당 프로시저의 작동이 정상완료 되었음.<br>
 	 * 2 : 입력 값이 존재하지 않는다.<br>
 	 * 3 : 일반 오류
 	 */
-	public int usp_register(CustomerDatas datas) {
-		int result = 0;
-		try {
-			connect();
-			callStmt = con.prepareCall(Sql.USP_REGISTER);
-			callStmt.setString(1, datas.getName());
-			callStmt.setString(2, datas.getTel());
-			callStmt.setString(3, datas.getAddr());
-			callStmt.setDate(4, datas.getBirth());
-	        callStmt.registerOutParameter(5, Types.NUMERIC);
-	        callStmt.executeQuery();
-	        
-	        result = callStmt.getInt(5);
-	        close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
-	public int usp_register(String name, String tel, String addr, String birth) {
+	public int usp_register(String name, String tel, String addr, Date birth) {
 		int result = 0;
 		try {
 			connect();
@@ -95,7 +79,7 @@ public class Db {
 			callStmt.setString(1, name);
 			callStmt.setString(2, tel);
 			callStmt.setString(3, addr);
-			callStmt.setDate(4, Util.transformDate(birth));
+			callStmt.setDate(4, birth);
 	        callStmt.registerOutParameter(5, Types.NUMERIC);
 	        callStmt.executeQuery();
 	        
@@ -242,7 +226,7 @@ public class Db {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				customerDatas.add(new CustomerDatas(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)));
+				customerDatas.add(new CustomerDatas(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getInt(7), rs.getString(8)));
 			}
 			close();
 		} catch (Exception e) {
@@ -262,7 +246,7 @@ public class Db {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				customerDatas.add(new CustomerDatas(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getInt(7), rs.getInt(8)));
+				customerDatas.add(new CustomerDatas(rs.getInt(1), rs.getNString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getInt(7), rs.getString(8)));
 			}
 			close();
 		} catch (Exception e) {
@@ -363,7 +347,7 @@ public class Db {
 		try {
 			stmt = con.prepareStatement(Sql.SELECT_ID_AFTER_REGISTER);
 			rs = stmt.executeQuery();
-			int maxId = rs.getInt(1);
+			while(rs.next()) id=rs.getInt(1);
 			
 			close();
 			
@@ -420,6 +404,187 @@ public class Db {
 		}
 		return result;
 	}
+	
+	
+	public CustomerCountData selectCount(int id) {
+		CustomerCountData counts = new CustomerCountData();
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_GENRE_NAME);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCountName().add(rs.getString(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_DIRECTOR_NAME);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCountName().add(rs.getString(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_ACTOR_NAME);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCountName().add(rs.getString(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_WRITER_NAME);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCountName().add(rs.getString(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_GENRE);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCount().add(rs.getInt(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_DIRECTOR);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCount().add(rs.getInt(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_ACTOR);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCount().add(rs.getInt(1));
+			}
+			
+			stmt = con.prepareStatement(Sql.SELECT_COUNT_WRITER);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				counts.getCount().add(rs.getInt(1));
+			}
+			
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return counts;
+	}
+	
+	public int updateCustomer(CustomerDatas c) {
+		int result = 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.UPDATE_CUSTOMER);
+			stmt.setString(1, c.getName());
+			stmt.setString(2, c.getTel());
+			stmt.setString(3, c.getAddr());
+			stmt.setDate(4, c.getBirth());
+			stmt.setInt(5, c.getAge());
+			stmt.setString(6, c.getPw());
+			stmt.setInt(7, c.getId());
+			
+			
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteCustomer(int id) {
+		int result = 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.DELETE_CUSTOMER);
+			stmt.setInt(1, id);
+			
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int insertFam(String fName, String fRelation, int id) {
+		int result = 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.INSERT_FAM);
+			stmt.setString(1, fName);
+			stmt.setString(2, fRelation);
+			stmt.setInt(3, id);
+			
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public ArrayList<FamDataModel> selectFam(int id) {
+		ArrayList<FamDataModel> f = new ArrayList<>();
+		connect();
+		try {
+			stmt = con.prepareStatement(Sql.SELECT_FAM);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				f.add(new FamDataModel(rs.getString(1), rs.getString(2), id));
+			}
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return f;
+	}
+	
+	public int deleteFam(FamDataModel f) {
+		int result= 0;
+		try {
+			connect();
+			stmt = con.prepareStatement(Sql.DELETE_FAM);
+			stmt.setInt(1, f.getId());
+			stmt.setString(2, f.getfName());
+			stmt.setString(3, f.getRelation());
+			
+			result = stmt.executeUpdate();
+	        
+	        close();
+	        return result;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }
 	
 

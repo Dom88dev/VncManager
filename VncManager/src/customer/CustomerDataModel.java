@@ -14,7 +14,7 @@ public class CustomerDataModel {
 	private SimpleStringProperty birth;
 	private SimpleIntegerProperty age;
 	private SimpleIntegerProperty countFamily;
-	private SimpleIntegerProperty pw;
+	private SimpleStringProperty pw;
 	
 	public CustomerDataModel(CustomerDatas bd) {
 		this.id = new SimpleIntegerProperty(bd.getId());
@@ -24,7 +24,7 @@ public class CustomerDataModel {
 		this.birth = new SimpleStringProperty(bd.getBirth().toString());
 		this.age = new SimpleIntegerProperty(bd.getAge());
 		this.countFamily = new SimpleIntegerProperty(bd.getCountFamily());
-		this.pw = new SimpleIntegerProperty(bd.getPw());
+		this.pw = new SimpleStringProperty(bd.getPw());
 	
 	}
 	
@@ -77,12 +77,12 @@ public class CustomerDataModel {
 		this.countFamily.set(countFamily);
 	}
 	
-	public int getPw() {
+	public String getPw() {
 		return pw.get();
 	}
 	
-	public void setPw(int pw) {
-		this.pw.get();
+	public void setPw(String pw) {
+		this.pw.set(pw);
 	}
 	
 }
