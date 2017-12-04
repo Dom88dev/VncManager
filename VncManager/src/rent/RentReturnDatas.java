@@ -16,10 +16,11 @@ public class RentReturnDatas {
 	private int overdueFee;
 	private String phone;
 	private String kind;
+	private String edition;
 	
 	public RentReturnDatas(int p_id, int id, String name, String title,
 			Date rentDate, Date dueDate, Date returnDate,
-			int lateDays, int overdueFee, String phone, String kind) {
+			int lateDays, int overdueFee, String phone, String kind, String edition) {
 		setP_id(p_id);
 		setId(id);
 		setName(name);
@@ -31,6 +32,7 @@ public class RentReturnDatas {
 		setOverdueFee(overdueFee);
 		setPhone(phone);
 		setKind(kind);
+		setEdition(edition);
 	}
 	
 	public int getP_id() {
@@ -109,6 +111,14 @@ public class RentReturnDatas {
 	}
 	public void setKind(String kind){
 		this.kind = kind;
+	}
+
+	public String getEdition() {
+		return edition;
+	}
+
+	public void setEdition(String edition) {
+		this.edition = edition;
 	}
 	
 }

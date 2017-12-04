@@ -1,6 +1,5 @@
 package book;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -10,6 +9,7 @@ import customer.CustomerDatas;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,26 +17,26 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Popup;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import product.ProductDataModel;
 import product.ProductDatas;
 import rsrc.Db;
 import rsrc.Sql;
+import rsrc.Util;
 
 public class ReservationMenuController implements Initializable {
 	private Db db = new Db();
@@ -60,6 +60,7 @@ public class ReservationMenuController implements Initializable {
 	private ObservableList<ProductDataModel> productList = FXCollections.observableArrayList();
 	
 	@FXML private BorderPane reservation;
+	@FXML private TabPane tab;
 	@FXML private Button b_homeBtn;
 	@FXML private Tab b_searchTab;
 	@FXML private Tab b_manageTap;
@@ -141,18 +142,17 @@ public class ReservationMenuController implements Initializable {
 		tcpGenre.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("genre"));
 		tcpRelease.setCellValueFactory(new PropertyValueFactory<ProductDataModel, String>("release"));
 		
+		//tab1 에약조회 화면
+		//예약목록 초기 로딩 처리 ====시작
 		bds = db.selectBookDatas();
 		for(BookDatas bd : bds){
 			bdms.add(new BookDataModel(bd));
-		}
+			}
 		bookingList.addAll(bdms);
 		rsvListTable.setItems(bookingList);
+		//====끝
 		
-		Label label = new Label("검색한 결과가 없습니다.");
-		rsvListTable.setPlaceholder(label);
-		customerSearchTable.setPlaceholder(label);
-		productSearchTable.setPlaceholder(label);
-		
+		//테이블 뷰 및 선택박스 리스너 바인딩 ====시작
 		pKindChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
 
 			@Override
@@ -179,59 +179,82 @@ public class ReservationMenuController implements Initializable {
 			}
 			
 		});
+		//==== 끝
 	
-
-	productKind.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
-
-		@Override
-		public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
-			// TODO Auto-generated method stub
-			if(newValue!=null){
-				productList.removeAll(pdms);
-				if(newValue.equals("전체")) {
-					productList.addAll(pdms);
-				} else {
-					for(ProductDataModel pd : pdms) {
-						switch(newValue) {
-						case "비디오":
-							if(pd.getKind().equals("V"))	productList.add(pd);
-							break;
-						case "만화책":
-							if(pd.getKind().equals("C"))	productList.add(pd);
-							break;
+		//tab2 예약추가 화면 
+		//테이블 뷰 , 선택박스에 리스너 바인딩 ====시작
+		productKind.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+	
+			@Override
+			public void changed(ObservableValue<? extends String> arg0, String oldValue, String newValue) {
+				// TODO Auto-generated method stub
+				if(newValue!=null){
+					productList.removeAll(pdms);
+					if(newValue.equals("전체")) {
+						productList.addAll(pdms);
+					} else {
+						for(ProductDataModel pd : pdms) {
+							switch(newValue) {
+							case "비디오":
+								if(pd.getKind().equals("V"))	productList.add(pd);
+								break;
+							case "만화책":
+								if(pd.getKind().equals("C"))	productList.add(pd);
+								break;
+							}
 						}
 					}
 				}
+				
 			}
 			
-		}
+		});
+	
+	
+		customerSearchTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerDataModel>() {
+	
+			@Override
+			public void changed(ObservableValue<? extends CustomerDataModel> arg0, CustomerDataModel old,
+					CustomerDataModel newValue) {
+				// TODO Auto-generated method stub
+				bookingNo1 = newValue.getId();
+			}
+			
+		});
 		
-	});
+		productSearchTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ProductDataModel>(){
 	
-	
-	customerSearchTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<CustomerDataModel>() {
+			@Override
+			public void changed(ObservableValue<? extends ProductDataModel> arg0, ProductDataModel arg1,
+					ProductDataModel newValue) {
+				// TODO Auto-generated method stub
+				bookingNo2 = newValue.getP_id();
+			}
+			
+		});
+		//====== 끝
+		
+		//테이블 플레이스홀더 지정
+		//====시작
+		Label label = new Label("검색한 결과가 없습니다.");
+		rsvListTable.setPlaceholder(label);
+		customerSearchTable.setPlaceholder(label);
+		productSearchTable.setPlaceholder(label);
+		//====끝
+		
+		
+		//tab change Listener 구현
+		tab.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 
-		@Override
-		public void changed(ObservableValue<? extends CustomerDataModel> arg0, CustomerDataModel old,
-				CustomerDataModel newValue) {
-			// TODO Auto-generated method stub
-			bookingNo1 = newValue.getId();
-		}
+			@Override
+			public void changed(ObservableValue<? extends Tab> arg0, Tab arg1, Tab newTab) {
+				// TODO Auto-generated method stub
+				if(newTab.getId().equals("searchTab"))	refreshList();
+			}
+			
+		});
 		
-	});
-	
-	productSearchTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ProductDataModel>(){
-
-		@Override
-		public void changed(ObservableValue<? extends ProductDataModel> arg0, ProductDataModel arg1,
-				ProductDataModel newValue) {
-			// TODO Auto-generated method stub
-			bookingNo2 = newValue.getP_id();
-		}
-		
-	});
-	
-}
+	}
 	
 	public void handleSearchBtn(ActionEvent e) {
 		String search = searchTextField.getText();
@@ -351,6 +374,7 @@ public class ReservationMenuController implements Initializable {
 		}
 	}
 	
+	//예약목록 새로고침 메소드
 	public void refreshList() {
 		bookingList.removeAll(bdms);
 		bdms = new ArrayList<BookDataModel>();
@@ -390,21 +414,7 @@ public class ReservationMenuController implements Initializable {
 	}
 	
 	public void popNoti(String notice) {
-		Popup noti = new Popup();
-		
-		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("/view/Notification.fxml"));
-			Label noticeText = (Label)parent.lookup("#noticeText");
-			noticeText.setText(notice);
-			
-			noti.getContent().add(parent);
-			noti.setAutoHide(true);
-			noti.show(reservation.getScene().getWindow());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("popNoti메소드 에러");
-		}
+		Util.popNoti(notice, this.getClass().getName(), (Stage)reservation.getScene().getWindow());
 	}
 
 	
