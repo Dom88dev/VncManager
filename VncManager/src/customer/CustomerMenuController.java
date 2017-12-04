@@ -40,79 +40,177 @@ import javafx.util.Duration;
 import rent.RentReturnDatasModel;
 import rsrc.Db;
 
+/**
+ * @author Hee
+ * @since 2017. 12. 4.
+ * @version 1.0
+ * 
+ * 비디오&만화 대여점 프로그램 중 회원관리에 관한 Controller Class
+ * 
+ */
 
 public class CustomerMenuController implements Initializable{
+	/**
+	 *<db>에 대한 설명.
+	 *@param db DataBase를 연결해주는 Db 클래스의 db메소드 호출하는 참조 변수
+	 */
 	
-	// DB 연결해주는 Db 클래스의 db메소드 호출
 	private Db db = new Db();
 	
-	// CustomerDates 데이터타입인 ArrayList 컬렉션 메소드
+	/**
+	 * <bds>에 대한 설명.
+	 * @param bds CustomerDatas 데이터타입인 ArrayList 컬렉션을 호출하는 참조 변수
+	 * @see CustomerDatas
+	 */
+	
 	private ArrayList<CustomerDatas> bds = new ArrayList<CustomerDatas>();
 	
-	// CustomerDataModel 데이터타입인 ArriList 컬렉션 메소드
+	/**
+	 * <bdms>에 대한 설명
+	 * @param bdms CustomerDataModel 데이터타입인 ArriList 컬렉션 호출하는 참조 변수
+	 * @see CustomerDataModel
+	 */
+	
 	private ArrayList<CustomerDataModel> bdms = new ArrayList<CustomerDataModel>();
-	private ArrayList<CustomerDataModel> compare = new ArrayList<CustomerDataModel>();
+
+	/**
+	 * <searchKindList>에 대한 설명
+	 * @param 회원관리 창 조회 탭에서 콤보박스의 검색 카테고리 값을 저장해주는 FXCollections 참조 변수
+	 */
 	
-	private int customeringNo =0, customeringNo2=0;
-	
-	// 조회 탭의 콤보박스의 카테고리의 값을 저장해주는 FX 컬렉션 메소드
 	private ObservableList<String> searchKindList = FXCollections.observableArrayList("회원번호", "이름", "전화번호", "주소");
 	
-	// 조회 탭의 초이스 박스의 카테고리의 값을 저장해주는 FX 컬렉션 메소드
+	/**
+	 * <familyKindList>에 대한 설명
+	 * @param 회원관리 창 조회탭에서 초이스박스의 카테고리 값을 저장해주는 FXCollections 참조 변수
+	 */
+
 	private ObservableList<String> familyKindList = FXCollections.observableArrayList("전체", "가족 유", "가족 무");
 	
-	// 조회 탭의 DB에서 불러운 값을 CUstomerDataModel 데이터형식에 따라서 저장해주는 FX 컬렉션 메소드
+	/**
+	 * <customerList>에 대한 설명
+	 * @param 회원관리 창 조회탭에서 DataBase에서 불러운 값을 CustomerDataModel 형시에 따라 저장해주는 FXCollections 참조 변수
+	 */
+	
 	private ObservableList<CustomerDataModel> customerList = FXCollections.observableArrayList();
 	
-	// 조회 탭의 오른쪽 추가 정보 란에서 추가 정보를 나타내는 리스트 뷰의 값을 담는 ArratList 메소드
+	/**
+	 * <infoTitleList>에 대한 설명
+	 * @param 회원관리 창 조회탭의 추가 정보란에서 추가 정보 데이터(이름)을 담는 FXCollections 참조 변수
+	 */
+	
 	private ObservableList<String> infoTitleList = FXCollections.observableArrayList();
+	
+	
+	/**
+	 * <infoDataList>에 대한 설명
+	 * @param 회원관리 창 조회탭의 추가 정보란에서 추가 정보 데이터(추가 정보)를 담는 FXCollections 참조 변수
+	 */
+	
 	private ObservableList<String> infoDataList = FXCollections.observableArrayList();
 	
-	@FXML private BorderPane customer;                                         // 전체 판넬
-	@FXML private ChoiceBox<String> fKindChoiceBox;                        // 가족 유, 무 초이스 박스
-	@FXML private ComboBox<String> searchKindComboBox;                // 검색 카테고리 콤보박스
-	@FXML private Tab c_searchTab;                                               // 조회 탭
-	@FXML private Tab c_joinTab;                                                   // 가입 탭
-	@FXML private Tab c_modifyTab;                                               // 수정/탈퇴 탭 
-	@FXML private Button c_homeBtn;                                             // <버튼> - 회원관리 창에서 처음 창으로 돌아가는 버튼
-	@FXML private TableView<CustomerDataModel> customerListTable;  // 조회탭의 회원정보를 나타내는 테이블 뷰.
-	@FXML private Button c_searchBtn;                                           // 조회 탭의 검색 버튼
-	@FXML private TextField c_searchFText;                                     // 조회 탭의 검색 텍스트 필드
-	@FXML private Button c_addInfoBtn;                                         // <버튼> -조회 탭의 추가 수정 정보 버튼
-	@FXML private ListView c_addInfoListView1;                                // 조회 탭의 추가 정보 란에서 테이블에서 선택된 레이블의 정보를 출력하는 리스트 뷰
-	@FXML private ListView c_addInfoListView2;                                // 조회 탭의 추가 정보 란에서 테이블에서 선택된 레이블의 정보를 출력해주는 리스트 뷰
+	/**
+	 * 조회 탭의 Xml의 fx:id 속성을 가진 Controller의 @FXML 어노테이션
+	 *@param customer 전체 pane
+	 *@param fKindChoiceBox 가족 유, 무, 전체 카테고리를 가진 ChoiceBox
+	 *@param searchKindComboBox 검색 카테고리 ComboBox
+	 *@param c_searchTab 조회 Tab
+	 *@param c_joinTab 가입 Tab
+	 *@param c_modifyTab 수정/탈퇴 Tab 
+	 *@param c_homeBtn <버튼> - 회원관리 창에서 처음 창으로 돌아가는 Button
+	 *@param customerListTable 조회탭의 회원정보를 나타내는 TableView.
+	 *@param c_searchBtn 조회 탭의 검색 Button
+	 *@param c_searchFText 조회 탭의 검색 TextField
+	 *@param c_addInfoBtn <버튼> -조회 탭의 추가 수정 정보 Button
+	 *@param c_addInfoListView1  조회 탭의 추가 정보 란에서 테이블에서 선택된 레이블의 정보를 출력하는 ListView
+	 *@param c_addInfoListView2 조회 탭의 추가 정보 란에서 테이블에서 선택된 레이블의 정보를 출력해주는 ListView
+	 */
 	
-	//추가 탭 정보
-	@FXML private TextField c_addNameFtext;                                  // 회원가입 탭에서 회원정보 중 이름을 추가해주는 텍스트 필드
-	@FXML private TextField c_addAddrFText;                                   // 회원가입 탭에서 회원정보 중 주소를 추가해주는 텍스트 필드
-	@FXML private TextField c_addTelFText;                                     // 회원가입 탭에서 회원정보 중 전화번호를 추가해주는 텍스트 필드
-	@FXML private TextField c_addBirthFText;                                   // 회원가입 탭에서 회원정보 중 생년월일을 추가해주는 텍스트 필드
-	@FXML private Button c_JoinBtn;                                              // <버튼> - 회원가입 탭에 회원 가입의 가입을 실행해주는 '가입' 버튼
-	@FXML private Button c_JoinCancleBtn;                                     // <버튼> - 회원가입 탭에 회원 가입 중 취소를 실행해주는 '취소'버튼
+	@FXML private BorderPane customer;                                              
+	@FXML private ChoiceBox<String> fKindChoiceBox;                         
+	@FXML private ComboBox<String> searchKindComboBox;               
+	@FXML private Tab c_searchTab;                                                     
+	@FXML private Tab c_joinTab;                                                          
+	@FXML private Tab c_modifyTab;                                                    
+	@FXML private Button c_homeBtn;                                                  
+	@FXML private TableView<CustomerDataModel> customerListTable;  
+	@FXML private Button c_searchBtn;                                                 
+	@FXML private TextField c_searchFText;                                          
+	@FXML private Button c_addInfoBtn;                                               
+	@FXML private ListView c_addInfoListView1;                                      
+	@FXML private ListView c_addInfoListView2;                                      
 	
+	/**
+	 * 추가 탭의 Xml의 fx:id 속성을 가진 Controller의 @FXML 어노테이션
+	 * @param c_addNameFtext 회원가입 탭에서 회원정보 중 이름을 추가해주는 TextField
+	 * @param c_addAddrFText 회원가입 탭에서 회원정보 중 주소를 추가해주는 TextField
+	 * @param c_addTelFText 회원가입 탭에서 회원정보 중 전화번호를 추가해주는 TextField
+	 * @param c_addBirthFText 회원가입 탭에서 회원정보 중 생년월일을 추가해주는 TextField
+	 * @param c_JoinBtn <버튼> - 회원가입 탭에 회원 가입의 가입을 실행해주는 '가입' Button
+	 * @param c_JoinCancleBtn <버튼> - 회원가입 탭에 회원 가입 중 취소를 실행해주는 '취소' Button
+	 */
+	
+	@FXML private TextField c_addNameFtext;                                        
+	@FXML private TextField c_addAddrFText;                                         
+	@FXML private TextField c_addTelFText;                                            
+	@FXML private TextField c_addBirthFText;                                         
+	@FXML private Button c_JoinBtn;                                                    
+	@FXML private Button c_JoinCancleBtn;                                          
+	
+	/**
+	 * 수정/탈퇴 탭의 Xml의 fx:id 속성을 가진 Controller의 @FXML 어노테이션
+	 * @param c_modifyId <라벨> - 수정/탈퇴 탭에 회원정보의 아이디를 알려주는 라벨
+	 * @param c_modifyNameFtext 수정/탈퇴 탭에서 회원정보의 이름을 수정해주는 텍스트 필드 
+	 * @param c_modifyAddrFtext 수정/탈퇴 탭에서 회원정보의 이름을 수정해주는 텍스트 필드
+	 * @param c_modifyTelFtext 수정/탈퇴 탭에서 회원정보의 전화번호를 수정해주는 텍스트 필드
+	 * @param c_modifyBirthFtext 수정/탈퇴 탭에서 회원정보의 생년월일을 수정해주는 텍스트 필드
+	 * @param c_modifyPwFtext 수정/탈퇴 탭에서 회원정보의 비밀번호를 수정해주는 텍스트 필드
+	 * @param c_modifyFnameFText // 수정탈퇴 탭의 가족 이름를 추가하거나 수정하는 텍스트 필드
+	 * @param c_modifyFrelationFText  수정/탈되 탭의 가족 관계를 추가하거나 수정하는 텍스트 필드
+	 * @param c_modifyBtn <버튼> - 수정/탈퇴탈퇴 탭에 회원정보 수정을 실행해주는 '수정' 버튼
+	 * @param c_modifyCancleBtn <버튼> - 수정/탈퇴 탭에 회원정보 수정하는 중 취소하는 '취소' 버튼
+	 * @param c_modifyAddBtn 수정/탈퇴 탭에 가족 정보 추가하는 '추가' 버튼
+	 * @param c_modifyFixBtn 수정/탈퇴 탭에 가족 정보 수정하는 '수정' 버튼
+	 * @param c_modifyDelBtn 수정/탈퇴 탭에 가족 정보 삭제하는 '삭제' 버튼
+	 * @param c_customerDropBtn 수정/탈퇴 탭에 회원 수 중 최소를 실행해주는 '취소'버튼
+	 */
 	//수정 및 탈퇴 정보
-	@FXML private Label c_modifyId;                                              // <라벨> - 수정/탈퇴 탭에 회원정보의 아이디를 알려주는 라벨
-	@FXML private TextField c_modifyNameFtext;                              // 수정/탈퇴 탭에서 회원정보의 이름을 수정해주는 텍스트 필드
-	@FXML private TextField c_modifyAddrFtext;                               // 수정/탈퇴 탭에서 회원정보의 주소를 수정해주는 텍스트 필드
-	@FXML private TextField c_modifyTelFtext;                                 // 수정/탈퇴 탭에서 회원정보의 전화번호를 수정해주는 텍스트 필드
-	@FXML private TextField c_modifyBirthFtext;                               // 수정/탈퇴 탭에서 회원정보의 생년월일을 수정해주는 텍스트 필드
-	@FXML private TextField c_modifyPwFtext;                                 // 수정/탈퇴 탭에서 회원정보의 비밀번호를 수정해주는 텍스트 필드
-	@FXML private TextField c_modifyFnameFText;                            // 수정탈퇴 탭의 가족 이름를 추가하거나 수정하는 텍스트 필드
-	@FXML private TextField c_modifyFrelationFText;                         // 수정/탈되 탭의 가족 관계를 추가하거나 수정하는 텍스트 필드
-	@FXML private Button c_modifyBtn;                                          // <버튼> - 수정/탈퇴탈퇴 탭에 회원정보 수정을 실행해주는 '수정' 버튼
-	@FXML private Button c_modifyCancleBtn;                                 // <버튼> - 수정/탈퇴 탭에 회원정보 수정하는 중 취소하는 '취소' 버튼
-	@FXML private Button c_modifyAddBtn;                                      // 수정/탈퇴 탭에 가족 정보 추가하는 '추가' 버튼
-	@FXML private Button c_modifyFixBtn;                                        // 수정/탈퇴 탭에 가족 정보 수정하는 '수정' 버튼  
-	@FXML private Button c_modifyDelBtn;                                      //  수정/탈퇴 탭에 가족 정보 삭제하는 '삭제' 버튼
-	@FXML private Button c_customerDropBtn;                                //  수정/탈퇴 탭에 회원 수 중 최소를 실행해주는 '취소'버튼
+	@FXML private Label c_modifyId;                                                   
+	@FXML private TextField c_modifyNameFtext;                                  
+	@FXML private TextField c_modifyAddrFtext;                                   
+	@FXML private TextField c_modifyTelFtext;                                      
+	@FXML private TextField c_modifyBirthFtext;                                   
+	@FXML private TextField c_modifyPwFtext;                                      
+	@FXML private TextField c_modifyFnameFText;                                
+	@FXML private TextField c_modifyFrelationFText;                            
+	@FXML private Button c_modifyBtn;                                                
+	@FXML private Button c_modifyCancleBtn;                                      
+	@FXML private Button c_modifyAddBtn;                                          
+	@FXML private Button c_modifyFixBtn;                                              
+	@FXML private Button c_modifyDelBtn;                                           
+	@FXML private Button c_customerDropBtn;                                     
 	
+	
+	/**
+	 * initialize() 메소드
+	 * 메인 클래스의 실행 매개값을 얻어 애플리케이션을 이용할 수 있게 해준다.
+	 * 이 메소드는 컨트롤러 객체가 생성되고 나서 호출되는데, 주로 UI 컨트롤의 초기화, 이벤트 핸들러 등록, 속성 감시 등의 코드가 작성된다.
+	 */
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		
-		// 가족 유, 무 초이스 박스의 디폴트 값을 저장하는 메소드
+		/**
+		 * 가족 유, 무, 전체 값을 가진 초이스 박스의 디폴트 값을 저장하는 메소드
+		 */
+		
 		fKindChoiceBox.setValue("전체");
+		
+		/**
+		 * 콤보박스를 값이 
+		 */
+		
 		fKindChoiceBox.setItems(familyKindList);
 		
 		// 조회 탭의 콤보 박스에서 쓸 값이 담겨있는 searchKindList 켈렉션 메소드를 콤보박스에 넣은 메소드 
