@@ -24,9 +24,9 @@
 
 <BorderPane fx:id="reservation" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="book.ReservationMenuController">
    <center>
-      <TabPane side="LEFT" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tab" side="LEFT" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab closable="false" text="조회/삭제">
+            <Tab fx:id="searchTab" closable="false" text="조회/삭제">
                <content>
                   <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -111,7 +111,7 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab closable="false" text="예약추가">
+            <Tab fx:id="bookTab" closable="false" text="예약추가">
               <content>
                   <BorderPane>
                      <top>

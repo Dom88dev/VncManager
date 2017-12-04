@@ -1,8 +1,15 @@
 package rsrc;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 /**
  * 각 클래스에서 사용되는 기타 기능성 메소드를 모아둔 클래스
  * 
@@ -43,4 +50,83 @@ public class Util {
         
         return d;
     }
+    
+    public static long trnasformMilliseconds(String date) {
+    	String timeDate = date.concat(" 00:00:00");
+    	SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	long ms = 0;
+        java.util.Date tempDate;
+		try {
+			tempDate = timeFormat.parse(timeDate);
+			ms = tempDate.getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        return ms;
+        
+    }
+    
+    
+    public static int getLateFee(String edition, String kind) {
+    	int result = 0;
+    	
+    	if(edition.equals("NEW")) {
+    		if(kind.equals("V")) {
+    			result = 1000;
+    		} else {
+    			result = 300;
+    		}
+    	} else {
+    		if(kind.equals("V")) {
+    			result = 500;
+    		} else {
+    			result = 200;
+    		}
+    	}
+    	return result;
+    }
+    
+    public static int getRentCost(String edition, String kind) {
+    	int result = 0;
+    	
+    	if(edition.equals("NEW")) {
+    		if(kind.equals("V")) {
+    			result = 1500;
+    		} else {
+    			result = 500;
+    		}
+    	} else {
+    		if(kind.equals("V")) {
+    			result = 1000;
+    		} else {
+    			result = 300;
+    		}
+    	}
+    	return result;
+    }
+    
+    
+    public static void popNoti(String notice, String className, Stage stg) {
+		Popup noti = new Popup();
+		
+		try {
+			Parent parent = FXMLLoader.load(Class.forName(className).getResource("/view/Notification.fxml"));
+			Label noticeText = (Label)parent.lookup("#noticeText");
+			noticeText.setText(notice);
+			
+			noti.getContent().add(parent);
+			noti.setAutoHide(true);
+			noti.show(stg);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("popNoti메소드 에러");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+    
 }

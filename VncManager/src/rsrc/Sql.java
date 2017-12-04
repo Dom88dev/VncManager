@@ -68,7 +68,7 @@ public class Sql {
 	
 	public static final String SELECT_RENT =  
 			"select r.p_id, r.id, c.name, p.title, r.rent_date, r.due_date, nvl(r.return_date, to_date(19010101)), "
-			+ "nvl(r.late_days, 0), nvl(r.overdue_fee, 0), c.tel , p.kind from product p right outer join rent_return r on "
+			+ "nvl(r.late_days, 0), nvl(r.overdue_fee, 0), c.tel , p.kind, p.edition from product p right outer join rent_return r on "
 			+ "p.p_id = r.p_id left outer join customer c on r.id = c.id"; 
 	public static final String SELECT_BOOKDATA = 
 			"select b.ID, c.name, c.tel, b.p_id, p.title, b.b_no, r.due_date, p.kind"

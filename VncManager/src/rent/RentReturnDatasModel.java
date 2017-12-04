@@ -17,6 +17,7 @@ public class RentReturnDatasModel {
 	private SimpleIntegerProperty overdueFee;
 	private SimpleStringProperty phone;
 	private SimpleStringProperty kind;
+	private SimpleStringProperty edition;
 	
 	public RentReturnDatasModel(RentReturnDatas rrd) {
 		this.p_id = new SimpleIntegerProperty(rrd.getP_id());
@@ -34,6 +35,7 @@ public class RentReturnDatasModel {
 		this.overdueFee = new SimpleIntegerProperty(rrd.getOverdueFee());
 		this.phone = new SimpleStringProperty(rrd.getPhone());
 		this.kind = new SimpleStringProperty(rrd.getKind());
+		this.edition = new SimpleStringProperty(rrd.getEdition());
 	}
 	
 	public int getP_id() {
@@ -67,8 +69,8 @@ public class RentReturnDatasModel {
 		this.rentDate.set(rentDate.toString());
 	}
 	
-	public Date getDueDate() {
-		return Date.valueOf(dueDate.get());
+	public String getDueDate() {
+		return dueDate.get();
 	}
 	public void setDueDate(Date dueDate) {
 		this.dueDate.set(dueDate.toString());
@@ -105,6 +107,13 @@ public class RentReturnDatasModel {
 	}
 	public void setKind(String kind) {
 		this.kind.set(kind);
+	}
+	
+	public String getEdition() {
+		return edition.get();
+	}
+	public void setEdition(String edition) {
+		this.edition.set(edition);
 	}
 	
 }
